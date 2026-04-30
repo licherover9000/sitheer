@@ -1,6 +1,8 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sitheer/services/notification_service.dart';
 
 enum TimerMode { focus, shortBreak, longBreak }
 
@@ -114,6 +116,12 @@ class TimerProviders extends ChangeNotifier {
     _timer?.cancel();
     _state = TimerState.finished;
     if (_mode == TimerMode.focus) _completedSessions++;
+    final label = switch (_mode) {
+      TimerMode.focus => 'Focus',
+      TimerMode.shortBreak => 'Short break',
+      TimerMode.longBreak => 'Long break',
+    };
+    unawaited(NotificationService.showSessionComplete(label));
     notifyListeners();
   }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  //primary paletter
+  // Primary palette
   static const primary = Colors.deepPurple;
   static const secondary = Colors.teal;
   static const accent = Colors.orangeAccent;

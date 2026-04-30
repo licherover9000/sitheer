@@ -1,9 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:sitheer/providers/task_providers.dart';
 import 'package:sitheer/core/constants.dart';
-import 'package:sitheer/screens/tasks/tasks.dart';
+import 'package:sitheer/model/task.dart';
 
 class TaskTile extends StatelessWidget {
   final Task task;
@@ -27,8 +28,10 @@ class TaskTile extends StatelessWidget {
         motion: const ScrollMotion(),
         children: [
           SlidableAction(
-            onPressed: (context) {
-              context.read<TaskProviders>().deleteTask(task.id, "test_user");
+            onPressed: (_) {
+              final uid = FirebaseAuth.instance.currentUser?.uid;
+              if (uid == null) return;
+              context.read<TaskProviders>().deleteTask(uid, task.id);
             },
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
@@ -48,7 +51,9 @@ class TaskTile extends StatelessWidget {
           child: CheckboxListTile(
             value: task.isCompleted,
             onChanged: (_) {
-              context.read<TaskProviders>().toggleTask(task, 'test_user');
+              final uid = FirebaseAuth.instance.currentUser?.uid;
+              if (uid == null) return;
+              context.read<TaskProviders>().toggleTask(task, uid);
             },
             title: Text(
               task.title,

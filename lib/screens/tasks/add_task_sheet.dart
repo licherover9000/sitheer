@@ -1,6 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sitheer/screens/tasks/tasks.dart';
+import 'package:sitheer/model/task.dart';
 import '../../providers/task_providers.dart';
 
 class AddTaskSheet extends StatefulWidget {
@@ -17,6 +18,9 @@ class _AddTaskSheetState extends State<AddTaskSheet> {
   void _submit() {
     if (_titleController.text.isEmpty) return;
 
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return;
+
     // Create the new task object
     final newTask = Task(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -26,7 +30,7 @@ class _AddTaskSheetState extends State<AddTaskSheet> {
     );
 
     // Send it to the provider
-    context.read<TaskProviders>().addTask(newTask, 'test_user');
+    context.read<TaskProviders>().addTask(newTask, uid);
 
     // Close the bottom sheet
     Navigator.pop(context);

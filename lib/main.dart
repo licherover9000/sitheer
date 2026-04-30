@@ -1,11 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:sitheer/core/themes.dart';
+import 'package:sitheer/providers/main_nav_provider.dart';
+import 'package:sitheer/providers/schedule_providers.dart';
+import 'package:sitheer/providers/settings_provider.dart';
 import 'package:sitheer/providers/task_providers.dart';
 import 'package:sitheer/providers/timer_providers.dart';
+import 'package:sitheer/services/auth_service.dart';
+import 'package:sitheer/services/notification_service.dart';
 import 'package:sitheer/screens/home/main_scaffold.dart';
-import 'firebase_options.dart';
+import 'package:sitheer/firebase_options.dart';
 
 void main() async {
   // Required to run async code before runApp
@@ -13,6 +19,19 @@ void main() async {
 
   // Initialize Firebase
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  try {
+    await AuthService.instance.signInAnonymously();
+  } on FirebaseAuthException catch (e, st) {
+    debugPrint(
+      'Firebase Auth unavailable (${e.code}): ${e.message}. '
+      'Enable Authentication in Firebase Console and turn on Anonymous sign-in.',
+    );
+    debugPrint('$st');
+  } catch (e, st) {
+    debugPrint('Firebase Auth sign-in failed: $e');
+    debugPrint('$st');
+  }
+  await NotificationService.init();
 
   runApp(const MyApp());
 }
@@ -24,13 +43,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => SettingsProvider()),
+        ChangeNotifierProvider(create: (_) => MainNavProvider()),
         ChangeNotifierProvider(create: (_) => TaskProviders()),
         ChangeNotifierProvider(create: (_) => TimerProviders()),
+        ChangeNotifierProvider(create: (_) => ScheduleProviders()),
       ],
-      child: MaterialApp(
-        title: 'Sitheer',
-        theme: lightTheme,
-        home: const MainScaffold(),
+      child: Consumer<SettingsProvider>(
+        builder: (context, settings, _) {
+          return MaterialApp(
+            title: 'Sitheer',
+            debugShowCheckedModeBanner: false,
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode: settings.themeMode,
+            home: const MainScaffold(),
+          );
+        },
       ),
     );
   }

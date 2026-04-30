@@ -1,18 +1,22 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:sitheer/screens/tasks/tasks.dart';
+import 'package:flutter/material.dart';
+import 'package:sitheer/model/task.dart';
 
 class TaskProviders extends ChangeNotifier {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   List<Task> _tasks = [];
+  StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? _subscription;
 
   List<Task> get tasks => _tasks;
   List<Task> get pendingTasks => _tasks.where((t) => !t.isCompleted).toList();
   List<Task> get completedTasks => tasks.where((t) => t.isCompleted).toList();
 
-  //listen to firestore in realtie
+  /// Listen to Firestore for the signed-in user’s task list.
   void startListening(String userId) {
-    _db
+    _subscription?.cancel();
+    _subscription = _db
         .collection('users')
         .doc(userId)
         .collection('tasks')
@@ -29,7 +33,7 @@ class TaskProviders extends ChangeNotifier {
   //crud operations
   Future<void> addTask(Task task, String userId) async {
     await _db
-        .collection('user')
+        .collection('users')
         .doc(userId)
         .collection('tasks')
         .doc(task.id)
@@ -53,5 +57,11 @@ class TaskProviders extends ChangeNotifier {
         .collection('tasks')
         .doc(taskId)
         .delete();
+  }
+
+  @override
+  void dispose() {
+    _subscription?.cancel();
+    super.dispose();
   }
 }
