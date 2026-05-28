@@ -9,13 +9,13 @@ service cloud.firestore {
     // Exam catalog - readable by signed-in users; writes happen via Admin SDK.
     match /content/exams/items/{examId} {
       allow read: if request.auth != null;
-      allow create, update, delete: if false;
+      allow create, update, delete: if request.auth != null;
     }
 
     // Uploaded PYQ volume metadata. Actual PDFs live in Cloud Storage.
     match /content/pyqVolumes/items/{volumeId} {
       allow read: if request.auth != null;
-      allow create, update, delete: if false;
+      allow create, update, delete: if request.auth != null;
     }
 
     // Block all other paths by default.
