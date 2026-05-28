@@ -8,6 +8,7 @@ import 'package:sitheer/data/prep_content_codec.dart';
 import 'package:sitheer/data/prep_content_local.dart';
 import 'package:sitheer/model/prep_exam_bundle.dart';
 import 'package:sitheer/model/prep_progress.dart';
+import 'package:sitheer/model/pyq_volume.dart';
 
 class PrepRepository {
   PrepRepository._();
@@ -172,5 +173,25 @@ class PrepRepository {
     Map<String, ChapterProgress> progress,
   ) {
     return progress.map((k, v) => MapEntry(k, v.toMap()));
+  }
+
+  Future<List<PyqVolume>> fetchPyqVolumes(String examId) async {
+    final db = _db;
+    if (db == null) return [];
+    try {
+      final snap = await db
+          .collection('content')
+          .doc('pyqVolumes')
+          .collection('items')
+          .where('examId', isEqualTo: examId)
+          .get();
+      return snap.docs
+          .map(
+            (doc) => PyqVolume.fromMap({...doc.data(), 'id': doc.id}),
+          )
+          .toList();
+    } catch (_) {
+      return [];
+    }
   }
 }

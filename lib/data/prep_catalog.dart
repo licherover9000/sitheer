@@ -50,6 +50,21 @@ final prepSubjects = <PrepSubject>[
             'Divide and conquer notes',
             'Recurrences, mergesort, quicksort',
           ),
+          prepArticle(
+            'EduRev GATE CSE Crash Course',
+            'Concise explanations + practice questions. Free crash course for all core topics.',
+            url: 'https://edurev.in/courses/73145_Crash-Course-for-GATE-CSE',
+          ),
+          prepNotes(
+            'PhysicsWallah GATE Notes',
+            'Well-structured PW notes covering all GATE CS topics — highly recommended.',
+            url: 'https://www.pw.live/exams/gate/gate-cse-notes/',
+          ),
+          prepArticle(
+            'GFG Last Minute Notes',
+            'Key formulas and quick revision notes for all GATE CSE subjects.',
+            url: 'https://www.geeksforgeeks.org/last-minute-notes-lmns/',
+          ),
         ],
       ),
       prepChapter(
@@ -72,6 +87,16 @@ final prepSubjects = <PrepSubject>[
           prepFormula(
             'Shortest path quick cards',
             'Dijkstra, Bellman Ford, Floyd Warshall',
+          ),
+          prepArticle(
+            'GATE CSE GitHub Resource Repo',
+            'Structured GATE CSE study materials including graph algorithms and DSA.',
+            url: 'https://github.com/baquer/GATE-and-CSE-Resources-for-Students',
+          ),
+          prepArticle(
+            'GateCse.in Resources',
+            'YouTube links, PDFs and study resources for all GATE CS subjects.',
+            url: 'https://gatecse.in/gate-cse-resources/',
           ),
         ],
       ),
@@ -310,6 +335,11 @@ final prepSubjects = <PrepSubject>[
             'Networking formula cards',
             'Bandwidth, delay, throughput',
           ),
+          prepArticle(
+            'GFG LMN — Computer Networks',
+            'Last Minute Notes covering all CN layers — quick revision before exam.',
+            url: 'https://www.geeksforgeeks.org/last-minute-notes-lmns/',
+          ),
         ],
       ),
       prepChapter(
@@ -327,6 +357,11 @@ final prepSubjects = <PrepSubject>[
           ),
           prepNotes('Subnet practice sheet', 'Fast binary-to-prefix workflow'),
           prepMock('Networks section test', 'Full chapter assessment'),
+          prepLecture(
+            'Ankit Doyla — Computer Networks (Unacademy)',
+            'Complete CN playlist by Ankit Doyla Sir — highly rated for GATE.',
+            url: 'https://www.youtube.com/playlist?list=PLOG_8OlGMp73hMyn-WX1M2Q4ON98DmaRq',
+          ),
         ],
       ),
       prepChapter(
@@ -343,8 +378,9 @@ final prepSubjects = <PrepSubject>[
             '61 questions',
           ),
           prepLecture(
-            'Transport layer revision',
-            'High-yield explanation playlist',
+            'NPTEL GATE CN Lectures',
+            'Official NPTEL subject-wise lectures for Computer Networks — free and reliable.',
+            url: 'https://gate.nptel.ac.in/video.php?branchID=2&cid=1',
           ),
         ],
       ),
@@ -375,6 +411,11 @@ final prepSubjects = <PrepSubject>[
             'Language closure map',
             'Closure and pumping lemma patterns',
           ),
+          prepLecture(
+            'Ankit Doyla — TOC Playlist (Unacademy)',
+            'Complete Theory of Computation playlist — DFA, NFA, CFG, TM.',
+            url: 'https://www.youtube.com/playlist?list=PLOG_8OlGMp72SAVxAk3VwEKQNbLkpN4Vs',
+          ),
         ],
       ),
       prepChapter(
@@ -391,6 +432,11 @@ final prepSubjects = <PrepSubject>[
             '62 questions',
           ),
           prepMock('TOC timed drill', 'Exam-style 60 minute set'),
+          prepArticle(
+            'GFG LMN — Theory of Computation',
+            'Last Minute Notes for TOC — pumping lemma, decidability, CFL properties.',
+            url: 'https://www.geeksforgeeks.org/last-minute-notes-lmns/',
+          ),
         ],
       ),
       prepChapter(
@@ -407,6 +453,11 @@ final prepSubjects = <PrepSubject>[
             '41 questions',
           ),
           prepFormula('Undecidability cards', 'Common reduction templates'),
+          prepArticle(
+            'NPTEL GATE Lectures Portal',
+            'Official NPTEL subject-wise video lectures for CSE and Data Science.',
+            url: 'https://gate.nptel.ac.in/video.php?branchID=2&cid=1',
+          ),
         ],
       ),
     ],
@@ -484,6 +535,21 @@ final prepSubjects = <PrepSubject>[
         prepNotes(
           'Common traps list',
           'Elimination rules and vocabulary patterns',
+        ),
+        prepArticle(
+          'BYJU\'s GATE Past Papers and Resources',
+          'Access previous years\' papers and other helpful resources.',
+          url: 'https://byjus.com/gate/gate-exam/',
+        ),
+        prepArticle(
+          'GATE Exam Guide — CollegeVerse',
+          'Detailed overview of exam pattern, syllabus, eligibility and preparation guide.',
+          url: 'https://collegeverse.co.in/gate-exam/',
+        ),
+        prepArticle(
+          'GATE Study Plan (SlideShare)',
+          'Subject-wise strategy, time management and exam tips guide.',
+          url: 'https://www.slideshare.net/slideshow/gate-preparation-strategy/134718443',
         ),
       ]),
       prepChapter(
@@ -760,6 +826,23 @@ List<PrepResource> get allResources => [
   for (final subject in prepSubjects)
     for (final chapter in subject.chapters) ...chapter.resources,
 ];
+
+PrepResource prepArticle(
+  String title,
+  String description, {
+  String? id,
+  required String url,
+}) {
+  return PrepResource(
+    id: id ?? _resourceId(title),
+    title: title,
+    type: PrepResourceType.article,
+    source: 'Guide',
+    description: description,
+    timeLabel: 'Read online',
+    url: url,
+  );
+}
 
 PrepChapter prepChapter(
   String id,

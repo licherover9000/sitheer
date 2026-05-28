@@ -6,6 +6,7 @@ import 'package:sitheer/data/prep_catalog_accessors.dart';
 import 'package:sitheer/data/prep_content_registry.dart';
 import 'package:sitheer/model/prep_content.dart';
 import 'package:sitheer/model/prep_progress.dart';
+import 'package:sitheer/model/pyq_volume.dart';
 import 'package:sitheer/repositories/prep_repository.dart';
 import 'package:sitheer/services/auth_service.dart';
 
@@ -22,6 +23,7 @@ class PrepProvider extends ChangeNotifier {
   final Set<String> _completedCheckpoints = {};
   final Map<String, ChapterProgress> _chapterProgress = {};
   final Map<String, MockAttemptRecord> _mockAttempts = {};
+  List<PyqVolume> _pyqVolumes = [];
   bool _loaded = false;
   bool _contentReady = false;
   String? _contentError;
@@ -32,6 +34,7 @@ class PrepProvider extends ChangeNotifier {
   bool get contentReady => _contentReady;
   String? get contentError => _contentError;
   Set<String> get completedCheckpoints => _completedCheckpoints;
+  List<PyqVolume> get pyqVolumes => List.unmodifiable(_pyqVolumes);
 
   List<PrepSubject> get subjects => subjectsForExam(_selectedExam);
   List<RoadmapWeek> get weeks => weeksForExam(_selectedExam);
@@ -74,6 +77,9 @@ class PrepProvider extends ChangeNotifier {
 
     _loaded = true;
     notifyListeners();
+
+    // Fetch PYQ volumes (silent failure)
+    await refreshPyqVolumes();
 
     final uid = AuthService.instance.userId;
     if (uid != null) {
@@ -153,6 +159,7 @@ class PrepProvider extends ChangeNotifier {
     _selectedExam = exam;
     if (_currentWeek > weeks.length) _currentWeek = 1;
     await _persist();
+    await refreshPyqVolumes();
   }
 
   Future<void> refreshContent({bool forceUpload = false}) async {
@@ -165,6 +172,15 @@ class PrepProvider extends ChangeNotifier {
       _contentError = null;
     } catch (e) {
       _contentError = e.toString();
+    }
+    notifyListeners();
+  }
+
+  Future<void> refreshPyqVolumes() async {
+    try {
+      _pyqVolumes = await _repo.fetchPyqVolumes(_selectedExam);
+    } catch (_) {
+      _pyqVolumes = [];
     }
     notifyListeners();
   }
@@ -226,28 +242,54 @@ class PrepProvider extends ChangeNotifier {
   Future<void> recordQuizResult(
     String chapterId,
     double accuracy,
-    int attempted,
-  ) async {
+    int attempted, {
+    int incorrectCount = 0,
+  }) async {
     final existing = _chapterProgress[chapterId] ?? const ChapterProgress();
     _chapterProgress[chapterId] = existing.copyWith(
       accuracy: accuracy,
       attemptedPyqs: existing.attemptedPyqs + attempted,
+      incorrectCount: existing.incorrectCount + incorrectCount,
     );
     await _persist();
   }
 
-  Future<void> recordMockAttempt(MockPaper paper, int score) async {
-    final accuracy = paper.questions == 0 ? 0.0 : score / paper.questions;
+  Future<void> recordMockAttempt(
+    MockPaper paper,
+    int correctCount,
+    int incorrectCount,
+    int skippedCount,
+  ) async {
+    final total = paper.questions;
+    final accuracy = total == 0 ? 0.0 : correctCount / total;
+    // GATE scoring: +1 MCQ correct, -1/3 MCQ wrong, 0 skipped
+    final marksObtained = correctCount - (incorrectCount / 3);
+
     _mockAttempts[paper.id] = MockAttemptRecord(
       paperId: paper.id,
-      score: score,
+      score: correctCount,
       accuracy: accuracy,
       completedAt: DateTime.now(),
+      correctCount: correctCount,
+      incorrectCount: incorrectCount,
+      skippedCount: skippedCount,
+      marksObtained: marksObtained,
     );
     await _persist();
   }
 
   MockAttemptRecord? mockAttempt(String paperId) => _mockAttempts[paperId];
+
+  /// Returns total incorrect count across all chapters (for mistake tracker).
+  int get totalIncorrect =>
+      _chapterProgress.values.fold(0, (sum, p) => sum + p.incorrectCount);
+
+  /// Returns chapters sorted by incorrectCount descending (weakest first).
+  List<MapEntry<String, ChapterProgress>> get weakestChaptersByMistakes {
+    final entries = _chapterProgress.entries.toList();
+    entries.sort((a, b) => b.value.incorrectCount.compareTo(a.value.incorrectCount));
+    return entries;
+  }
 
   Future<void> createRoadmapTask(String title, {String? tag}) async {
     // Tasks are created from UI via TaskProviders + FirebaseAuth.
