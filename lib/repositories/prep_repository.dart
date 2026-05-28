@@ -111,6 +111,17 @@ class PrepRepository {
       final loaded = await fetchExamBundle(local.examId);
       if (loaded != null) out.add(loaded);
     }
+    for (final pyq in allLocalPyqVolumes()) {
+      await db
+          .collection('content')
+          .doc('pyqVolumes')
+          .collection('items')
+          .doc(pyq.id)
+          .set({
+            ...pyq.toMap(),
+            'updatedAt': FieldValue.serverTimestamp(),
+          });
+    }
     return out;
   }
 
