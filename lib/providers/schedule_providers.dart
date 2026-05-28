@@ -1,12 +1,17 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sitheer/model/event.dart';
 import 'package:sitheer/services/notification_service.dart';
 
 class ScheduleProviders extends ChangeNotifier {
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  FirebaseFirestore? get _db {
+    if (Firebase.apps.isEmpty) return null;
+    return FirebaseFirestore.instance;
+  }
+
   List<AppEvent> _events = [];
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? _subscription;
 
@@ -51,8 +56,10 @@ class ScheduleProviders extends ChangeNotifier {
   }
 
   void startListening(String userId) {
+    final db = _db;
+    if (db == null) return;
     _subscription?.cancel();
-    _subscription = _db
+    _subscription = db
         .collection('users')
         .doc(userId)
         .collection('events')
@@ -67,7 +74,9 @@ class ScheduleProviders extends ChangeNotifier {
   }
 
   Future<void> addEvent(AppEvent event, String userId) async {
-    await _db
+    final db = _db;
+    if (db == null) return;
+    await db
         .collection('users')
         .doc(userId)
         .collection('events')

@@ -1,30 +1,45 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:sitheer/main.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sitheer/core/themes.dart';
+import 'package:sitheer/providers/main_nav_provider.dart';
+import 'package:sitheer/providers/mentor_keys_provider.dart';
+import 'package:sitheer/providers/prep_provider.dart';
+import 'package:sitheer/providers/schedule_providers.dart';
+import 'package:sitheer/providers/settings_provider.dart';
+import 'package:sitheer/providers/task_providers.dart';
+import 'package:sitheer/providers/timer_providers.dart';
+import 'package:sitheer/screens/home/main_scaffold.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('prep dashboard loads the main workflows', (tester) async {
+    SharedPreferences.setMockInitialValues({});
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    await tester.pumpWidget(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => SettingsProvider()),
+          ChangeNotifierProvider(create: (_) => MentorKeysProvider()),
+          ChangeNotifierProvider(create: (_) => PrepProvider()),
+          ChangeNotifierProvider(create: (_) => MainNavProvider()),
+          ChangeNotifierProvider(create: (_) => TaskProviders()),
+          ChangeNotifierProvider(create: (_) => TimerProviders()),
+          ChangeNotifierProvider(create: (_) => ScheduleProviders()),
+        ],
+        child: MaterialApp(theme: lightTheme, home: const MainScaffold()),
+      ),
+    );
     await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('myTayari'), findsOneWidget);
+    expect(find.text('Ask, practice, review, repeat.'), findsOneWidget);
+    expect(find.text('Roadmap'), findsWidgets);
+
+    await tester.tap(find.text('Vault'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Every chapter has a material stack.'), findsOneWidget);
   });
 }

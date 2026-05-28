@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sitheer/core/constants.dart';
 import 'package:sitheer/model/event.dart';
-import 'package:sitheer/providers/main_nav_provider.dart';
 import 'package:sitheer/providers/schedule_providers.dart';
 import 'package:sitheer/providers/task_providers.dart';
 import 'package:sitheer/providers/timer_providers.dart';
@@ -51,30 +50,27 @@ class HomeScreen extends StatelessWidget {
           _SummaryCard(
             title: "Today's tasks",
             subtitle:
-                '${tasks.pendingTasks.length} pending · ${tasks.completedTasks.length} done',
+                '${tasks.pendingTasks.length} pending - ${tasks.completedTasks.length} done',
             icon: Icons.check_circle_outline,
-            onTap: () =>
-                context.read<MainNavProvider>().setIndex(1),
+            onTap: () => DefaultTabController.of(context).animateTo(1),
           ),
           const SizedBox(height: AppSizes.paddingM),
           _SummaryCard(
             title: 'Focus',
             subtitle: timer.state == TimerState.running
-                ? '${_modeLabel(timer.mode)} running · ${timer.sessions} completed'
+                ? '${_modeLabel(timer.mode)} running - ${timer.sessions} completed'
                 : '${timer.sessions} focus session(s) completed',
             icon: Icons.timer_outlined,
-            onTap: () =>
-                context.read<MainNavProvider>().setIndex(2),
+            onTap: () => DefaultTabController.of(context).animateTo(2),
           ),
           const SizedBox(height: AppSizes.paddingM),
           _SummaryCard(
             title: 'Next event',
             subtitle: next == null
                 ? 'Nothing coming up'
-                : '${next.title} · ${_etaLabel(next) ?? "Schedule"}',
+                : '${next.title} - ${_etaLabel(next) ?? "Schedule"}',
             icon: Icons.event,
-            onTap: () =>
-                context.read<MainNavProvider>().setIndex(3),
+            onTap: () => DefaultTabController.of(context).animateTo(3),
           ),
         ],
       ),
@@ -113,18 +109,16 @@ class _SummaryCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: Theme.of(context).textTheme.titleMedium
-                          ?.copyWith(fontWeight: FontWeight.w600),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     const SizedBox(height: 4),
                     Text(
                       subtitle,
-                      style: Theme.of(context).textTheme.bodyMedium
-                          ?.copyWith(
-                            color: Theme.of(
-                              context,
-                            ).textTheme.bodySmall?.color,
-                          ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).textTheme.bodySmall?.color,
+                      ),
                     ),
                   ],
                 ),

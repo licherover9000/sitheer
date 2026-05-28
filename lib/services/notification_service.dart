@@ -9,19 +9,19 @@ class NotificationService {
 
   static const AndroidNotificationChannel _timerChannel =
       AndroidNotificationChannel(
-    'timer_channel',
-    'Timer',
-    description: 'Alerts when a focus or break session ends',
-    importance: Importance.high,
-  );
+        'timer_channel',
+        'Timer',
+        description: 'Alerts when a focus or break session ends',
+        importance: Importance.high,
+      );
 
   static const AndroidNotificationChannel _scheduleChannel =
       AndroidNotificationChannel(
-    'schedule_channel',
-    'Schedule',
-    description: 'Reminders before calendar events',
-    importance: Importance.defaultImportance,
-  );
+        'schedule_channel',
+        'Schedule',
+        description: 'Reminders before calendar events',
+        importance: Importance.defaultImportance,
+      );
 
   static bool _ready = false;
 
@@ -54,20 +54,23 @@ class NotificationService {
 
     await _plugin.initialize(settings);
 
-    final androidImpl =
-        _plugin.resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>();
+    final androidImpl = _plugin
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >();
     await androidImpl?.createNotificationChannel(_timerChannel);
     await androidImpl?.createNotificationChannel(_scheduleChannel);
     await androidImpl?.requestNotificationsPermission();
 
     await _plugin
         .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
+          IOSFlutterLocalNotificationsPlugin
+        >()
         ?.requestPermissions(alert: true, badge: true, sound: true);
     await _plugin
         .resolvePlatformSpecificImplementation<
-            MacOSFlutterLocalNotificationsPlugin>()
+          MacOSFlutterLocalNotificationsPlugin
+        >()
         ?.requestPermissions(alert: true, badge: true, sound: true);
 
     _ready = true;
@@ -119,12 +122,8 @@ class NotificationService {
           importance: Importance.defaultImportance,
           priority: Priority.defaultPriority,
         ),
-        iOS: DarwinNotificationDetails(
-          presentSound: true,
-        ),
-        macOS: DarwinNotificationDetails(
-          presentSound: true,
-        ),
+        iOS: DarwinNotificationDetails(presentSound: true),
+        macOS: DarwinNotificationDetails(presentSound: true),
       ),
       androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
       uiLocalNotificationDateInterpretation:
@@ -147,12 +146,8 @@ class NotificationService {
           importance: Importance.high,
           priority: Priority.high,
         ),
-        iOS: DarwinNotificationDetails(
-          presentSound: true,
-        ),
-        macOS: DarwinNotificationDetails(
-          presentSound: true,
-        ),
+        iOS: DarwinNotificationDetails(presentSound: true),
+        macOS: DarwinNotificationDetails(presentSound: true),
       ),
     );
   }

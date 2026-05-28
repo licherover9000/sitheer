@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sitheer/providers/prep_provider.dart';
 import 'package:sitheer/providers/settings_provider.dart';
+import 'package:sitheer/screens/settings/mentor_api_keys_section.dart';
 import 'package:sitheer/providers/timer_providers.dart';
 import 'package:sitheer/core/constants.dart';
 
@@ -13,6 +15,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final settings = context.watch<SettingsProvider>();
     final timer = context.watch<TimerProviders>();
+    final prep = context.watch<PrepProvider>();
 
     return Scaffold(
       appBar: AppBar(title: const Text('Settings')),
@@ -55,6 +58,64 @@ class SettingsScreen extends StatelessWidget {
                   unawaited(settings.setThemeMode(next.first));
                 },
               ),
+            ),
+          ),
+          const SizedBox(height: AppSizes.paddingL),
+          const MentorApiKeysSection(),
+          const SizedBox(height: AppSizes.paddingL),
+          Text(
+            'Prep content',
+            style: Theme.of(
+              context,
+            ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
+          ),
+          const SizedBox(height: 8),
+          Card(
+            child: Column(
+              children: [
+                ListTile(
+                  leading: Icon(
+                    prep.contentReady
+                        ? Icons.cloud_done_outlined
+                        : Icons.cloud_off_outlined,
+                    color: prep.contentReady
+                        ? AppColors.mint
+                        : AppColors.warning,
+                  ),
+                  title: Text(
+                    prep.contentReady
+                        ? 'Catalog synced'
+                        : 'Using offline catalog',
+                  ),
+                  subtitle: Text(
+                    prep.contentError ??
+                        'Firestore path: content/exams/items/{gate-cs|gate-da}',
+                  ),
+                ),
+                const Divider(height: 1),
+                ListTile(
+                  leading: const Icon(Icons.refresh),
+                  title: const Text('Refresh from cloud'),
+                  onTap: () => unawaited(prep.refreshContent()),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.upload_outlined),
+                  title: const Text('Re-upload built-in catalog'),
+                  subtitle: const Text(
+                    'Blocked by security rules - use Firebase Console or admin SDK',
+                  ),
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text(
+                          'Catalog overwrite disabled for security. '
+                          'Edit content/exams/items in Firebase Console.',
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
           ),
           const SizedBox(height: AppSizes.paddingL),
@@ -137,12 +198,7 @@ class _DurationTile extends StatelessWidget {
         value: value,
         onChanged: onChanged,
         items: [5, 10, 15, 20, 25, 30, 45, 50, 60]
-            .map(
-              (m) => DropdownMenuItem(
-                value: m,
-                child: Text('$m min'),
-              ),
-            )
+            .map((m) => DropdownMenuItem(value: m, child: Text('$m min')))
             .toList(),
       ),
     );

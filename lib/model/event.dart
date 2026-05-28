@@ -34,9 +34,7 @@ class AppEvent {
 
   factory AppEvent.fromMap(Map<String, dynamic> map) {
     final colorRaw = map['colorValue'];
-    final colorValue = colorRaw is int
-        ? colorRaw
-        : (colorRaw as num).toInt();
+    final colorValue = colorRaw is int ? colorRaw : (colorRaw as num).toInt();
     int asInt(Object? v) => v is int ? v : (v as num).toInt();
 
     return AppEvent(

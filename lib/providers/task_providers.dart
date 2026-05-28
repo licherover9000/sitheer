@@ -1,11 +1,16 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:sitheer/model/task.dart';
 
 class TaskProviders extends ChangeNotifier {
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  FirebaseFirestore? get _db {
+    if (Firebase.apps.isEmpty) return null;
+    return FirebaseFirestore.instance;
+  }
+
   List<Task> _tasks = [];
   StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? _subscription;
 
@@ -13,10 +18,12 @@ class TaskProviders extends ChangeNotifier {
   List<Task> get pendingTasks => _tasks.where((t) => !t.isCompleted).toList();
   List<Task> get completedTasks => tasks.where((t) => t.isCompleted).toList();
 
-  /// Listen to Firestore for the signed-in user’s task list.
+  /// Listen to Firestore for the signed-in user's task list.
   void startListening(String userId) {
+    final db = _db;
+    if (db == null) return;
     _subscription?.cancel();
-    _subscription = _db
+    _subscription = db
         .collection('users')
         .doc(userId)
         .collection('tasks')
@@ -32,7 +39,9 @@ class TaskProviders extends ChangeNotifier {
 
   //crud operations
   Future<void> addTask(Task task, String userId) async {
-    await _db
+    final db = _db;
+    if (db == null) return;
+    await db
         .collection('users')
         .doc(userId)
         .collection('tasks')
@@ -41,8 +50,10 @@ class TaskProviders extends ChangeNotifier {
   }
 
   Future<void> toggleTask(Task task, String userId) async {
+    final db = _db;
+    if (db == null) return;
     final updated = task.copyWith(isCompleted: !task.isCompleted);
-    await _db
+    await db
         .collection('users')
         .doc(userId)
         .collection('tasks')
@@ -51,7 +62,9 @@ class TaskProviders extends ChangeNotifier {
   }
 
   Future<void> deleteTask(String userId, String taskId) async {
-    await _db
+    final db = _db;
+    if (db == null) return;
+    await db
         .collection('users')
         .doc(userId)
         .collection('tasks')

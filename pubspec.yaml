@@ -56,6 +56,10 @@ dependencies:
   timezone: ^0.9.3
   firebase_storage: ^11.7.7
   flutter_timezone: ^5.0.2
+  url_launcher: ^6.3.1
+  http: ^1.2.2
+  cloud_functions: ^4.7.6
+  flutter_secure_storage: ^9.2.4
 
 dev_dependencies:
   flutter_test:

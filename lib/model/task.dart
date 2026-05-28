@@ -20,22 +20,22 @@ class Task {
   });
 
   Map<String, dynamic> toMap() => {
-        'id': id,
-        'title': title,
-        'isCompleted': isCompleted,
-        'priority': priority.name,
-        'createAt': Timestamp.fromDate(createAt),
-        'tag': tag,
-      };
+    'id': id,
+    'title': title,
+    'isCompleted': isCompleted,
+    'priority': priority.name,
+    'createAt': Timestamp.fromDate(createAt),
+    'tag': tag,
+  };
 
   factory Task.fromMap(Map<String, dynamic> map) => Task(
-        id: map['id'] as String,
-        title: map['title'] as String,
-        isCompleted: map['isCompleted'] as bool,
-        priority: Priority.values.byName(map['priority'] as String),
-        createAt: (map['createAt'] as Timestamp).toDate(),
-        tag: map['tag'] as String?,
-      );
+    id: map['id'] as String,
+    title: map['title'] as String,
+    isCompleted: map['isCompleted'] as bool,
+    priority: Priority.values.byName(map['priority'] as String),
+    createAt: (map['createAt'] as Timestamp).toDate(),
+    tag: map['tag'] as String?,
+  );
 
   Task copyWith({
     String? title,
