@@ -5,8 +5,8 @@ import 'package:sitheer/data/prep_catalog_accessors.dart';
 import 'package:sitheer/model/question_attempt.dart';
 import 'package:sitheer/providers/prep_provider.dart';
 import 'package:sitheer/screens/prep/explain_question_screen.dart';
+import 'package:sitheer/screens/prep/practice_runner_screen.dart';
 import 'package:sitheer/screens/prep/prep_widgets.dart';
-import 'package:sitheer/screens/prep/pyq_quiz_screen.dart';
 
 /// Shared post-attempt review used by both mocks and PYQ drills.
 ///
@@ -146,7 +146,7 @@ class _PracticeReviewScreenState extends State<PracticeReviewScreen> {
               onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => PyqQuizScreen(chapterId: weakest!),
+                  builder: (_) => PracticeRunnerScreen.chapter(weakest!),
                 ),
               ),
               icon: const Icon(Icons.replay_outlined),
@@ -308,23 +308,23 @@ class _ReviewCard extends StatelessWidget {
               ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
-            if (a.selectedIndex != null && !a.isCorrect)
-              _AnswerRow(
-                label: 'Your answer',
-                text: a.options[a.selectedIndex!],
-                color: AppColors.danger,
-                icon: Icons.close,
-              ),
             if (a.isSkipped)
               const _AnswerRow(
                 label: 'Your answer',
                 text: 'Skipped',
                 color: AppColors.textMuted,
                 icon: Icons.remove,
+              )
+            else if (!a.isCorrect)
+              _AnswerRow(
+                label: 'Your answer',
+                text: a.responseText,
+                color: AppColors.danger,
+                icon: Icons.close,
               ),
             _AnswerRow(
               label: 'Correct answer',
-              text: a.options[a.correctIndex],
+              text: a.correctText,
               color: AppColors.mint,
               icon: Icons.check,
             ),

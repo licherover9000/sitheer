@@ -17,10 +17,13 @@ void main() {
   test('buildExplainPrompt includes question, options, and both answers', () {
     final prompt = buildExplainPrompt(attempt);
 
-    expect(prompt, contains('Which normal form removes transitive dependency?'));
+    expect(
+      prompt,
+      contains('Which normal form removes transitive dependency?'),
+    );
     expect(prompt, contains('A. 1NF'));
-    expect(prompt, contains('Correct answer: C. 3NF'));
-    expect(prompt, contains('My answer: B. 2NF'));
+    expect(prompt, contains('Correct answer: 3NF'));
+    expect(prompt, contains('My answer: 2NF'));
     expect(prompt, contains('Reference note:'));
   });
 

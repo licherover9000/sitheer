@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:sitheer/core/themes.dart';
 import 'package:sitheer/providers/main_nav_provider.dart';
 import 'package:sitheer/data/prep_content_registry.dart';
+import 'package:sitheer/data/question_bank.dart';
 import 'package:sitheer/providers/mentor_keys_provider.dart';
 import 'package:sitheer/providers/prep_provider.dart';
 import 'package:sitheer/providers/schedule_providers.dart';
@@ -43,6 +44,15 @@ void main() async {
     PrepContentRegistry.instance.setBundles(bundles);
   } catch (e, st) {
     debugPrint('Prep content bootstrap failed: $e');
+    debugPrint('$st');
+  }
+
+  // Load the PYQ question bank (seed + JSON assets). Runs after the content
+  // registry so exam grouping (chapter -> subject -> exam) resolves.
+  try {
+    await QuestionBank.instance.load();
+  } catch (e, st) {
+    debugPrint('Question bank load failed: $e');
     debugPrint('$st');
   }
 

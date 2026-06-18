@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sitheer/core/constants.dart';
-import 'package:sitheer/data/prep_questions.dart';
+import 'package:sitheer/data/question_bank.dart';
 import 'package:sitheer/model/prep_content.dart';
 import 'package:sitheer/providers/prep_provider.dart';
 import 'package:sitheer/screens/prep/mock_attempt_screen.dart';
 import 'package:sitheer/screens/prep/prep_widgets.dart';
-import 'package:sitheer/screens/prep/pyq_quiz_screen.dart';
+import 'package:sitheer/screens/prep/practice_runner_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ResourceDetailScreen extends StatelessWidget {
@@ -76,7 +76,7 @@ class ResourceDetailScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (_) => PyqQuizScreen(chapterId: chapterId),
+                    builder: (_) => PracticeRunnerScreen.chapter(chapterId),
                   ),
                 );
               },
@@ -154,7 +154,8 @@ class ResourceDetailScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => PyqQuizScreen(chapterId: chapterId),
+                          builder: (_) =>
+                              PracticeRunnerScreen.chapter(chapterId),
                         ),
                       );
                     },

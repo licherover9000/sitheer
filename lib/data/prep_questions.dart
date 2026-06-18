@@ -1010,17 +1010,3 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
     ),
   ],
 };
-
-List<PrepQuestion> questionsForChapter(String chapterId) {
-  return prepQuestionsByChapter[chapterId] ??
-      [
-        PrepQuestion(
-          id: 'generic-$chapterId',
-          chapterId: chapterId,
-          prompt: 'Placeholder: add more questions for $chapterId',
-          options: ['A', 'B', 'C', 'D'],
-          correctIndex: 0,
-          explanation: 'Import a full question bank into Firestore later.',
-        ),
-      ];
-}

@@ -3,8 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:sitheer/core/constants.dart';
 import 'package:sitheer/model/prep_content.dart';
 import 'package:sitheer/providers/prep_provider.dart';
+import 'package:sitheer/data/question_bank.dart';
 import 'package:sitheer/screens/prep/mock_attempt_screen.dart';
 import 'package:sitheer/screens/prep/practice_review_screen.dart';
+import 'package:sitheer/screens/prep/practice_runner_screen.dart';
 import 'package:sitheer/screens/prep/prep_widgets.dart';
 
 class MockTestsScreen extends StatelessWidget {
@@ -71,6 +73,15 @@ class MockTestsScreen extends StatelessWidget {
           ...prep.mocks.map(
             (paper) => _MockPaperCard(paper: paper, prep: prep),
           ),
+          const SizedBox(height: AppSizes.paddingL),
+          SectionTitle(
+            title: 'PYQ by year',
+            subtitle:
+                'Practise real ${prep.selectedExam} previous-year questions, '
+                'one year at a time.',
+          ),
+          const SizedBox(height: AppSizes.paddingM),
+          _PyqByYear(exam: prep.selectedExam),
           const SizedBox(height: AppSizes.paddingL),
           const SectionTitle(
             title: 'Exam interface map',
@@ -251,6 +262,56 @@ class _MockPaperCard extends StatelessWidget {
               ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PyqByYear extends StatelessWidget {
+  const _PyqByYear({required this.exam});
+
+  final String exam;
+
+  @override
+  Widget build(BuildContext context) {
+    final bank = QuestionBank.instance;
+    final years = bank.availableYears(exam);
+    if (years.isEmpty) {
+      return const Card(
+        child: ListTile(
+          leading: Icon(Icons.history_edu_outlined, color: AppColors.textMuted),
+          title: Text('No year-tagged PYQs loaded yet.'),
+          subtitle: Text('Curated previous-year questions will appear here.'),
+        ),
+      );
+    }
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(AppSizes.paddingM),
+        child: Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: years.map((year) {
+            final count = bank.countForYear(exam, year);
+            return ActionChip(
+              avatar: const Icon(Icons.play_arrow, size: 18),
+              label: Text('$year  ·  $count Q'),
+              onPressed: () {
+                final questions = bank.forYear(exam, year);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => PracticeRunnerScreen(
+                      questions: questions,
+                      title: '$exam $year PYQ',
+                      source: 'pyq',
+                      refId: 'year-$exam-$year',
+                    ),
+                  ),
+                );
+              },
+            );
+          }).toList(),
         ),
       ),
     );

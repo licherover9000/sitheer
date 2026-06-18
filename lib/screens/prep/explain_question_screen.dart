@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sitheer/core/constants.dart';
 import 'package:sitheer/data/prep_catalog_accessors.dart';
+import 'package:sitheer/model/prep_question.dart';
 import 'package:sitheer/model/question_attempt.dart';
 import 'package:sitheer/providers/mentor_keys_provider.dart';
 import 'package:sitheer/providers/prep_provider.dart';
@@ -104,40 +105,51 @@ class _ExplainQuestionScreenState extends State<ExplainQuestionScreen> {
             ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
           ),
           const SizedBox(height: 16),
-          ...List.generate(_q.options.length, (i) {
-            final isCorrect = i == _q.correctIndex;
-            final isPicked = i == _q.selectedIndex;
-            Color? border;
-            if (isCorrect) {
-              border = AppColors.mint;
-            } else if (isPicked) {
-              border = AppColors.danger;
-            }
-            return Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              padding: const EdgeInsets.all(AppSizes.paddingM),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(AppSizes.radiusM),
-                border: Border.all(
-                  color: border ?? AppColors.border,
-                  width: border != null ? 2 : 1,
+          if (_q.options.isEmpty)
+            _AnswerSummary(attempt: _q)
+          else
+            ...List.generate(_q.options.length, (i) {
+              final isCorrect = _q.type == QuestionType.msq
+                  ? _q.correctIndexes.contains(i)
+                  : i == _q.correctIndex;
+              final isPicked = _q.type == QuestionType.msq
+                  ? _q.selectedIndexes.contains(i)
+                  : i == _q.selectedIndex;
+              Color? border;
+              if (isCorrect) {
+                border = AppColors.mint;
+              } else if (isPicked) {
+                border = AppColors.danger;
+              }
+              return Container(
+                margin: const EdgeInsets.only(bottom: 10),
+                padding: const EdgeInsets.all(AppSizes.paddingM),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(AppSizes.radiusM),
+                  border: Border.all(
+                    color: border ?? AppColors.border,
+                    width: border != null ? 2 : 1,
+                  ),
                 ),
-              ),
-              child: Row(
-                children: [
-                  Expanded(child: Text(_q.options[i])),
-                  if (isCorrect)
-                    const Icon(
-                      Icons.check_circle,
-                      color: AppColors.mint,
-                      size: 18,
-                    )
-                  else if (isPicked)
-                    const Icon(Icons.cancel, color: AppColors.danger, size: 18),
-                ],
-              ),
-            );
-          }),
+                child: Row(
+                  children: [
+                    Expanded(child: Text(_q.options[i])),
+                    if (isCorrect)
+                      const Icon(
+                        Icons.check_circle,
+                        color: AppColors.mint,
+                        size: 18,
+                      )
+                    else if (isPicked)
+                      const Icon(
+                        Icons.cancel,
+                        color: AppColors.danger,
+                        size: 18,
+                      ),
+                  ],
+                ),
+              );
+            }),
           const SizedBox(height: AppSizes.paddingM),
           if (_answer == null)
             FilledButton.icon(
@@ -198,6 +210,43 @@ class _ExplainQuestionScreenState extends State<ExplainQuestionScreen> {
           StudyTopicSection(chapterId: _q.chapterId),
         ],
       ),
+    );
+  }
+}
+
+/// Your-answer-vs-correct summary for questions without options (NAT).
+class _AnswerSummary extends StatelessWidget {
+  const _AnswerSummary({required this.attempt});
+
+  final QuestionAttempt attempt;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _row(
+          context,
+          'Your answer',
+          attempt.isSkipped ? 'Skipped' : attempt.responseText,
+          attempt.isCorrect ? AppColors.mint : AppColors.danger,
+        ),
+        const SizedBox(height: 6),
+        _row(context, 'Correct answer', attempt.correctText, AppColors.mint),
+      ],
+    );
+  }
+
+  Widget _row(BuildContext context, String label, String value, Color color) {
+    return Container(
+      width: double.infinity,
+      margin: const EdgeInsets.only(bottom: 4),
+      padding: const EdgeInsets.all(AppSizes.paddingM),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(AppSizes.radiusM),
+        border: Border.all(color: color, width: 1.5),
+      ),
+      child: Text('$label: $value'),
     );
   }
 }

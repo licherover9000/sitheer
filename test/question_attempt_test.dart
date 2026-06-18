@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:sitheer/model/prep_question.dart';
 import 'package:sitheer/model/question_attempt.dart';
 
 void main() {
@@ -9,6 +10,7 @@ void main() {
         prompt: 'Best case of merge sort?',
         options: const ['n', 'n log n', 'n^2', '1'],
         correctIndex: 1,
+        penalty: 1 / 3,
         selectedIndex: selected,
         explanation: 'Merge sort is always n log n.',
         markedForReview: marked,
@@ -78,5 +80,42 @@ void main() {
     expect(restored.attempts.length, 2);
     expect(restored.attempts[1].markedForReview, isTrue);
     expect(restored.completedAt, session.completedAt);
+  });
+
+  test('NAT attempt correctness honours tolerance', () {
+    QuestionAttempt nat(double? resp) => QuestionAttempt(
+      questionId: 'n1',
+      chapterId: 'cn-routing',
+      prompt: 'Usable hosts in a /26?',
+      options: const [],
+      correctIndex: 0,
+      type: QuestionType.nat,
+      numericAnswer: 62,
+      numericTolerance: 0,
+      numericResponse: resp,
+      attemptedAt: DateTime.utc(2026, 6, 18),
+    );
+    expect(nat(62).isCorrect, isTrue);
+    expect(nat(61).isWrong, isTrue);
+    expect(nat(null).isSkipped, isTrue);
+  });
+
+  test('MSQ attempt requires the exact correct set', () {
+    QuestionAttempt msq(List<int> sel) => QuestionAttempt(
+      questionId: 'm1',
+      chapterId: 'os-sync',
+      prompt: 'Deadlock conditions?',
+      options: const ['Mutual excl', 'Hold & wait', 'Preemption', 'Circular'],
+      correctIndex: 0,
+      correctIndexes: const [0, 1, 3],
+      type: QuestionType.msq,
+      selectedIndexes: sel,
+      attemptedAt: DateTime.utc(2026, 6, 18),
+    );
+    expect(msq([0, 1, 3]).isCorrect, isTrue);
+    expect(msq([3, 1, 0]).isCorrect, isTrue); // order-independent
+    expect(msq([0, 1]).isWrong, isTrue); // missing one
+    expect(msq([0, 1, 2, 3]).isWrong, isTrue); // extra one
+    expect(msq([]).isSkipped, isTrue);
   });
 }

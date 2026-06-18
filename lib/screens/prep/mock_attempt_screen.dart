@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sitheer/core/constants.dart';
-import 'package:sitheer/data/prep_questions.dart';
+import 'package:sitheer/data/question_bank.dart';
 import 'package:sitheer/model/mock_question.dart';
+import 'package:sitheer/model/prep_question.dart';
 import 'package:sitheer/model/prep_content.dart';
 import 'package:sitheer/model/question_attempt.dart';
 import 'package:sitheer/providers/prep_provider.dart';
@@ -65,8 +66,13 @@ class _MockAttemptScreenState extends State<MockAttemptScreen> {
   List<MockQuestion> _buildQuestions() {
     // Shuffle so each attempt draws a different set/order, then cycle if the
     // pool is smaller than the paper size. Order is fixed for this attempt.
-    final pool = prepQuestionsByChapter.values.expand((q) => q).toList()
-      ..shuffle();
+    // The mock interface is single-correct MCQ only; exclude NAT/MSQ.
+    final pool =
+        QuestionBank.instance.allQuestions
+            .where((q) => q.type == QuestionType.mcq && q.options.isNotEmpty)
+            .toList()
+          ..shuffle();
+    if (pool.isEmpty) return const [];
     final count = widget.paper.questions.clamp(10, 65);
     return List.generate(count, (i) {
       final q = pool[i % pool.length];

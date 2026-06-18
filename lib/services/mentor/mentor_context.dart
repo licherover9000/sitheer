@@ -1,4 +1,5 @@
 import 'package:sitheer/model/mentor_reply.dart';
+import 'package:sitheer/model/prep_question.dart';
 import 'package:sitheer/model/question_attempt.dart';
 import 'package:sitheer/providers/prep_provider.dart';
 
@@ -57,16 +58,11 @@ String buildMentorUserPrompt(String question, MentorIntent intent) {
 /// (the "Explain differently" follow-up).
 String buildExplainPrompt(QuestionAttempt q, {bool simpler = false}) {
   const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-  String label(int i) => i >= 0 && i < q.options.length && i < letters.length
-      ? '${letters[i]}. ${q.options[i]}'
-      : 'option ${i + 1}';
-
-  final options = [
-    for (var i = 0; i < q.options.length; i++) label(i),
-  ].join('\n');
-  final picked = q.selectedIndex == null
-      ? 'skipped (no answer)'
-      : label(q.selectedIndex!);
+  final typeLabel = switch (q.type) {
+    QuestionType.mcq => 'single-correct MCQ',
+    QuestionType.msq => 'multiple-select (MSQ)',
+    QuestionType.nat => 'numerical-answer (NAT)',
+  };
 
   final buffer = StringBuffer();
   if (simpler) {
@@ -81,18 +77,27 @@ String buildExplainPrompt(QuestionAttempt q, {bool simpler = false}) {
   }
   buffer
     ..writeln()
-    ..writeln('Question: ${q.prompt}')
-    ..writeln('Options:')
-    ..writeln(options)
-    ..writeln('Correct answer: ${label(q.correctIndex)}')
-    ..writeln('My answer: $picked');
+    ..writeln('Type: $typeLabel')
+    ..writeln('Question: ${q.prompt}');
+  if (q.options.isNotEmpty) {
+    buffer.writeln('Options:');
+    for (var i = 0; i < q.options.length; i++) {
+      final letter = i < letters.length ? letters[i] : '${i + 1}';
+      buffer.writeln('$letter. ${q.options[i]}');
+    }
+  }
+  buffer
+    ..writeln('Correct answer: ${q.correctText}')
+    ..writeln(
+      'My answer: ${q.isSkipped ? 'skipped (no answer)' : q.responseText}',
+    );
   if (q.explanation != null && q.explanation!.trim().isNotEmpty) {
     buffer.writeln('Reference note: ${q.explanation!.trim()}');
   }
   buffer
     ..writeln()
     ..writeln(
-      'Cover: (1) the core concept being tested, (2) why the correct option '
+      'Cover: (1) the core concept being tested, (2) why the correct answer '
       'is right, (3) the likely mistake behind my answer, and (4) one tip to '
       'remember it. Be concise and exam-focused.',
     );
