@@ -4,6 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:sitheer/core/themes.dart';
 import 'package:sitheer/providers/main_nav_provider.dart';
+import 'package:sitheer/data/prep_catalog.dart' show supportedExams;
+import 'package:sitheer/data/prep_content_codec.dart' show examIdFromLabel;
 import 'package:sitheer/data/prep_content_registry.dart';
 import 'package:sitheer/data/question_bank.dart';
 import 'package:sitheer/providers/mentor_keys_provider.dart';
@@ -51,6 +53,14 @@ void main() async {
   // registry so exam grouping (chapter -> subject -> exam) resolves.
   try {
     await QuestionBank.instance.load();
+    // Best-effort: merge any cloud-hosted questions (Admin-SDK imported) on
+    // top of the bundled set. Offline/first-run simply keeps the assets.
+    for (final exam in supportedExams) {
+      final remote = await PrepRepository.instance.fetchExamQuestions(
+        examIdFromLabel(exam),
+      );
+      QuestionBank.instance.mergeRemote(remote);
+    }
   } catch (e, st) {
     debugPrint('Question bank load failed: $e');
     debugPrint('$st');

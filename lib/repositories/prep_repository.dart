@@ -42,6 +42,27 @@ class PrepRepository {
     return;
   }
 
+  /// Reads cloud-hosted questions for an exam from
+  /// `content/exams/items/{examId}/questions`. Returns an empty list when
+  /// Firebase is unavailable or the collection is empty (the app then relies on
+  /// the bundled JSON assets). Writes are Admin-SDK only.
+  Future<List<Map<String, dynamic>>> fetchExamQuestions(String examId) async {
+    final db = _db;
+    if (db == null) return const [];
+    try {
+      final snap = await db
+          .collection('content')
+          .doc('exams')
+          .collection('items')
+          .doc(examId)
+          .collection('questions')
+          .get();
+      return snap.docs.map((d) => d.data()).toList();
+    } catch (_) {
+      return const [];
+    }
+  }
+
   Future<PrepExamBundle?> fetchExamBundle(String examId) async {
     final db = _db;
     if (db == null) return _loadCachedBundle(examId);

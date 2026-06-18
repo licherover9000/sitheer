@@ -23,6 +23,7 @@ class QuestionBank {
     'GATE DA': 'assets/questions/gate-da.json',
   };
 
+  final Map<String, PrepQuestion> _byId = {};
   final Map<String, List<PrepQuestion>> _byChapter = {};
   final Map<String, List<PrepQuestion>> _byExam = {};
   final List<PrepQuestion> _all = [];
@@ -35,10 +36,9 @@ class QuestionBank {
     if (_loaded) return;
 
     // Seed (in-code) first; JSON assets override by id.
-    final byId = <String, PrepQuestion>{};
     for (final list in prepQuestionsByChapter.values) {
       for (final q in list) {
-        byId[q.id] = q;
+        _byId[q.id] = q;
       }
     }
     for (final asset in _assetByExam.values) {
@@ -47,18 +47,34 @@ class QuestionBank {
         final decoded = jsonDecode(raw) as List;
         for (final item in decoded) {
           final q = PrepQuestion.fromJson(Map<String, dynamic>.from(item));
-          byId[q.id] = q;
+          _byId[q.id] = q;
         }
       } catch (e) {
         debugPrint('QuestionBank: could not load $asset: $e');
       }
     }
 
-    _index(byId.values.toList());
+    _reindex();
     _loaded = true;
   }
 
-  void _index(List<PrepQuestion> questions) {
+  /// Merges cloud-hosted questions (Admin-SDK imported) on top of the bundled
+  /// set, overriding by id, and re-indexes. Safe to call with an empty list.
+  void mergeRemote(List<Map<String, dynamic>> remote) {
+    if (remote.isEmpty) return;
+    for (final item in remote) {
+      try {
+        final q = PrepQuestion.fromJson(item);
+        _byId[q.id] = q;
+      } catch (e) {
+        debugPrint('QuestionBank: skipped malformed remote question: $e');
+      }
+    }
+    _reindex();
+  }
+
+  void _reindex() {
+    final questions = _byId.values.toList();
     _byChapter.clear();
     _byExam.clear();
     _all

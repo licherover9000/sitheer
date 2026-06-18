@@ -5,6 +5,7 @@
     "serve": "firebase emulators:start --only functions",
     "deploy": "firebase deploy --only functions",
     "seed:content": "node scripts/import-content.js ../content/seed",
+    "seed:questions": "node scripts/import-questions.js ../assets/questions",
     "upload:pyq": "node scripts/upload-pyq-volumes.js"
   },
   "engines": {

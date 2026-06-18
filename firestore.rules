@@ -12,6 +12,13 @@ service cloud.firestore {
       allow create, update, delete: if false;
     }
 
+    // Cloud-hosted PYQ questions per exam. Readable by signed-in users;
+    // imported via the Admin SDK (functions/scripts/import-questions.js).
+    match /content/exams/items/{examId}/questions/{questionId} {
+      allow read: if request.auth != null;
+      allow create, update, delete: if false;
+    }
+
     // Uploaded PYQ volume metadata. Actual PDFs live in Cloud Storage.
     match /content/pyqVolumes/items/{volumeId} {
       allow read: if request.auth != null;
