@@ -327,5 +327,212 @@
     "marks": 2,
     "tags": ["ml", "underfitting", "bias-variance"],
     "source": "GATE DA (representative)"
+  },
+  {
+    "id": "dax-ml-softmax",
+    "chapterId": "ml-supervised",
+    "type": "mcq",
+    "prompt": "The softmax function applied to a vector of logits produces:",
+    "options": [
+      "Values in (-1, 1)",
+      "A probability distribution (non-negative values summing to 1)",
+      "Binary 0/1 outputs",
+      "The largest logit only"
+    ],
+    "correctIndex": 1,
+    "explanation": "Softmax exponentiates and normalizes the logits, yielding non-negative values that sum to 1 - a probability distribution over classes.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["ml", "softmax", "classification"],
+    "source": "GATE DA (representative)"
+  },
+  {
+    "id": "dax-ml-l1-sparsity",
+    "chapterId": "ml-supervised",
+    "type": "mcq",
+    "prompt": "Compared with L2, L1 regularization (Lasso) tends to produce weight vectors that are:",
+    "options": ["Denser", "Sparser (many exact zeros)", "Always larger", "Unchanged"],
+    "correctIndex": 1,
+    "explanation": "The L1 penalty drives many coefficients exactly to zero, yielding sparse models useful for feature selection.",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["ml", "regularization", "lasso"],
+    "source": "GATE DA (representative)"
+  },
+  {
+    "id": "dax-ml-naive-bayes",
+    "chapterId": "ml-supervised",
+    "type": "mcq",
+    "prompt": "The 'naive' assumption in a Naive Bayes classifier is that:",
+    "options": [
+      "The data is linearly separable",
+      "Features are conditionally independent given the class",
+      "All classes are equally likely",
+      "The decision boundary is quadratic"
+    ],
+    "correctIndex": 1,
+    "explanation": "Naive Bayes assumes features are conditionally independent given the class label, which simplifies the likelihood to a product.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["ml", "naive-bayes"],
+    "source": "GATE DA (representative)"
+  },
+  {
+    "id": "dax-ml-crossentropy",
+    "chapterId": "ml-supervised",
+    "type": "mcq",
+    "prompt": "Cross-entropy loss is most appropriate for which task?",
+    "options": [
+      "Linear regression",
+      "Classification with probability outputs",
+      "Clustering",
+      "Dimensionality reduction"
+    ],
+    "correctIndex": 1,
+    "explanation": "Cross-entropy measures the divergence between predicted class probabilities and the true labels, the standard loss for classification.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["ml", "loss", "classification"],
+    "source": "GATE DA (representative)"
+  },
+  {
+    "id": "dax-ml-knn-smallk",
+    "chapterId": "ml-supervised",
+    "type": "mcq",
+    "prompt": "In k-Nearest-Neighbours, choosing a very SMALL k typically leads to:",
+    "options": [
+      "High bias, low variance (underfitting)",
+      "Low bias, high variance (overfitting)",
+      "No effect on the model",
+      "A linear decision boundary"
+    ],
+    "correctIndex": 1,
+    "explanation": "Small k makes predictions sensitive to individual noisy points - low bias but high variance, i.e. overfitting. Large k smooths the boundary.",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["ml", "knn", "bias-variance"],
+    "source": "GATE DA (representative)"
+  },
+  {
+    "id": "dax-stats-mean",
+    "chapterId": "stats-core",
+    "type": "nat",
+    "prompt": "The arithmetic mean of the data set {2, 4, 6, 8, 10} is ______.",
+    "numericAnswer": 6,
+    "numericTolerance": 0,
+    "explanation": "Sum = 30, count = 5, mean = 30/5 = 6.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["statistics", "mean"],
+    "source": "GATE DA (representative)"
+  },
+  {
+    "id": "dax-stats-mode",
+    "chapterId": "stats-core",
+    "type": "nat",
+    "prompt": "The mode of the data set {1, 2, 2, 3, 4} is ______.",
+    "numericAnswer": 2,
+    "numericTolerance": 0,
+    "explanation": "The mode is the most frequent value; 2 appears twice, more than any other.",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["statistics", "mode"],
+    "source": "GATE DA (representative)"
+  },
+  {
+    "id": "dax-stats-range",
+    "chapterId": "stats-core",
+    "type": "nat",
+    "prompt": "The range of the data set {3, 7, 2, 9} is ______.",
+    "numericAnswer": 7,
+    "numericTolerance": 0,
+    "explanation": "Range = maximum - minimum = 9 - 2 = 7.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["statistics", "range"],
+    "source": "GATE DA (representative)"
+  },
+  {
+    "id": "dax-prob-conditional",
+    "chapterId": "math-prob",
+    "type": "nat",
+    "prompt": "Given P(A and B) = 0.2 and P(B) = 0.5, the conditional probability P(A | B) is ______ (2 decimal places).",
+    "numericAnswer": 0.4,
+    "numericTolerance": 0.01,
+    "explanation": "P(A | B) = P(A and B) / P(B) = 0.2 / 0.5 = 0.4.",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["probability", "conditional"],
+    "source": "GATE DA (representative)"
+  },
+  {
+    "id": "dax-prob-dice-outcomes",
+    "chapterId": "math-prob",
+    "type": "nat",
+    "prompt": "The total number of equally likely outcomes when two distinct six-sided dice are rolled is ______.",
+    "numericAnswer": 36,
+    "numericTolerance": 0,
+    "explanation": "Each die has 6 outcomes; together 6 * 6 = 36 ordered outcomes.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["probability", "counting"],
+    "source": "GATE DA (representative)"
+  },
+  {
+    "id": "dax-la-det-identity",
+    "chapterId": "math-la",
+    "type": "nat",
+    "prompt": "The determinant of the 3 x 3 identity matrix is ______.",
+    "numericAnswer": 1,
+    "numericTolerance": 0,
+    "explanation": "The determinant of any identity matrix is 1 (product of its diagonal 1's).",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["linear-algebra", "determinant"],
+    "source": "GATE DA (representative)"
+  },
+  {
+    "id": "dax-la-transpose",
+    "chapterId": "math-la",
+    "type": "mcq",
+    "prompt": "The transpose of a 1 x n row vector is:",
+    "options": [
+      "Another row vector",
+      "An n x 1 column vector",
+      "A scalar",
+      "An n x n matrix"
+    ],
+    "correctIndex": 1,
+    "explanation": "Transposing swaps rows and columns, turning a 1 x n row vector into an n x 1 column vector.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["linear-algebra", "transpose"],
+    "source": "GATE DA (representative)"
+  },
+  {
+    "id": "dax-python-mutable",
+    "chapterId": "prog-da-python",
+    "type": "mcq",
+    "prompt": "Which of these Python built-in types is MUTABLE?",
+    "options": ["tuple", "str", "list", "int"],
+    "correctIndex": 2,
+    "explanation": "Lists can be modified in place (append, item assignment). Tuples, strings, and ints are immutable.",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["python", "mutability"],
+    "source": "GATE DA (representative)"
+  },
+  {
+    "id": "dax-python-npzeros",
+    "chapterId": "prog-da-python",
+    "type": "nat",
+    "prompt": "A NumPy array created by np.zeros((2, 3)) has how many elements in total?",
+    "numericAnswer": 6,
+    "numericTolerance": 0,
+    "explanation": "Shape (2, 3) means 2 rows by 3 columns = 2 * 3 = 6 elements.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["python", "numpy"],
+    "source": "GATE DA (representative)"
   }
 ]
