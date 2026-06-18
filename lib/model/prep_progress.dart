@@ -81,7 +81,9 @@ class MockAttemptRecord {
       paperId: map['paperId'] as String,
       score: map['score'] as int? ?? 0,
       accuracy: (map['accuracy'] as num?)?.toDouble() ?? 0,
-      completedAt: DateTime.parse(map['completedAt'] as String),
+      completedAt:
+          DateTime.tryParse(map['completedAt'] as String? ?? '') ??
+          DateTime.now(),
       correctCount: map['correctCount'] as int? ?? 0,
       incorrectCount: map['incorrectCount'] as int? ?? 0,
       skippedCount: map['skippedCount'] as int? ?? 0,

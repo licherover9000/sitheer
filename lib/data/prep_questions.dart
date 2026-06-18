@@ -70,7 +70,8 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
     const PrepQuestion(
       id: 'q-algo-graph-2',
       chapterId: 'algo-graphs',
-      prompt: 'The time complexity of BFS on a graph with V vertices and E edges is:',
+      prompt:
+          'The time complexity of BFS on a graph with V vertices and E edges is:',
       options: ['O(V)', 'O(E)', 'O(V + E)', 'O(V × E)'],
       correctIndex: 2,
       explanation:
@@ -93,7 +94,8 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
     const PrepQuestion(
       id: 'q-algo-graph-4',
       chapterId: 'algo-graphs',
-      prompt: 'Kruskal\'s MST algorithm uses which data structure for efficiency?',
+      prompt:
+          'Kruskal\'s MST algorithm uses which data structure for efficiency?',
       options: ['Heap', 'Trie', 'Union-Find (Disjoint Set)', 'Stack'],
       correctIndex: 2,
       explanation:
@@ -123,8 +125,14 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
     const PrepQuestion(
       id: 'q-algo-dp-3',
       chapterId: 'algo-dp',
-      prompt: 'Matrix chain multiplication chooses parenthesization to minimize:',
-      options: ['Number of matrices', 'Number of scalar additions', 'Number of scalar multiplications', 'Memory usage'],
+      prompt:
+          'Matrix chain multiplication chooses parenthesization to minimize:',
+      options: [
+        'Number of matrices',
+        'Number of scalar additions',
+        'Number of scalar multiplications',
+        'Memory usage',
+      ],
       correctIndex: 2,
       explanation:
           'Matrix chain multiplication optimizes the number of scalar multiplications, since multiplication is the dominant operation compared to additions.',
@@ -190,7 +198,8 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
     const PrepQuestion(
       id: 'q-ds-linear-1',
       chapterId: 'ds-linear',
-      prompt: 'Which operation is O(1) for a doubly-linked list but O(n) for a singly-linked list?',
+      prompt:
+          'Which operation is O(1) for a doubly-linked list but O(n) for a singly-linked list?',
       options: [
         'Insertion at head',
         'Deletion of a node given its pointer',
@@ -204,7 +213,8 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
     const PrepQuestion(
       id: 'q-ds-linear-2',
       chapterId: 'ds-linear',
-      prompt: 'A queue implemented with two stacks has amortized push/pop complexity:',
+      prompt:
+          'A queue implemented with two stacks has amortized push/pop complexity:',
       options: ['O(n)', 'O(1)', 'O(log n)', 'O(n²)'],
       correctIndex: 1,
       explanation:
@@ -230,7 +240,8 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
     const PrepQuestion(
       id: 'q-ds-hash-1',
       chapterId: 'ds-hashing',
-      prompt: 'Load factor α = n/m. Average search time under separate chaining is:',
+      prompt:
+          'Load factor α = n/m. Average search time under separate chaining is:',
       options: ['O(1)', 'O(α)', 'O(α²)', 'O(n)'],
       correctIndex: 1,
       explanation:
@@ -271,7 +282,8 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
     const PrepQuestion(
       id: 'q-os-proc-1',
       chapterId: 'os-process',
-      prompt: 'Round Robin scheduling with very large time quantum behaves like:',
+      prompt:
+          'Round Robin scheduling with very large time quantum behaves like:',
       options: ['FCFS', 'SJF', 'SRTF', 'Priority scheduling'],
       correctIndex: 0,
       explanation:
@@ -295,7 +307,12 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
       id: 'q-os-proc-3',
       chapterId: 'os-process',
       prompt: 'Shortest Job First (SJF) is optimal in minimizing:',
-      options: ['Turnaround time', 'Waiting time', 'Average waiting time', 'Response time'],
+      options: [
+        'Turnaround time',
+        'Waiting time',
+        'Average waiting time',
+        'Response time',
+      ],
       correctIndex: 2,
       explanation:
           'SJF minimizes average waiting time among all non-preemptive algorithms. It\'s provably optimal: scheduling the shortest burst next minimizes total time other processes wait.',
@@ -335,7 +352,12 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
       id: 'q-os-mem-3',
       chapterId: 'os-memory',
       prompt: 'LRU page replacement is approximated in hardware using:',
-      options: ['Clock algorithm', 'Reference bits / Aging', 'FIFO', 'Random replacement'],
+      options: [
+        'Clock algorithm',
+        'Reference bits / Aging',
+        'FIFO',
+        'Random replacement',
+      ],
       correctIndex: 1,
       explanation:
           'True LRU requires tracking exact last-use times. Hardware approximations use reference bits that are periodically shifted right (aging), creating an approximate LRU ordering.',
@@ -346,8 +368,14 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
     const PrepQuestion(
       id: 'q-os-sync-1',
       chapterId: 'os-sync',
-      prompt: 'Deadlock requires all four conditions: mutual exclusion, hold-and-wait, no preemption, and:',
-      options: ['Starvation', 'Circular wait', 'Priority inversion', 'Busy waiting'],
+      prompt:
+          'Deadlock requires all four conditions: mutual exclusion, hold-and-wait, no preemption, and:',
+      options: [
+        'Starvation',
+        'Circular wait',
+        'Priority inversion',
+        'Busy waiting',
+      ],
       correctIndex: 1,
       explanation:
           'The four Coffman conditions for deadlock are: mutual exclusion, hold-and-wait, no preemption, and circular wait. All four must hold simultaneously.',
@@ -356,7 +384,12 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
       id: 'q-os-sync-2',
       chapterId: 'os-sync',
       prompt: 'A binary semaphore initialized to 1 implements:',
-      options: ['Counting semaphore', 'Mutex', 'Spinlock', 'Condition variable'],
+      options: [
+        'Counting semaphore',
+        'Mutex',
+        'Spinlock',
+        'Condition variable',
+      ],
       correctIndex: 1,
       explanation:
           'A binary semaphore {0,1} initialized to 1 provides mutual exclusion: wait() decrements to 0 (locked), signal() increments back to 1 (unlocked) — equivalent to a mutex.',
@@ -365,7 +398,12 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
       id: 'q-os-sync-3',
       chapterId: 'os-sync',
       prompt: 'Banker\'s Algorithm is used for:',
-      options: ['Memory allocation', 'Deadlock avoidance', 'CPU scheduling', 'Deadlock detection'],
+      options: [
+        'Memory allocation',
+        'Deadlock avoidance',
+        'CPU scheduling',
+        'Deadlock detection',
+      ],
       correctIndex: 1,
       explanation:
           'Banker\'s Algorithm checks if a resource allocation request would leave the system in a safe state (a state from which all processes can complete). It\'s a deadlock avoidance technique.',
@@ -457,7 +495,8 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
     const PrepQuestion(
       id: 'q-dbms-txn-1',
       chapterId: 'dbms-txn',
-      prompt: 'The ACID property that ensures transactions execute as if they are the only one running is:',
+      prompt:
+          'The ACID property that ensures transactions execute as if they are the only one running is:',
       options: ['Atomicity', 'Consistency', 'Isolation', 'Durability'],
       correctIndex: 2,
       explanation:
@@ -481,7 +520,12 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
       id: 'q-dbms-txn-3',
       chapterId: 'dbms-txn',
       prompt: 'Two-phase locking (2PL) guarantees:',
-      options: ['Deadlock freedom', 'Serializability', 'Starvation freedom', 'Optimistic concurrency'],
+      options: [
+        'Deadlock freedom',
+        'Serializability',
+        'Starvation freedom',
+        'Optimistic concurrency',
+      ],
       correctIndex: 1,
       explanation:
           '2PL ensures conflict serializability: the growing phase acquires locks, the shrinking phase releases them. Once a lock is released, no new lock can be acquired.',
@@ -508,7 +552,12 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
       id: 'q-cn-route-2',
       chapterId: 'cn-routing',
       prompt: 'OSPF is a link-state protocol that uses:',
-      options: ['Bellman-Ford', 'Dijkstra\'s shortest path', 'Spanning tree', 'Flooding only'],
+      options: [
+        'Bellman-Ford',
+        'Dijkstra\'s shortest path',
+        'Spanning tree',
+        'Flooding only',
+      ],
       correctIndex: 1,
       explanation:
           'OSPF routers maintain a complete topology map (link-state database) and compute shortest paths using Dijkstra\'s algorithm, unlike distance-vector protocols.',
@@ -568,7 +617,8 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
     const PrepQuestion(
       id: 'q-cn-phys-1',
       chapterId: 'cn-physical',
-      prompt: 'Shannon\'s channel capacity formula C = B log₂(1 + S/N) gives capacity in:',
+      prompt:
+          'Shannon\'s channel capacity formula C = B log₂(1 + S/N) gives capacity in:',
       options: ['Packets per second', 'Bits per second', 'Baud', 'MHz'],
       correctIndex: 1,
       explanation:
@@ -596,7 +646,12 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
       id: 'q-toc-fa-1',
       chapterId: 'toc-fa',
       prompt: 'The language accepted by a DFA is always:',
-      options: ['Context-free', 'Regular', 'Recursively enumerable', 'Context-sensitive'],
+      options: [
+        'Context-free',
+        'Regular',
+        'Recursively enumerable',
+        'Context-sensitive',
+      ],
       correctIndex: 1,
       explanation:
           'DFAs (and NFAs) recognize exactly the class of regular languages. Regular languages are closed under union, concatenation, and Kleene star.',
@@ -618,7 +673,8 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
     const PrepQuestion(
       id: 'q-toc-fa-3',
       chapterId: 'toc-fa',
-      prompt: 'The number of states in the minimal DFA for strings over {a,b} containing "ab" as a substring is:',
+      prompt:
+          'The number of states in the minimal DFA for strings over {a,b} containing "ab" as a substring is:',
       options: ['2', '3', '4', '5'],
       correctIndex: 1,
       explanation:
@@ -658,7 +714,8 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
     const PrepQuestion(
       id: 'q-toc-cfg-3',
       chapterId: 'toc-cfg',
-      prompt: 'CYK algorithm parses a string of length n using a CFG in CNF in:',
+      prompt:
+          'CYK algorithm parses a string of length n using a CFG in CNF in:',
       options: ['O(n)', 'O(n²)', 'O(n³)', 'O(2ⁿ)'],
       correctIndex: 2,
       explanation:
@@ -698,7 +755,8 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
     const PrepQuestion(
       id: 'q-toc-tm-3',
       chapterId: 'toc-tm',
-      prompt: 'Rice\'s Theorem states that every non-trivial property of the language of a TM is:',
+      prompt:
+          'Rice\'s Theorem states that every non-trivial property of the language of a TM is:',
       options: ['Decidable', 'Undecidable', 'Semi-decidable', 'Regular'],
       correctIndex: 1,
       explanation:
@@ -760,7 +818,8 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
     const PrepQuestion(
       id: 'q-math-prob-2',
       chapterId: 'math-prob',
-      prompt: 'If P(A) = 0.4, P(B) = 0.3, and A and B are independent, then P(A ∩ B) =',
+      prompt:
+          'If P(A) = 0.4, P(B) = 0.3, and A and B are independent, then P(A ∩ B) =',
       options: ['0.7', '0.12', '0.1', '0.3'],
       correctIndex: 1,
       explanation:
@@ -816,8 +875,7 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
       prompt: 'A train 200m long crosses a pole in 10 seconds. Its speed is:',
       options: ['15 m/s', '20 m/s', '25 m/s', '18 m/s'],
       correctIndex: 1,
-      explanation:
-          'Speed = distance/time = 200m / 10s = 20 m/s.',
+      explanation: 'Speed = distance/time = 200m / 10s = 20 m/s.',
     ),
     const PrepQuestion(
       id: 'q-apt-quant-2',
@@ -911,7 +969,8 @@ final prepQuestionsByChapter = <String, List<PrepQuestion>>{
     const PrepQuestion(
       id: 'q-prog-2',
       chapterId: 'prog-da-python',
-      prompt: 'What does Python\'s list comprehension `[x*2 for x in range(5)]` produce?',
+      prompt:
+          'What does Python\'s list comprehension `[x*2 for x in range(5)]` produce?',
       options: [
         '[0, 2, 4, 6, 8]',
         '[1, 2, 4, 8, 16]',

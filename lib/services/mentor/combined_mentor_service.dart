@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:sitheer/model/mentor_reply.dart';
 import 'package:sitheer/providers/prep_provider.dart';
 import 'package:sitheer/services/mentor/gemini_client.dart';
@@ -202,9 +203,16 @@ class CombinedMentorService {
     }
 
     if (sections.isEmpty) {
+      // Surface the offline answer to the user; keep raw API error text out of
+      // the UI (it can contain keys/quota details). Log it for debugging only.
+      if (errors.isNotEmpty) {
+        debugPrint('Mentor API errors: ${errors.join(' | ')}');
+      }
       final fallback = _offline.reply(question: question, prep: prep);
       return MentorReply(
-        answer: '${fallback.answer}\n\n(API errors: ${errors.join(' | ')})',
+        answer:
+            '${fallback.answer}\n\n(AI services are unavailable right now - '
+            'showing offline guidance.)',
         sources: const ['offline'],
         intent: intent,
       );

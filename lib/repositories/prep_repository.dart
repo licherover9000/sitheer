@@ -39,19 +39,7 @@ class PrepRepository {
 
   @Deprecated('Use the Admin SDK seed script instead of client writes.')
   Future<void> seedExamContentIfMissing(PrepExamBundle bundle) async {
-    final db = _db;
-    if (db == null) return;
-    final ref = db
-        .collection('content')
-        .doc('exams')
-        .collection('items')
-        .doc(bundle.examId);
-    final snap = await ref.get();
-    if (snap.exists) return;
-    await ref.set({
-      ...bundleToMap(bundle),
-      'updatedAt': FieldValue.serverTimestamp(),
-    });
+    return;
   }
 
   Future<PrepExamBundle?> fetchExamBundle(String examId) async {
@@ -92,37 +80,6 @@ class PrepRepository {
     } catch (_) {
       return null;
     }
-  }
-
-  Future<List<PrepExamBundle>> forceRefreshContent() async {
-    final db = _db;
-    if (db == null) return allLocalBundles();
-    final out = <PrepExamBundle>[];
-    for (final local in allLocalBundles()) {
-      await db
-          .collection('content')
-          .doc('exams')
-          .collection('items')
-          .doc(local.examId)
-          .set({
-            ...bundleToMap(local),
-            'updatedAt': FieldValue.serverTimestamp(),
-          });
-      final loaded = await fetchExamBundle(local.examId);
-      if (loaded != null) out.add(loaded);
-    }
-    for (final pyq in allLocalPyqVolumes()) {
-      await db
-          .collection('content')
-          .doc('pyqVolumes')
-          .collection('items')
-          .doc(pyq.id)
-          .set({
-            ...pyq.toMap(),
-            'updatedAt': FieldValue.serverTimestamp(),
-          });
-    }
-    return out;
   }
 
   Future<Map<String, dynamic>> loadLocalState() async {
@@ -187,8 +144,9 @@ class PrepRepository {
   }
 
   Future<List<PyqVolume>> fetchPyqVolumes(String examId) async {
+    final fallback = _localPyqVolumesFor(examId);
     final db = _db;
-    if (db == null) return [];
+    if (db == null) return fallback;
     try {
       final snap = await db
           .collection('content')
@@ -196,13 +154,29 @@ class PrepRepository {
           .collection('items')
           .where('examId', isEqualTo: examId)
           .get();
-      return snap.docs
-          .map(
-            (doc) => PyqVolume.fromMap({...doc.data(), 'id': doc.id}),
-          )
+      final volumes = snap.docs
+          .map((doc) => PyqVolume.fromMap({...doc.data(), 'id': doc.id}))
           .toList();
+      volumes.sort(_comparePyqVolumes);
+      return volumes.isEmpty ? fallback : volumes;
     } catch (_) {
-      return [];
+      return fallback;
     }
+  }
+
+  List<PyqVolume> _localPyqVolumesFor(String examId) {
+    final volumes = allLocalPyqVolumes()
+        .where((volume) => volume.examId == examId)
+        .toList();
+    volumes.sort(_comparePyqVolumes);
+    return volumes;
+  }
+
+  int _comparePyqVolumes(PyqVolume a, PyqVolume b) {
+    final aOrder = a.volumeNumber ?? (a.year == 0 ? 9999 : a.year);
+    final bOrder = b.volumeNumber ?? (b.year == 0 ? 9999 : b.year);
+    final order = aOrder.compareTo(bOrder);
+    if (order != 0) return order;
+    return a.label.compareTo(b.label);
   }
 }

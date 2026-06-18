@@ -42,7 +42,10 @@ exports.mentorChat = onCall(
           generationConfig: { temperature: 0.65, maxOutputTokens: 1200 },
         }),
       });
-      if (!res.ok) throw new Error(await res.text());
+      if (!res.ok) {
+        console.error('Gemini API error', res.status, await res.text());
+        throw new Error('Gemini request failed (' + res.status + ')');
+      }
       const json = await res.json();
       return json.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || '';
     }
@@ -65,7 +68,10 @@ exports.mentorChat = onCall(
           ],
         }),
       });
-      if (!res.ok) throw new Error(await res.text());
+      if (!res.ok) {
+        console.error('OpenAI API error', res.status, await res.text());
+        throw new Error('OpenAI request failed (' + res.status + ')');
+      }
       const json = await res.json();
       return json.choices?.[0]?.message?.content?.trim() || '';
     }

@@ -6,8 +6,9 @@ import 'package:sitheer/core/constants.dart';
 import 'package:sitheer/data/prep_questions.dart';
 import 'package:sitheer/model/mock_question.dart';
 import 'package:sitheer/model/prep_content.dart';
+import 'package:sitheer/model/question_attempt.dart';
 import 'package:sitheer/providers/prep_provider.dart';
-import 'package:sitheer/screens/prep/mock_analysis_screen.dart';
+import 'package:sitheer/screens/prep/practice_review_screen.dart';
 
 /// Full 65-question GATE-style mock exam with:
 /// - Colour-coded question palette (not-visited / answered / marked / marked+answered)
@@ -41,8 +42,13 @@ class _MockAttemptScreenState extends State<MockAttemptScreen> {
     _questions = _buildQuestions();
     _secondsLeft = _parseDurationMinutes(widget.paper.duration) * 60;
     _visited.add(0);
+    _startTimer();
+  }
+
+  void _startTimer() {
+    _timer?.cancel();
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (_finished) return;
+      if (_finished || !mounted) return;
       if (_secondsLeft <= 0) {
         _submit(autoSubmit: true);
         return;
@@ -57,11 +63,15 @@ class _MockAttemptScreenState extends State<MockAttemptScreen> {
   }
 
   List<MockQuestion> _buildQuestions() {
-    final pool = prepQuestionsByChapter.values.expand((q) => q).toList();
+    // Shuffle so each attempt draws a different set/order, then cycle if the
+    // pool is smaller than the paper size. Order is fixed for this attempt.
+    final pool = prepQuestionsByChapter.values.expand((q) => q).toList()
+      ..shuffle();
     final count = widget.paper.questions.clamp(10, 65);
     return List.generate(count, (i) {
       final q = pool[i % pool.length];
       return MockQuestion(
+        questionId: q.id,
         prompt: q.prompt,
         options: q.options,
         correctIndex: q.correctIndex,
@@ -95,6 +105,10 @@ class _MockAttemptScreenState extends State<MockAttemptScreen> {
   Future<void> _submit({bool autoSubmit = false}) async {
     if (_finished) return;
 
+    // Stop the countdown immediately so it can't tick (or auto-submit again)
+    // while the confirm dialog is open.
+    _timer?.cancel();
+
     final unanswered = _questions.length - _answers.length;
 
     if (!autoSubmit && unanswered > 0) {
@@ -118,10 +132,12 @@ class _MockAttemptScreenState extends State<MockAttemptScreen> {
           ],
         ),
       );
-      if (confirmed != true) return;
+      // User chose to keep reviewing: resume the countdown from where it left.
+      if (confirmed != true) {
+        if (mounted && !_finished) _startTimer();
+        return;
+      }
     }
-
-    _timer?.cancel();
 
     int correct = 0;
     int incorrect = 0;
@@ -142,32 +158,40 @@ class _MockAttemptScreenState extends State<MockAttemptScreen> {
 
     if (!mounted) return;
 
-    await context
-        .read<PrepProvider>()
-        .recordMockAttempt(widget.paper, correct, incorrect, skipped);
+    final now = DateTime.now();
+    final attempts = _questions.asMap().entries.map((e) {
+      final q = e.value;
+      return QuestionAttempt(
+        questionId: q.questionId,
+        chapterId: q.chapterId,
+        prompt: q.prompt,
+        options: q.options,
+        correctIndex: q.correctIndex,
+        explanation: q.explanation,
+        selectedIndex: _answers[e.key],
+        markedForReview: _markedForReview.contains(e.key),
+        attemptedAt: now,
+      );
+    }).toList();
+
+    final session = PracticeSession(
+      id: 'mock-${widget.paper.id}-${now.millisecondsSinceEpoch}',
+      source: 'mock',
+      refId: widget.paper.id,
+      title: widget.paper.title,
+      attempts: attempts,
+      completedAt: now,
+    );
+
+    final prep = context.read<PrepProvider>();
+    await prep.recordMockAttempt(widget.paper, correct, incorrect, skipped);
+    await prep.recordPracticeSession(session);
 
     if (!mounted) return;
 
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(
-        builder: (_) => MockAnalysisScreen(
-          paper: widget.paper,
-          results: _questions
-              .asMap()
-              .entries
-              .map(
-                (e) => MockQuestionResult(
-                  question: e.value,
-                  selectedIndex: _answers[e.key],
-                ),
-              )
-              .toList(),
-          correct: correct,
-          incorrect: incorrect,
-          skipped: skipped,
-        ),
-      ),
+      MaterialPageRoute(builder: (_) => PracticeReviewScreen(session: session)),
     );
   }
 
@@ -334,8 +358,9 @@ class _MockAttemptScreenState extends State<MockAttemptScreen> {
                     children: [
                       Chip(
                         label: Text('Q${_current + 1} of ${_questions.length}'),
-                        backgroundColor:
-                            AppColors.primary.withValues(alpha: 0.08),
+                        backgroundColor: AppColors.primary.withValues(
+                          alpha: 0.08,
+                        ),
                       ),
                       const SizedBox(width: 8),
                       Chip(label: Text(q.chapterId)),
@@ -363,8 +388,7 @@ class _MockAttemptScreenState extends State<MockAttemptScreen> {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: OutlinedButton(
-                        onPressed: () =>
-                            setState(() => _answers[_current] = i),
+                        onPressed: () => setState(() => _answers[_current] = i),
                         style: OutlinedButton.styleFrom(
                           alignment: Alignment.centerLeft,
                           padding: const EdgeInsets.symmetric(

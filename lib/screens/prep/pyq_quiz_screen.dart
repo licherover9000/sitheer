@@ -4,7 +4,9 @@ import 'package:sitheer/core/constants.dart';
 import 'package:sitheer/data/prep_catalog_accessors.dart';
 import 'package:sitheer/data/prep_questions.dart';
 import 'package:sitheer/model/prep_question.dart';
+import 'package:sitheer/model/question_attempt.dart';
 import 'package:sitheer/providers/prep_provider.dart';
+import 'package:sitheer/screens/prep/practice_review_screen.dart';
 
 class PyqQuizScreen extends StatefulWidget {
   const PyqQuizScreen({super.key, required this.chapterId});
@@ -22,6 +24,9 @@ class _PyqQuizScreenState extends State<PyqQuizScreen> {
   int _correct = 0;
   bool _answered = false;
 
+  /// Chosen option per question index, for the post-drill review.
+  final Map<int, int> _selections = {};
+
   @override
   void initState() {
     super.initState();
@@ -30,15 +35,28 @@ class _PyqQuizScreenState extends State<PyqQuizScreen> {
 
   PrepQuestion get _current => _questions[_index];
 
+  QuestionAttempt _attemptForCurrent() => QuestionAttempt(
+    questionId: _current.id,
+    chapterId: _current.chapterId,
+    prompt: _current.prompt,
+    options: _current.options,
+    correctIndex: _current.correctIndex,
+    explanation: _current.explanation,
+    selectedIndex: _selected,
+    markedForReview: true,
+    attemptedAt: DateTime.now(),
+  );
+
   void _submit() {
     if (_selected == null) return;
     setState(() {
       _answered = true;
+      _selections[_index] = _selected!;
       if (_selected == _current.correctIndex) _correct++;
     });
   }
 
-  void _next() async {
+  Future<void> _next() async {
     if (_index < _questions.length - 1) {
       setState(() {
         _index++;
@@ -49,11 +67,39 @@ class _PyqQuizScreenState extends State<PyqQuizScreen> {
     }
 
     final accuracy = _correct / _questions.length;
-    await context.read<PrepProvider>().recordQuizResult(
+    final now = DateTime.now();
+    final chapterTitle =
+        findChapterContext(widget.chapterId)?.$2.title ?? widget.chapterId;
+    final attempts = _questions.asMap().entries.map((e) {
+      final q = e.value;
+      return QuestionAttempt(
+        questionId: q.id,
+        chapterId: q.chapterId,
+        prompt: q.prompt,
+        options: q.options,
+        correctIndex: q.correctIndex,
+        explanation: q.explanation,
+        selectedIndex: _selections[e.key],
+        attemptedAt: now,
+      );
+    }).toList();
+    final session = PracticeSession(
+      id: 'pyq-${widget.chapterId}-${now.millisecondsSinceEpoch}',
+      source: 'pyq',
+      refId: widget.chapterId,
+      title: 'PYQ drill - $chapterTitle',
+      attempts: attempts,
+      completedAt: now,
+    );
+
+    final prep = context.read<PrepProvider>();
+    await prep.recordQuizResult(
       widget.chapterId,
       accuracy,
       _questions.length,
+      incorrectCount: _questions.length - _correct,
     );
+    await prep.recordPracticeSession(session);
     if (!mounted) return;
     showDialog(
       context: context,
@@ -71,6 +117,18 @@ class _PyqQuizScreenState extends State<PyqQuizScreen> {
             },
             child: const Text('Done'),
           ),
+          FilledButton(
+            onPressed: () {
+              Navigator.pop(ctx);
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => PracticeReviewScreen(session: session),
+                ),
+              );
+            },
+            child: const Text('Review answers'),
+          ),
         ],
       ),
     );
@@ -81,9 +139,20 @@ class _PyqQuizScreenState extends State<PyqQuizScreen> {
     final ctx = findChapterContext(widget.chapterId);
     final chapterTitle = ctx?.$2.title ?? widget.chapterId;
 
+    final prep = context.watch<PrepProvider>();
+    final flagged = prep.isFlagged(_current.id);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('PYQ - $chapterTitle'),
+        actions: [
+          IconButton(
+            tooltip: flagged ? 'Remove flag' : 'Flag to revise',
+            icon: Icon(flagged ? Icons.flag : Icons.flag_outlined),
+            color: flagged ? AppColors.warning : null,
+            onPressed: () => prep.toggleFlag(_attemptForCurrent()),
+          ),
+        ],
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(4),
           child: LinearProgressIndicator(

@@ -6,6 +6,9 @@
 service-account*.json
 *serviceAccount*.json
 
+# Firebase deploy/emulator cache
+.firebase/
+
 # Miscellaneous
 *.class
 *.log

@@ -1,4 +1,5 @@
 import 'package:sitheer/model/mentor_reply.dart';
+import 'package:sitheer/model/question_attempt.dart';
 import 'package:sitheer/providers/prep_provider.dart';
 
 String buildMentorSystemPrompt(PrepProvider prep) {
@@ -49,4 +50,51 @@ String buildMentorUserPrompt(String question, MentorIntent intent) {
     MentorIntent.general => 'Answer directly with next actions.',
   };
   return '$focus\n\nStudent question: $question';
+}
+
+/// Builds a prompt asking the mentor to explain a specific flagged/wrong
+/// question. When [simpler] is true it asks for a fresh, easier re-explanation
+/// (the "Explain differently" follow-up).
+String buildExplainPrompt(QuestionAttempt q, {bool simpler = false}) {
+  const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+  String label(int i) => i >= 0 && i < q.options.length && i < letters.length
+      ? '${letters[i]}. ${q.options[i]}'
+      : 'option ${i + 1}';
+
+  final options = [
+    for (var i = 0; i < q.options.length; i++) label(i),
+  ].join('\n');
+  final picked = q.selectedIndex == null
+      ? 'skipped (no answer)'
+      : label(q.selectedIndex!);
+
+  final buffer = StringBuffer();
+  if (simpler) {
+    buffer.writeln(
+      'Re-explain this GATE question in a simpler, different way than before. '
+      'Use a short analogy or a tiny worked example.',
+    );
+  } else {
+    buffer.writeln(
+      'Explain this GATE question step by step so I understand it deeply.',
+    );
+  }
+  buffer
+    ..writeln()
+    ..writeln('Question: ${q.prompt}')
+    ..writeln('Options:')
+    ..writeln(options)
+    ..writeln('Correct answer: ${label(q.correctIndex)}')
+    ..writeln('My answer: $picked');
+  if (q.explanation != null && q.explanation!.trim().isNotEmpty) {
+    buffer.writeln('Reference note: ${q.explanation!.trim()}');
+  }
+  buffer
+    ..writeln()
+    ..writeln(
+      'Cover: (1) the core concept being tested, (2) why the correct option '
+      'is right, (3) the likely mistake behind my answer, and (4) one tip to '
+      'remember it. Be concise and exam-focused.',
+    );
+  return buffer.toString();
 }

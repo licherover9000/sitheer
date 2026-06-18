@@ -13,8 +13,6 @@ Build `sitheer` into a myTayari-style GATE prep web/mobile app with original UI 
 - Progress analytics and planner workflows
 - Firebase-backed sync, content storage, and secure AI proxying
 
-Important copyright boundary: do not copy protected third-party website content or course material unless the user owns it or has permission. The two local PDFs supplied by the user should be treated as user-provided source material and stored outside git.
-
 ## Current Implementation Status
 
 ### Implemented In Flutter

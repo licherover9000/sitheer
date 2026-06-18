@@ -4,6 +4,7 @@ import 'package:sitheer/core/constants.dart';
 import 'package:sitheer/model/prep_content.dart';
 import 'package:sitheer/providers/prep_provider.dart';
 import 'package:sitheer/screens/prep/mock_attempt_screen.dart';
+import 'package:sitheer/screens/prep/practice_review_screen.dart';
 import 'package:sitheer/screens/prep/prep_widgets.dart';
 
 class MockTestsScreen extends StatelessWidget {
@@ -88,6 +89,55 @@ class _MockPaperCard extends StatelessWidget {
 
   final MockPaper paper;
   final PrepProvider prep;
+
+  void _showAnalysis(BuildContext context) {
+    // Prefer the full per-question review from the latest stored session.
+    final session = prep.latestSessionFor('mock', paper.id);
+    if (session != null) {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (_) => PracticeReviewScreen(session: session),
+        ),
+      );
+      return;
+    }
+
+    // Older attempts (before per-question capture) only have a summary record.
+    final saved = prep.mockAttempt(paper.id);
+    if (saved == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Attempt this mock first to unlock its analysis.'),
+        ),
+      );
+      return;
+    }
+    showDialog<void>(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('${paper.title} - analysis'),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Score: ${saved.score} / ${paper.questions}'),
+            Text('Accuracy: ${(saved.accuracy * 100).round()}%'),
+            Text('Marks (GATE): ${saved.marksObtained.toStringAsFixed(2)}'),
+            const SizedBox(height: 8),
+            Text('Correct: ${saved.correctCount}'),
+            Text('Incorrect: ${saved.incorrectCount}'),
+            Text('Skipped: ${saved.skippedCount}'),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: const Text('Close'),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +244,7 @@ class _MockPaperCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 10),
                 OutlinedButton.icon(
-                  onPressed: () {},
+                  onPressed: () => _showAnalysis(context),
                   icon: const Icon(Icons.analytics_outlined),
                   label: const Text('Analysis'),
                 ),

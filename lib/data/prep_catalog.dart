@@ -91,7 +91,8 @@ final prepSubjects = <PrepSubject>[
           prepArticle(
             'GATE CSE GitHub Resource Repo',
             'Structured GATE CSE study materials including graph algorithms and DSA.',
-            url: 'https://github.com/baquer/GATE-and-CSE-Resources-for-Students',
+            url:
+                'https://github.com/baquer/GATE-and-CSE-Resources-for-Students',
           ),
           prepArticle(
             'GateCse.in Resources',
@@ -360,7 +361,8 @@ final prepSubjects = <PrepSubject>[
           prepLecture(
             'Ankit Doyla — Computer Networks (Unacademy)',
             'Complete CN playlist by Ankit Doyla Sir — highly rated for GATE.',
-            url: 'https://www.youtube.com/playlist?list=PLOG_8OlGMp73hMyn-WX1M2Q4ON98DmaRq',
+            url:
+                'https://www.youtube.com/playlist?list=PLOG_8OlGMp73hMyn-WX1M2Q4ON98DmaRq',
           ),
         ],
       ),
@@ -414,7 +416,8 @@ final prepSubjects = <PrepSubject>[
           prepLecture(
             'Ankit Doyla — TOC Playlist (Unacademy)',
             'Complete Theory of Computation playlist — DFA, NFA, CFG, TM.',
-            url: 'https://www.youtube.com/playlist?list=PLOG_8OlGMp72SAVxAk3VwEKQNbLkpN4Vs',
+            url:
+                'https://www.youtube.com/playlist?list=PLOG_8OlGMp72SAVxAk3VwEKQNbLkpN4Vs',
           ),
         ],
       ),
@@ -549,7 +552,8 @@ final prepSubjects = <PrepSubject>[
         prepArticle(
           'GATE Study Plan (SlideShare)',
           'Subject-wise strategy, time management and exam tips guide.',
-          url: 'https://www.slideshare.net/slideshow/gate-preparation-strategy/134718443',
+          url:
+              'https://www.slideshare.net/slideshow/gate-preparation-strategy/134718443',
         ),
       ]),
       prepChapter(

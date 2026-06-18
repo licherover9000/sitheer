@@ -29,7 +29,8 @@ List<PyqVolume> allLocalPyqVolumes() => [
     label: 'GATE CSE 2024 Question Paper',
     year: 2024,
     storagePath: 'pyqs/gate_cs_2024.pdf',
-    downloadUrl: 'https://engineering.careers360.com/download/sample-papers/gate-2024-computer-science-information-technology-question-paper-and-answer-key',
+    downloadUrl:
+        'https://engineering.careers360.com/download/sample-papers/gate-2024-computer-science-information-technology-question-paper-and-answer-key',
   ),
   const PyqVolume(
     id: 'gate-da-2024',
@@ -37,6 +38,7 @@ List<PyqVolume> allLocalPyqVolumes() => [
     label: 'GATE DA 2024 Question Paper',
     year: 2024,
     storagePath: 'pyqs/gate_da_2024.pdf',
-    downloadUrl: 'https://engineering.careers360.com/download/sample-papers/gate-2024-data-science-and-artificial-intelligence-question-paper-and-answer-key',
+    downloadUrl:
+        'https://engineering.careers360.com/download/sample-papers/gate-2024-data-science-and-artificial-intelligence-question-paper-and-answer-key',
   ),
 ];

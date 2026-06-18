@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sitheer/core/constants.dart';
 import 'package:sitheer/data/prep_catalog.dart';
+import 'package:sitheer/data/prep_catalog_accessors.dart';
 import 'package:sitheer/model/prep_content.dart';
 import 'package:sitheer/providers/prep_provider.dart';
+import 'package:sitheer/screens/prep/practice_review_screen.dart';
 import 'package:sitheer/screens/prep/prep_widgets.dart';
 import 'package:sitheer/screens/prep/subject_detail_screen.dart';
 
@@ -128,12 +130,12 @@ class ProgressScreen extends StatelessWidget {
               ),
               const SizedBox(height: AppSizes.paddingL),
               const SectionTitle(
-                title: 'Mistake tracker',
+                title: 'Wrong answers to review',
                 subtitle:
-                    'The buckets below turn wrong answers into revision loops.',
+                    'Revisit the questions you missed across drills and mocks.',
               ),
               const SizedBox(height: AppSizes.paddingM),
-              const _MistakeTracker(),
+              _ReviewWrongPanel(prep: prep),
               const SizedBox(height: AppSizes.paddingL),
               const SectionTitle(
                 title: 'College predictor',
@@ -159,72 +161,126 @@ class ProgressScreen extends StatelessWidget {
   }
 }
 
-class _MistakeTracker extends StatelessWidget {
-  const _MistakeTracker();
+class _ReviewWrongPanel extends StatelessWidget {
+  const _ReviewWrongPanel({required this.prep});
+
+  final PrepProvider prep;
 
   @override
   Widget build(BuildContext context) {
-    final buckets = [
-      ('Concept gap', 42, AppColors.danger, Icons.psychology_outlined),
-      ('Calculation slip', 31, AppColors.warning, Icons.calculate_outlined),
-      ('Time pressure', 27, AppColors.primary, Icons.timer_outlined),
-      ('Question trap', 19, AppColors.mint, Icons.warning_amber_outlined),
-    ];
+    final sessions = prep.recentSessions;
+    final wrong = prep.allWrongAttempts;
+
+    if (wrong.isEmpty) {
+      return const Card(
+        child: ListTile(
+          leading: Icon(Icons.task_alt_outlined, color: AppColors.mint),
+          title: Text('No wrong answers tracked yet.'),
+          subtitle: Text(
+            'Finish a PYQ drill or a mock to build your review list.',
+          ),
+        ),
+      );
+    }
+
+    // Wrong count by chapter (top 5).
+    final byChapter = <String, int>{};
+    for (final a in wrong) {
+      byChapter[a.chapterId] = (byChapter[a.chapterId] ?? 0) + 1;
+    }
+    final top = byChapter.entries.toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
+    final maxCount = top.first.value;
+
+    String title(String chapterId) =>
+        findChapterContext(chapterId)?.$2.title ?? chapterId;
 
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(AppSizes.paddingM),
         child: Column(
-          children: buckets
-              .map(
-                (bucket) => Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: bucket.$3.withValues(alpha: 0.12),
-                        foregroundColor: bucket.$3,
-                        child: Icon(bucket.$4, size: 20),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    bucket.$1,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleSmall
-                                        ?.copyWith(fontWeight: FontWeight.w800),
-                                  ),
-                                ),
-                                Text('${bucket.$2} tagged'),
-                              ],
-                            ),
-                            const SizedBox(height: 7),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(99),
-                              child: LinearProgressIndicator(
-                                value: bucket.$2 / 50,
-                                minHeight: 7,
-                                color: bucket.$3,
-                                backgroundColor: bucket.$3.withValues(
-                                  alpha: 0.12,
-                                ),
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${wrong.length} wrong across ${sessions.length} recent '
+              'session${sessions.length == 1 ? '' : 's'}',
+              style: Theme.of(
+                context,
+              ).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
+            ),
+            const SizedBox(height: 12),
+            ...top
+                .take(5)
+                .map(
+                  (e) => Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 130,
+                          child: Text(
+                            title(e.key),
+                            style: Theme.of(context).textTheme.bodySmall,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(99),
+                            child: LinearProgressIndicator(
+                              value: e.value / maxCount,
+                              minHeight: 7,
+                              color: AppColors.danger,
+                              backgroundColor: AppColors.danger.withValues(
+                                alpha: 0.12,
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(width: 8),
+                        Text('${e.value}'),
+                      ],
+                    ),
                   ),
                 ),
-              )
-              .toList(),
+            const Divider(height: 24),
+            Text(
+              'Recent sessions',
+              style: Theme.of(
+                context,
+              ).textTheme.labelLarge?.copyWith(color: AppColors.textMuted),
+            ),
+            const SizedBox(height: 6),
+            ...sessions
+                .take(5)
+                .map(
+                  (s) => ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    leading: Icon(
+                      s.source == 'mock'
+                          ? Icons.assignment_outlined
+                          : Icons.menu_book_outlined,
+                      color: AppColors.primary,
+                    ),
+                    title: Text(
+                      s.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    subtitle: Text(
+                      '${s.incorrectCount} wrong · ${(s.accuracy * 100).round()}% '
+                      'accuracy',
+                    ),
+                    trailing: const Icon(Icons.chevron_right),
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => PracticeReviewScreen(session: s),
+                      ),
+                    ),
+                  ),
+                ),
+          ],
         ),
       ),
     );

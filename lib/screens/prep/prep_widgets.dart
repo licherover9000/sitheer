@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sitheer/core/constants.dart';
+import 'package:sitheer/data/prep_catalog_accessors.dart';
 import 'package:sitheer/model/prep_content.dart';
 import 'package:sitheer/screens/prep/resource_detail_screen.dart';
 
@@ -454,6 +455,72 @@ class _SmallPill extends StatelessWidget {
           fontWeight: FontWeight.w700,
         ),
       ),
+    );
+  }
+}
+
+/// Surfaces the learning resources attached to a chapter so the student can
+/// study the topic right after getting a question wrong. Renders nothing if
+/// the chapter has no resources. Set [limit] to cap how many are shown.
+class StudyTopicSection extends StatelessWidget {
+  const StudyTopicSection({super.key, required this.chapterId, this.limit});
+
+  final String chapterId;
+  final int? limit;
+
+  @override
+  Widget build(BuildContext context) {
+    PrepSubject? subject;
+    PrepChapter? chapter;
+    for (final s in allCatalogSubjects()) {
+      for (final c in s.chapters) {
+        if (c.id == chapterId) {
+          subject = s;
+          chapter = c;
+          break;
+        }
+      }
+      if (chapter != null) break;
+    }
+    if (chapter == null || chapter.resources.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    final resources = limit != null
+        ? chapter.resources.take(limit!).toList()
+        : chapter.resources;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            const Icon(
+              Icons.menu_book_outlined,
+              size: 18,
+              color: AppColors.primary,
+            ),
+            const SizedBox(width: 6),
+            Text(
+              'Study this topic',
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
+            ),
+          ],
+        ),
+        const SizedBox(height: AppSizes.paddingS),
+        ...resources.map(
+          (r) => Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: ResourceCard(
+              resource: r,
+              chapterId: chapter!.id,
+              subjectTitle: subject!.title,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

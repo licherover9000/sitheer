@@ -22,10 +22,19 @@ class OfflineMentorService {
       ..sort(
         (a, b) => prep.subjectProgress(a).compareTo(prep.subjectProgress(b)),
       );
+    final intent = classifyMentorIntent(question);
+    if (subjects.isEmpty) {
+      return MentorReply(
+        answer:
+            'Pick an exam stream to load your roadmap and subjects, '
+            'then ask me again.',
+        sources: const ['offline'],
+        intent: intent,
+      );
+    }
     final weakest = subjects.first;
     final strongest = subjects.last;
     final week = prep.currentRoadmapWeek;
-    final intent = classifyMentorIntent(question);
 
     String answer;
     if (q.contains('rank') || q.contains('score')) {
@@ -53,15 +62,24 @@ class OfflineMentorService {
           : 'Week ${w.week}: ${w.title}. Focus: ${w.focus}. '
                 'Start with checkpoints: ${w.checkpoints.take(2).join('; ')}.';
     } else if (q.contains('pyq') || q.contains('previous')) {
+      final targetPyqs = weakest.chapters.isEmpty
+          ? 15
+          : weakest.chapters.first.pyqCount;
       answer =
           'Open Vault > ${weakest.title} > start the PYQ drill. '
-          'Target ${weakest.chapters.first.pyqCount} questions, '
+          'Target $targetPyqs questions, '
           'then retake wrong ones after 48 hours.';
     } else if (q.contains('mock')) {
-      final paper = prep.mocks.first;
-      answer =
-          'Run "${paper.title}" (${paper.duration}). '
-          'After submit, review ${paper.focusAreas.join(', ')}.';
+      if (prep.mocks.isEmpty) {
+        answer =
+            'No mock papers are loaded yet for ${prep.selectedExam}. '
+            'Check the Mocks tab once content syncs.';
+      } else {
+        final paper = prep.mocks.first;
+        answer =
+            'Run "${paper.title}" (${paper.duration}). '
+            'After submit, review ${paper.focusAreas.join(', ')}.';
+      }
     } else if (q.contains('operating') ||
         q.contains(' os') ||
         q.startsWith('os')) {
@@ -95,7 +113,7 @@ class OfflineMentorService {
         break;
       }
     }
-    if (subject == null) {
+    if (subject == null || subject.chapters.isEmpty) {
       return 'That subject is not in your ${prep.selectedExam} track.';
     }
     final chapter = subject.chapters.first;

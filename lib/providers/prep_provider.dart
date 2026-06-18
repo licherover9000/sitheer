@@ -6,6 +6,7 @@ import 'package:sitheer/data/prep_catalog_accessors.dart';
 import 'package:sitheer/data/prep_content_registry.dart';
 import 'package:sitheer/model/prep_content.dart';
 import 'package:sitheer/model/prep_progress.dart';
+import 'package:sitheer/model/question_attempt.dart';
 import 'package:sitheer/model/pyq_volume.dart';
 import 'package:sitheer/repositories/prep_repository.dart';
 import 'package:sitheer/services/auth_service.dart';
@@ -23,6 +24,16 @@ class PrepProvider extends ChangeNotifier {
   final Set<String> _completedCheckpoints = {};
   final Map<String, ChapterProgress> _chapterProgress = {};
   final Map<String, MockAttemptRecord> _mockAttempts = {};
+
+  /// Recent mock/PYQ sessions, newest first. Capped to keep the synced
+  /// Firestore document small.
+  final List<PracticeSession> _sessions = [];
+  static const int _maxStoredSessions = 10;
+
+  /// Questions the user flagged to revisit and learn with the AI mentor,
+  /// newest first.
+  final List<QuestionAttempt> _flaggedQuestions = [];
+
   List<PyqVolume> _pyqVolumes = [];
   bool _loaded = false;
   bool _contentReady = false;
@@ -35,6 +46,9 @@ class PrepProvider extends ChangeNotifier {
   String? get contentError => _contentError;
   Set<String> get completedCheckpoints => _completedCheckpoints;
   List<PyqVolume> get pyqVolumes => List.unmodifiable(_pyqVolumes);
+  List<PracticeSession> get recentSessions => List.unmodifiable(_sessions);
+  List<QuestionAttempt> get flaggedQuestions =>
+      List.unmodifiable(_flaggedQuestions);
 
   List<PrepSubject> get subjects => subjectsForExam(_selectedExam);
   List<RoadmapWeek> get weeks => weeksForExam(_selectedExam);
@@ -120,6 +134,23 @@ class PrepProvider extends ChangeNotifier {
         );
       }
     }
+
+    _sessions
+      ..clear()
+      ..addAll(
+        (state['sessions'] as List? ?? const []).map(
+          (e) => PracticeSession.fromMap(Map<String, dynamic>.from(e as Map)),
+        ),
+      );
+    _sessions.sort((a, b) => b.completedAt.compareTo(a.completedAt));
+
+    _flaggedQuestions
+      ..clear()
+      ..addAll(
+        (state['flaggedQuestions'] as List? ?? const []).map(
+          (e) => QuestionAttempt.fromMap(Map<String, dynamic>.from(e as Map)),
+        ),
+      );
   }
 
   Map<String, dynamic> _toState() => {
@@ -128,6 +159,8 @@ class PrepProvider extends ChangeNotifier {
     'completedCheckpoints': _completedCheckpoints.toList(),
     'chapterProgress': _repo.chapterProgressToMap(_chapterProgress),
     'mockAttempts': _mockAttempts.map((k, v) => MapEntry(k, v.toMap())),
+    'sessions': _sessions.map((s) => s.toMap()).toList(),
+    'flaggedQuestions': _flaggedQuestions.map((q) => q.toMap()).toList(),
   };
 
   Future<void> _persist() async {
@@ -162,14 +195,13 @@ class PrepProvider extends ChangeNotifier {
     await refreshPyqVolumes();
   }
 
-  Future<void> refreshContent({bool forceUpload = false}) async {
+  Future<void> refreshContent() async {
     try {
-      final bundles = forceUpload
-          ? await _repo.forceRefreshContent()
-          : await _repo.bootstrapContent();
+      final bundles = await _repo.bootstrapContent();
       PrepContentRegistry.instance.setBundles(bundles);
       _contentReady = PrepContentRegistry.instance.isReady;
       _contentError = null;
+      await refreshPyqVolumes();
     } catch (e) {
       _contentError = e.toString();
     }
@@ -280,6 +312,51 @@ class PrepProvider extends ChangeNotifier {
 
   MockAttemptRecord? mockAttempt(String paperId) => _mockAttempts[paperId];
 
+  /// Persists a completed mock/PYQ session (newest first, capped). Powers the
+  /// wrong-answer review flow.
+  Future<void> recordPracticeSession(PracticeSession session) async {
+    _sessions
+      ..removeWhere((s) => s.id == session.id)
+      ..insert(0, session);
+    if (_sessions.length > _maxStoredSessions) {
+      _sessions.removeRange(_maxStoredSessions, _sessions.length);
+    }
+    await _persist();
+  }
+
+  /// Most recent stored session for a given source/ref, if any.
+  PracticeSession? latestSessionFor(String source, String refId) {
+    for (final s in _sessions) {
+      if (s.source == source && s.refId == refId) return s;
+    }
+    return null;
+  }
+
+  /// All wrong attempts across stored sessions, newest first.
+  List<QuestionAttempt> get allWrongAttempts =>
+      _sessions.expand((s) => s.wrongAttempts).toList(growable: false);
+
+  bool isFlagged(String questionId) =>
+      _flaggedQuestions.any((q) => q.questionId == questionId);
+
+  /// Adds [attempt] to the flagged list, or removes it if already flagged.
+  Future<void> toggleFlag(QuestionAttempt attempt) async {
+    final index = _flaggedQuestions.indexWhere(
+      (q) => q.questionId == attempt.questionId,
+    );
+    if (index >= 0) {
+      _flaggedQuestions.removeAt(index);
+    } else {
+      _flaggedQuestions.insert(0, attempt.copyWith(markedForReview: true));
+    }
+    await _persist();
+  }
+
+  Future<void> unflag(String questionId) async {
+    _flaggedQuestions.removeWhere((q) => q.questionId == questionId);
+    await _persist();
+  }
+
   /// Returns total incorrect count across all chapters (for mistake tracker).
   int get totalIncorrect =>
       _chapterProgress.values.fold(0, (sum, p) => sum + p.incorrectCount);
@@ -287,12 +364,10 @@ class PrepProvider extends ChangeNotifier {
   /// Returns chapters sorted by incorrectCount descending (weakest first).
   List<MapEntry<String, ChapterProgress>> get weakestChaptersByMistakes {
     final entries = _chapterProgress.entries.toList();
-    entries.sort((a, b) => b.value.incorrectCount.compareTo(a.value.incorrectCount));
+    entries.sort(
+      (a, b) => b.value.incorrectCount.compareTo(a.value.incorrectCount),
+    );
     return entries;
-  }
-
-  Future<void> createRoadmapTask(String title, {String? tag}) async {
-    // Tasks are created from UI via TaskProviders + FirebaseAuth.
   }
 
   @override

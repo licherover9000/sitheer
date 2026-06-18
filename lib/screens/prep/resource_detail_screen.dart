@@ -87,6 +87,14 @@ class ResourceDetailScreen extends StatelessWidget {
             FilledButton.icon(
               onPressed: () {
                 final mocks = prep.mocks;
+                if (mocks.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('No mock papers available for this exam.'),
+                    ),
+                  );
+                  return;
+                }
                 final paper = mocks.firstWhere(
                   (m) => m.title.toLowerCase().contains('sprint'),
                   orElse: () => mocks.first,

@@ -5,6 +5,7 @@ import 'package:sitheer/data/prep_catalog.dart';
 import 'package:sitheer/providers/main_nav_provider.dart';
 import 'package:sitheer/providers/mentor_keys_provider.dart';
 import 'package:sitheer/providers/prep_provider.dart';
+import 'package:sitheer/screens/prep/flagged_questions_screen.dart';
 import 'package:sitheer/screens/prep/mentor_reply_sheet.dart';
 import 'package:sitheer/screens/prep/prep_widgets.dart';
 import 'package:sitheer/screens/prep/subject_detail_screen.dart';
@@ -31,6 +32,21 @@ class AskTayariScreen extends StatelessWidget {
           appBar: AppBar(
             title: const Text('myTayari'),
             actions: [
+              IconButton(
+                tooltip: 'Flagged to revise',
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => const FlaggedQuestionsScreen(),
+                    ),
+                  );
+                },
+                icon: Badge(
+                  isLabelVisible: prep.flaggedQuestions.isNotEmpty,
+                  label: Text('${prep.flaggedQuestions.length}'),
+                  child: const Icon(Icons.flag_outlined),
+                ),
+              ),
               IconButton(
                 tooltip: 'Settings',
                 onPressed: () {

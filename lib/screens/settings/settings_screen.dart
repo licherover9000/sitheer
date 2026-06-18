@@ -99,7 +99,13 @@ class SettingsScreen extends StatelessWidget {
                   onTap: () => unawaited(prep.refreshContent()),
                 ),
                 const Divider(height: 1),
-                _UploadCatalogTile(prep: prep),
+                const ListTile(
+                  leading: Icon(Icons.admin_panel_settings_outlined),
+                  title: Text('Content imports use Admin SDK scripts'),
+                  subtitle: Text(
+                    'Run import-content.js or upload-pyq-volumes.js from a trusted machine. Client catalog writes are disabled.',
+                  ),
+                ),
               ],
             ),
           ),
@@ -189,57 +195,3 @@ class _DurationTile extends StatelessWidget {
     );
   }
 }
-
-class _UploadCatalogTile extends StatefulWidget {
-  const _UploadCatalogTile({required this.prep});
-
-  final PrepProvider prep;
-
-  @override
-  State<_UploadCatalogTile> createState() => _UploadCatalogTileState();
-}
-
-class _UploadCatalogTileState extends State<_UploadCatalogTile> {
-  bool _uploading = false;
-
-  Future<void> _upload() async {
-    setState(() => _uploading = true);
-    try {
-      await widget.prep.refreshContent(forceUpload: true);
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Catalog uploaded to Firestore successfully.'),
-          ),
-        );
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Upload failed: $e')),
-        );
-      }
-    } finally {
-      if (mounted) setState(() => _uploading = false);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: _uploading
-          ? const SizedBox(
-              width: 24,
-              height: 24,
-              child: CircularProgressIndicator(strokeWidth: 2),
-            )
-          : const Icon(Icons.upload_outlined),
-      title: const Text('Upload built-in catalog to Firestore'),
-      subtitle: const Text(
-        'Writes content/exams/items/{gate-cs|gate-da} — requires write permission.',
-      ),
-      onTap: _uploading ? null : _upload,
-    );
-  }
-}
-
