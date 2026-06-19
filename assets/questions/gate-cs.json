@@ -3507,5 +3507,560 @@
     "marks": 2,
     "tags": ["os", "paging", "multilevel"],
     "source": "GATE CSE 2024 (Set 2)"
+  },
+  {
+    "id": "cs23-q1",
+    "chapterId": "apt-verbal",
+    "type": "mcq",
+    "prompt": "We reached the station late, and _______ missed the train.",
+    "options": ["near", "nearly", "utterly", "mostly"],
+    "correctIndex": 1,
+    "explanation": "'nearly missed' (almost missed) is the idiomatically correct adverb.",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["aptitude", "grammar"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q3",
+    "chapterId": "apt-quant",
+    "type": "mcq",
+    "prompt": "A sequence obeys a(n+1) = a(n) + a(n-1) for n >= 2. If a6 = 37 and a7 = 60, what is a1?",
+    "options": ["4", "5", "8", "9"],
+    "correctIndex": 0,
+    "explanation": "Working backward: a5=60-37=23, a4=37-23=14, a3=23-14=9, a2=14-9=5, a1=9-5=4.",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["aptitude", "series", "fibonacci"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q4",
+    "chapterId": "apt-reason",
+    "type": "mcq",
+    "prompt": "90% of pregnant women received medical care at least once before birth; of these, 60% received care from doctors. Which can be inferred with certainty?",
+    "options": [
+      "More than half of the pregnant women received care at least once from a doctor",
+      "Less than half received care at least once from a doctor",
+      "More than half received care at most once from a doctor",
+      "Less than half received care at most once from a doctor"
+    ],
+    "correctIndex": 0,
+    "explanation": "0.90 * 0.60 = 0.54 = 54% > 50%, so more than half received care at least once from a doctor.",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["aptitude", "data-interpretation"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q5",
+    "chapterId": "apt-reason",
+    "type": "mcq",
+    "prompt": "Looking at the surface of a smooth 3-dimensional object from the outside, which is TRUE?",
+    "options": [
+      "The surface must be concave everywhere",
+      "The surface must be convex everywhere",
+      "The surface may be concave in some places and convex in others",
+      "The object can have edges but no corners"
+    ],
+    "correctIndex": 2,
+    "explanation": "A smooth surface can curve inward (concave) or outward (convex) at different regions.",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["aptitude", "spatial-reasoning"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q6",
+    "chapterId": "apt-reason",
+    "type": "mcq",
+    "prompt": "Lack of exercise causes health issues in Zombieland, so the government gives incentives to those who cycle to work. What can be logically inferred with certainty?",
+    "options": [
+      "All the working population will ride bicycles to work",
+      "Cycling will ensure everyone is free of health issues",
+      "Health experts asked to make cycling mandatory",
+      "The government believes cycling is a form of physical exercise"
+    ],
+    "correctIndex": 3,
+    "explanation": "Incentivizing cycling as a remedy for lack of exercise implies the government treats cycling as exercise; the others overstate the claim.",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["aptitude", "inference"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q7",
+    "chapterId": "apt-quant",
+    "type": "mcq",
+    "prompt": "Let f(t) = 0.01 t^2 and g(t) = 4t for 0 < t < infinity. (i) For some t > 0, g(t) > f(t). (ii) There exists T such that f(t) > g(t) for all t > T. Which is TRUE?",
+    "options": ["only (i)", "only (ii)", "both (i) and (ii)", "neither"],
+    "correctIndex": 2,
+    "explanation": "For small t, 4t > 0.01t^2 (i true); for large t, 0.01t^2 dominates 4t (ii true). Both hold.",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["aptitude", "functions", "growth"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q8",
+    "chapterId": "apt-verbal",
+    "type": "mcq",
+    "prompt": "Which sentence sequence creates a coherent narrative? (i) Once on the terrace she notices the man. (ii) She begins to pant after climbing the stairs. (iii) Mina has bought heavy bags at the market. (iv) He was leaning against the parapet.",
+    "options": [
+      "(i),(ii),(iv),(iii)",
+      "(ii),(iii),(i),(iv)",
+      "(iv),(ii),(i),(iii)",
+      "(iii),(ii),(i),(iv)"
+    ],
+    "correctIndex": 3,
+    "explanation": "Logical order: heavy bags (iii) -> panting up stairs (ii) -> notices man on terrace (i) -> describes him at the parapet (iv).",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["aptitude", "sentence-ordering"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q9",
+    "chapterId": "apt-quant",
+    "type": "mcq",
+    "prompt": "f(x) and g(y) satisfy f(x) = g(y) for ALL real x and y. Which is necessarily TRUE?",
+    "options": [
+      "f(x) = 0 and g(y) = 0",
+      "f(x) = g(y) = constant",
+      "f(x) != constant and g(y) != constant",
+      "f(x) + g(y) = f(x) - g(y)"
+    ],
+    "correctIndex": 1,
+    "explanation": "If a function of x alone equals a function of y alone for all x, y, both must be the same constant.",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["aptitude", "functions"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q12",
+    "chapterId": "ds-trees",
+    "type": "mcq",
+    "prompt": "Which sequence stored at A[1..10] forms a MAX-heap?",
+    "options": [
+      "23, 17, 10, 6, 13, 14, 1, 5, 7, 12",
+      "23, 17, 14, 7, 13, 10, 1, 5, 6, 12",
+      "23, 17, 14, 6, 13, 10, 1, 5, 7, 15",
+      "23, 14, 17, 1, 10, 13, 16, 12, 7, 5"
+    ],
+    "correctIndex": 1,
+    "explanation": "Only option B satisfies parent >= children at every index (e.g. A[5]=13 >= A[10]=12, A[3]=14 >= A[6]=10, A[7]=1).",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["data-structures", "heap"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q13",
+    "chapterId": "ds-linear",
+    "type": "mcq",
+    "prompt": "SLLdel deletes a node of a singly linked list given pointers to the node and head; DLLdel does the same for a doubly linked list. The worst-case time complexities are:",
+    "options": [
+      "SLLdel is O(1) and DLLdel is O(n)",
+      "Both are O(log n)",
+      "Both are O(1)",
+      "SLLdel is O(n) and DLLdel is O(1)"
+    ],
+    "correctIndex": 3,
+    "explanation": "A doubly linked list reaches the previous node via the back pointer in O(1); a singly linked list must traverse from the head to find the predecessor, O(n).",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["data-structures", "linked-list"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q16",
+    "chapterId": "dbms-sql",
+    "type": "mcq",
+    "prompt": "The degree (or arity) of a relation in a relational database refers to the:",
+    "options": [
+      "Number of attributes of its relation schema",
+      "Number of tuples stored in the relation",
+      "Number of entries in the relation",
+      "Number of distinct domains of its relation schema"
+    ],
+    "correctIndex": 0,
+    "explanation": "Degree/arity is the number of attributes (columns); the number of tuples is the cardinality.",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["dbms", "relational-model"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q17",
+    "chapterId": "cn-transport",
+    "type": "mcq",
+    "prompt": "Two hosts on a point-to-point link use Stop-and-Wait. In which scenario is link utilization the LOWEST?",
+    "options": [
+      "Longer link length and lower transmission rate",
+      "Longer link length and higher transmission rate",
+      "Shorter link length and lower transmission rate",
+      "Shorter link length and higher transmission rate"
+    ],
+    "correctIndex": 1,
+    "explanation": "Utilization = Tt/(Tt + 2Tp). It is lowest when propagation delay is large (long link) relative to transmission time (high rate -> small Tt).",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["networks", "stop-and-wait"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q20",
+    "chapterId": "ds-hashing",
+    "type": "mcq",
+    "prompt": "An adversary tries to maximize collisions among k keys in a hash table of m slots (k > m). Which hashing strategy best counteracts this?",
+    "options": [
+      "Division method h(k) = k mod m",
+      "Multiplication method",
+      "Universal hashing method",
+      "Division if k is prime, else multiplication"
+    ],
+    "correctIndex": 2,
+    "explanation": "Universal hashing chooses the hash function randomly at run time, so no fixed adversarial key set can force many collisions in expectation.",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["data-structures", "hashing", "universal-hashing"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q22",
+    "chapterId": "os-process",
+    "type": "msq",
+    "prompt": "On a context switch between two threads of the SAME process, which must be saved? (Select all that apply.)",
+    "options": [
+      "Page table base register",
+      "Stack pointer",
+      "Program counter",
+      "General purpose registers"
+    ],
+    "correctIndexes": [1, 2, 3],
+    "explanation": "Threads of one process share the address space, so the page-table base register need not change; their private execution context (stack pointer, PC, GP registers) must be saved.",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["os", "threads", "context-switch"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q23",
+    "chapterId": "os-process",
+    "type": "msq",
+    "prompt": "Which of the following guarantee a transition from user mode to kernel mode? (Select all that apply.)",
+    "options": ["Function Call", "malloc Call", "Page Fault", "System Call"],
+    "correctIndexes": [2, 3],
+    "explanation": "A page fault is a trap and a system call is a deliberate trap into the kernel. An ordinary function call stays in user mode; malloc only traps if it itself makes a system call.",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["os", "kernel-mode", "traps"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q24",
+    "chapterId": "toc-cfg",
+    "type": "msq",
+    "prompt": "Which statements are CORRECT? (Select all that apply.)",
+    "options": [
+      "The intersection of two regular languages is regular",
+      "The intersection of two context-free languages is context-free",
+      "The intersection of two recursive languages is recursive",
+      "The intersection of two recursively enumerable languages is recursively enumerable"
+    ],
+    "correctIndexes": [0, 2, 3],
+    "explanation": "Regular, recursive, and recursively enumerable languages are closed under intersection. Context-free languages are NOT closed under intersection (B false).",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["toc", "closure-properties"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q25",
+    "chapterId": "cn-routing",
+    "type": "msq",
+    "prompt": "Which statements about OSPF are INCORRECT? (Select all that apply.)",
+    "options": [
+      "OSPF implements the Bellman-Ford algorithm to find shortest paths",
+      "OSPF uses Dijkstra's algorithm for least-cost path routing",
+      "OSPF is used as an inter-domain routing protocol",
+      "OSPF implements hierarchical routing"
+    ],
+    "correctIndexes": [0, 2],
+    "explanation": "OSPF is a link-state protocol using Dijkstra (so A is incorrect) and is an INTRA-domain protocol (so C is incorrect). B and D are correct statements.",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["networks", "ospf", "routing"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q28",
+    "chapterId": "math-calc",
+    "type": "msq",
+    "prompt": "For f(x) = x^3 + 15x^2 - 33x - 36, which statements are TRUE? (Select all that apply.)",
+    "options": [
+      "f does not have a local maximum",
+      "f has a local maximum",
+      "f does not have a local minimum",
+      "f has a local minimum"
+    ],
+    "correctIndexes": [1, 3],
+    "explanation": "f'(x) = 3(x+11)(x-1); f''(-11) < 0 gives a local maximum and f''(1) > 0 gives a local minimum, so f has both.",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["calculus", "extrema"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q29",
+    "chapterId": "algo-sorting",
+    "type": "msq",
+    "prompt": "Let f(n) = n and g(n) = n^2. Which statements are TRUE? (Select all that apply.)",
+    "options": ["f in O(g)", "f in Omega(g)", "f in o(g)", "f in omega(g)"],
+    "correctIndexes": [0, 2],
+    "explanation": "n grows strictly slower than n^2, so f in O(g) and even f in o(g); it is not in Omega(g) or omega(g).",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["algorithms", "asymptotics"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q31",
+    "chapterId": "math-calc",
+    "type": "nat",
+    "prompt": "The value of the definite integral, integral over x in [-3,3], y in [-2,2], z in [-1,1] of (4 x^2 y - z^3) dz dy dx, is ______ (nearest integer).",
+    "numericAnswer": 0,
+    "numericTolerance": 0,
+    "explanation": "Over symmetric limits, 4x^2 y is odd in y (integrates to 0) and z^3 is odd in z (integrates to 0), so the whole integral is 0.",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["calculus", "multiple-integral", "symmetry"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q32",
+    "chapterId": "apt-quant",
+    "type": "nat",
+    "prompt": "A number is written as 132 in radix-4. Written in radix-5, it is ______.",
+    "numericAnswer": 110,
+    "numericTolerance": 0,
+    "explanation": "132 (base 4) = 1*16 + 3*4 + 2 = 30. In base 5, 30 = 1*25 + 1*5 + 0 = 110.",
+    "year": 2023,
+    "marks": 1,
+    "tags": ["aptitude", "number-systems", "radix"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q38",
+    "chapterId": "os-sync",
+    "type": "mcq",
+    "prompt": "incr/decr do wait(s); X+-1; signal(s). 5 threads call incr and 3 call decr on shared X (initially 10). I-1: s is a binary semaphore = 1. I-2: s is a counting semaphore = 2. The MINIMUM possible final values (V1, V2) are:",
+    "options": ["15, 7", "7, 7", "12, 7", "12, 8"],
+    "correctIndex": 2,
+    "explanation": "A binary semaphore enforces mutual exclusion, so V1 = 10 + 5 - 3 = 12 exactly. A counting semaphore of 2 allows two threads in the critical section, causing lost updates; the minimum attainable value is 7.",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["os", "semaphores", "race-condition"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q39",
+    "chapterId": "toc-cfg",
+    "type": "mcq",
+    "prompt": "Grammar G: S -> aSb | X, X -> aX | Xb | a | b. Which statement is CORRECT?",
+    "options": [
+      "The language generated by G is (a + b)*",
+      "The language generated by G is a(a + b)*b",
+      "The language generated by G is ab(a + b)*",
+      "The language generated by G is not regular"
+    ],
+    "correctIndex": 1,
+    "explanation": "G generates exactly the strings that start with a and end with b, i.e. a(a + b)*b, which is regular.",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["toc", "cfg", "regular-language"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q46",
+    "chapterId": "ds-trees",
+    "type": "mcq",
+    "prompt": "A priority queue A is implemented with a max-heap of n elements. The worst-case running times of Extract-Max(A) and Insert(A, key) are:",
+    "options": [
+      "Both run in O(1)",
+      "Both run in O(log n)",
+      "Extract-Max O(1), Insert O(n)",
+      "Extract-Max O(1), Insert O(log n)"
+    ],
+    "correctIndex": 1,
+    "explanation": "Both operations restore the heap with a sift-up/sift-down along a path of height log n, so each is O(log n).",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["data-structures", "heap", "priority-queue"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q47",
+    "chapterId": "ds-trees",
+    "type": "mcq",
+    "prompt": "foo(p) returns p->val + foo(left) + foo(right) and prints the returned value. For the tree with root 10, left subtree (5 with children 3, 8) and right subtree (11 with child 13), what does foo print?",
+    "options": [
+      "3 8 5 13 11 10",
+      "3 5 8 10 11 13",
+      "3 8 16 13 24 50",
+      "3 16 8 50 24 13"
+    ],
+    "correctIndex": 2,
+    "explanation": "foo prints subtree sums in postorder: 3, 8, (5+3+8)=16, 13, (11+13)=24, (10+16+24)=50.",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["data-structures", "binary-tree", "recursion"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q50",
+    "chapterId": "cn-transport",
+    "type": "msq",
+    "prompt": "myTCP runs over a 100 Mbps network with RTT 150 ms and maximum segment lifetime 2 minutes. Which are valid lengths for the Sequence Number field? (Select all that apply.)",
+    "options": ["30 bits", "32 bits", "34 bits", "36 bits"],
+    "correctIndexes": [1, 2, 3],
+    "explanation": "Bytes sent in one MSL = 100 Mbps * 120 s / 8 ~ 1.5 GB, which needs about 31 bits, so the sequence space must be at least 31 bits: 32, 34, 36 are valid (30 is not).",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["networks", "tcp", "sequence-number"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q53",
+    "chapterId": "math-prob",
+    "type": "msq",
+    "prompt": "Two fair coins are tossed. A = heads on both, B = head on first, C = head on second. Which statements are TRUE? (Select all that apply.)",
+    "options": [
+      "A and B are independent",
+      "A and C are independent",
+      "B and C are independent",
+      "P(B|C) = P(B)"
+    ],
+    "correctIndexes": [2, 3],
+    "explanation": "P(A)=1/4 but P(A and B)=1/4 != P(A)P(B)=1/8, so A is dependent on B (and C). B and C are independent (P(B and C)=1/4=P(B)P(C)), which also gives P(B|C)=P(B).",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["probability", "independence"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q54",
+    "chapterId": "algo-sorting",
+    "type": "msq",
+    "prompt": "Function 1: while n>1 { for i=1..n: x++; n=n/2 }. Function 2: for i=1..100n: x++. Let f1, f2 be the number of x++ executions. Which are TRUE? (Select all that apply.)",
+    "options": [
+      "f1(n) in Theta(f2(n))",
+      "f1(n) in o(f2(n))",
+      "f1(n) in omega(f2(n))",
+      "f1(n) in O(n)"
+    ],
+    "correctIndexes": [0, 3],
+    "explanation": "f1 = n + n/2 + n/4 + ... ~ 2n = Theta(n), and f2 = 100n = Theta(n). So f1 in Theta(f2) and f1 in O(n).",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["algorithms", "asymptotics"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q55",
+    "chapterId": "algo-graphs",
+    "type": "msq",
+    "prompt": "Greedy vertex coloring assigns color(v_i) = min{ j : no neighbour of v_i is colored j }. Let Delta(G) be the maximum degree. Which statements are TRUE? (Select all that apply.)",
+    "options": [
+      "This produces a proper vertex coloring of G",
+      "The number of colors used is at most Delta(G) + 1",
+      "The number of colors used is at most Delta(G)",
+      "The number of colors used equals the chromatic number of G"
+    ],
+    "correctIndexes": [0, 1],
+    "explanation": "Greedy coloring always yields a proper coloring with at most Delta(G)+1 colors. It need not achieve only Delta(G) colors or the optimum chromatic number.",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["algorithms", "graphs", "greedy-coloring"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q58",
+    "chapterId": "os-memory",
+    "type": "nat",
+    "prompt": "A system has 57-bit virtual addresses, multi-level page tables, 4 KB pages (1 KB = 1024 B), and 8-byte page-table entries. The number of levels L is ______.",
+    "numericAnswer": 5,
+    "numericTolerance": 0,
+    "explanation": "Page offset = 12 bits. PTEs per page = 4096/8 = 512 = 2^9, so 9 bits per level. VPN bits = 57 - 12 = 45; levels = ceil(45/9) = 5.",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["os", "paging", "multilevel"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q59",
+    "chapterId": "ds-linear",
+    "type": "nat",
+    "prompt": "a = [1,5,7,8,9,2]. Push a0..a5 onto stack S and enqueue them into queue Q. Then: pop S; dequeue Q; pop S; dequeue Q; (dequeue Q and push onto S) repeated 4 times; pop S; pop S. The top element of S now is ______.",
+    "numericAnswer": 8,
+    "numericTolerance": 0,
+    "explanation": "After the two pops (2, 9) and two dequeues (1, 5), moving 7,8,9,2 from Q to S and then popping twice (2, 9) leaves 8 on top of S.",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["data-structures", "stack", "queue"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q61",
+    "chapterId": "dbms-sql",
+    "type": "nat",
+    "prompt": "Student(rollNum, name, gender, marks) has rows: (1,Naman,M,62),(2,Aliya,F,70),(3,Aliya,F,80),(4,James,M,82),(5,Swati,F,65). SELECT * FROM Student WHERE gender='F' AND marks>65 returns ______ rows.",
+    "numericAnswer": 2,
+    "numericTolerance": 0,
+    "explanation": "Female rows with marks > 65 are Aliya (70) and Aliya (80); Swati has 65 (not > 65). So 2 rows.",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["dbms", "sql"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q62",
+    "chapterId": "dbms-sql",
+    "type": "nat",
+    "prompt": "An ordered file has 25000 records of 100 bytes (15-byte primary key). A block-aligned primary (sparse) index is built; block size 1024 bytes, block pointer 5 bytes. Binary search on a b-block index takes ceil(log2 b) block accesses. The block accesses to find the data block for a key is ______.",
+    "numericAnswer": 6,
+    "numericTolerance": 0,
+    "explanation": "Records per block = 1024/100 = 10 -> 2500 data blocks. Index entry = 15+5 = 20 bytes -> 51 entries/block; 2500 entries -> 49 index blocks. ceil(log2 49) = 6.",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["dbms", "indexing", "binary-search"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q63",
+    "chapterId": "toc-fa",
+    "type": "nat",
+    "prompt": "L = { w in {0,1}* : w does not contain three or more consecutive 1's }. The minimum number of states in a DFA for L is ______.",
+    "numericAnswer": 4,
+    "numericTolerance": 0,
+    "explanation": "Track the count of trailing 1's: 0, 1, 2 (all accepting) plus a dead state once three 1's appear = 4 states.",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["toc", "dfa"],
+    "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs23-q65",
+    "chapterId": "cn-routing",
+    "type": "nat",
+    "prompt": "Forwarding table: 200.150.0.0/16 -> if1, 200.150.64.0/19 -> if2, 200.150.68.0/24 -> if3, 200.150.68.64/27 -> if4, default -> if0. A packet to 200.150.68.118 is forwarded to interface ID ______.",
+    "numericAnswer": 3,
+    "numericTolerance": 0,
+    "explanation": ".118 is not in the /27 (.64-.95). Among matches /16, /19, /24, the longest prefix is 200.150.68.0/24 -> interface 3.",
+    "year": 2023,
+    "marks": 2,
+    "tags": ["networks", "longest-prefix-match", "forwarding"],
+    "source": "GATE CSE 2023"
   }
 ]
