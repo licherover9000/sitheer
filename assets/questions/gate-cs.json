@@ -4062,5 +4062,361 @@
     "marks": 2,
     "tags": ["networks", "longest-prefix-match", "forwarding"],
     "source": "GATE CSE 2023"
+  },
+  {
+    "id": "cs22-q1",
+    "chapterId": "apt-verbal",
+    "type": "mcq",
+    "prompt": "The _________ is too high for it to be considered _________.",
+    "options": ["fair / fare", "faer / fair", "fare / fare", "fare / fair"],
+    "correctIndex": 3,
+    "explanation": "A price is a 'fare' (noun); 'fair' means reasonable. The fare is too high to be considered fair.",
+    "year": 2022,
+    "marks": 1,
+    "tags": ["aptitude", "homophones"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q4",
+    "chapterId": "apt-reason",
+    "type": "mcq",
+    "prompt": "Statements: (1) All students are inquisitive. (2) Some students are inquisitive. (3) No student is inquisitive. (4) Some students are not inquisitive. Assuming at least one student exists, which two CANNOT both be true?",
+    "options": [
+      "Statement 1 and Statement 3",
+      "Statement 1 and Statement 2",
+      "Statement 2 and Statement 4",
+      "Statement 3 and Statement 4"
+    ],
+    "correctIndex": 0,
+    "explanation": "'All are inquisitive' and 'No student is inquisitive' are contradictory and cannot both hold when a student exists.",
+    "year": 2022,
+    "marks": 1,
+    "tags": ["aptitude", "logic"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q6",
+    "chapterId": "apt-reason",
+    "type": "mcq",
+    "prompt": "Metrics help improve outcomes in organizations with good work culture but are counterproductive with poor work culture. Which is the correct logical inference?",
+    "options": [
+      "Metrics are useful in organizations with poor work culture",
+      "Metrics are useful in organizations with good work culture",
+      "Metrics are always counterproductive in organizations with good work culture",
+      "Metrics are never useful in organizations with good work culture"
+    ],
+    "correctIndex": 1,
+    "explanation": "The passage states metrics help in good-work-culture organizations, so they are useful there.",
+    "year": 2022,
+    "marks": 2,
+    "tags": ["aptitude", "inference"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q7",
+    "chapterId": "apt-reason",
+    "type": "mcq",
+    "prompt": "Boys were 65% of test takers; girls (35%) were 60% of the qualified candidates. Which inference is correct?",
+    "options": [
+      "Equal number of boys and girls qualified",
+      "Equal number of boys and girls appeared",
+      "Fewer boys than girls appeared",
+      "Fewer boys than girls qualified"
+    ],
+    "correctIndex": 3,
+    "explanation": "Girls were 60% of those who qualified, so boys were only 40%: fewer boys qualified than girls.",
+    "year": 2022,
+    "marks": 2,
+    "tags": ["aptitude", "data-interpretation"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q8",
+    "chapterId": "apt-quant",
+    "type": "mcq",
+    "prompt": "A box has 3 green and 2 orange balls. If a green ball is drawn it is not replaced; if an orange ball is drawn it is replaced with another orange ball. After the first draw, what is the probability the next ball is orange?",
+    "options": ["1/2", "8/25", "19/50", "23/50"],
+    "correctIndex": 3,
+    "explanation": "First green (3/5): box becomes 2G,2O, P(orange)=1/2. First orange (2/5): box stays 3G,2O, P(orange)=2/5. Total = (3/5)(1/2) + (2/5)(2/5) = 15/50 + 8/50 = 23/50.",
+    "year": 2022,
+    "marks": 2,
+    "tags": ["aptitude", "probability"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q14",
+    "chapterId": "dbms-normal",
+    "type": "mcq",
+    "prompt": "In the relational data model, which statement is TRUE?",
+    "options": [
+      "A relation with only two attributes is always in BCNF",
+      "If all attributes of a relation are prime, the relation is in BCNF",
+      "Every relation has at least one non-prime attribute",
+      "BCNF decompositions preserve functional dependencies"
+    ],
+    "correctIndex": 0,
+    "explanation": "A two-attribute relation is always in BCNF. The other statements are false (e.g. BCNF does not always preserve dependencies).",
+    "year": 2022,
+    "marks": 1,
+    "tags": ["dbms", "normalization", "bcnf"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q15",
+    "chapterId": "ds-linear",
+    "type": "mcq",
+    "prompt": "Reversing a singly linked list in O(1) space: which statement about the best worst-case time complexity is TRUE?",
+    "options": [
+      "The best algorithm takes Theta(n) time",
+      "The best algorithm takes Theta(n log n) time",
+      "The best algorithm takes Theta(n^2) time",
+      "It is not possible in O(1) space"
+    ],
+    "correctIndex": 0,
+    "explanation": "Reversing pointers in a single pass takes Theta(n) time and O(1) extra space.",
+    "year": 2022,
+    "marks": 1,
+    "tags": ["data-structures", "linked-list"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q16",
+    "chapterId": "ds-hashing",
+    "type": "mcq",
+    "prompt": "Given n keys, m hash-table slots, and two simple uniform hash functions (h1 for odd keys, h2 for even keys), the expected number of keys per slot is:",
+    "options": ["m/n", "n/m", "2n/m", "n/2m"],
+    "correctIndex": 1,
+    "explanation": "Under simple uniform hashing every key is equally likely to land in any slot, so the expected load per slot is n/m regardless of using two functions.",
+    "year": 2022,
+    "marks": 1,
+    "tags": ["data-structures", "hashing", "load-factor"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q17",
+    "chapterId": "os-process",
+    "type": "mcq",
+    "prompt": "Which method transfers bulk data from hard disk to main memory with the HIGHEST throughput?",
+    "options": [
+      "DMA based I/O transfer",
+      "Interrupt driven I/O transfer",
+      "Polling based I/O transfer",
+      "Programmed I/O transfer"
+    ],
+    "correctIndex": 0,
+    "explanation": "DMA moves blocks directly between device and memory without per-word CPU involvement, giving the highest throughput.",
+    "year": 2022,
+    "marks": 1,
+    "tags": ["os", "io", "dma"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q19",
+    "chapterId": "os-sync",
+    "type": "mcq",
+    "prompt": "T1: wait(S3);print(C);signal(S2). T2: wait(S1);print(B);signal(S3). T3: wait(S2);print(A);signal(S1). Which initialization prints BCABCA...?",
+    "options": [
+      "S1=1; S2=1; S3=1",
+      "S1=1; S2=1; S3=0",
+      "S1=1; S2=0; S3=0",
+      "S1=0; S2=1; S3=1"
+    ],
+    "correctIndex": 2,
+    "explanation": "To start with B, only T2 must run first (S1=1), with S2=S3=0 so T1 and T3 wait. Then the cycle B->C->A repeats.",
+    "year": 2022,
+    "marks": 1,
+    "tags": ["os", "semaphores", "synchronization"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q20",
+    "chapterId": "math-la",
+    "type": "mcq",
+    "prompt": "For matrices A (mxn), B (nxm), C (nxn), D (nxn): Statement 1: tr(AB) = tr(BA). Statement 2: tr(CD) = tr(DC). Which holds?",
+    "options": [
+      "Statement 1 correct, Statement 2 wrong",
+      "Statement 1 wrong, Statement 2 correct",
+      "Both correct",
+      "Both wrong"
+    ],
+    "correctIndex": 2,
+    "explanation": "The trace satisfies tr(XY) = tr(YX) whenever both products are defined, so both statements are correct.",
+    "year": 2022,
+    "marks": 1,
+    "tags": ["linear-algebra", "trace"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q23",
+    "chapterId": "toc-cfg",
+    "type": "msq",
+    "prompt": "Which statements are TRUE? (Select all that apply.)",
+    "options": [
+      "Every subset of a recursively enumerable language is recursive",
+      "If a language L and its complement are both recursively enumerable, then L is recursive",
+      "The complement of a context-free language must be recursive",
+      "If L1 and L2 are regular, then L1 union L2 must be deterministic context-free"
+    ],
+    "correctIndexes": [1, 2, 3],
+    "explanation": "B is the standard theorem (L and L-complement RE => recursive). CFLs are recursive, so their complement is recursive (C true). Regular languages are deterministic context-free (D true). A is false.",
+    "year": 2022,
+    "marks": 1,
+    "tags": ["toc", "decidability", "closure"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q26",
+    "chapterId": "os-process",
+    "type": "msq",
+    "prompt": "Which statements about deadlocks are TRUE? (Select all that apply.)",
+    "options": [
+      "Circular wait is a necessary condition for a deadlock",
+      "With multiple instances per resource, a cycle in the wait-for graph indicates a deadlock",
+      "If the current allocation leads to an unsafe state, deadlock will necessarily occur",
+      "If every edge in the resource-allocation graph is an assignment edge, the system is not deadlocked"
+    ],
+    "correctIndexes": [0, 3],
+    "explanation": "Circular wait is necessary (A true). With multiple instances a cycle is necessary but not sufficient (B false). Unsafe does not imply deadlock (C false). With only assignment edges no process is waiting, so no deadlock (D true).",
+    "year": 2022,
+    "marks": 1,
+    "tags": ["os", "deadlock"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q30",
+    "chapterId": "algo-graphs",
+    "type": "nat",
+    "prompt": "A simple undirected graph has 10 vertices. If it is DISCONNECTED, the maximum number of edges it can have is ______.",
+    "numericAnswer": 36,
+    "numericTolerance": 0,
+    "explanation": "Put 9 vertices in a complete graph K9 and leave 1 isolated: C(9,2) = 36 edges.",
+    "year": 2022,
+    "marks": 1,
+    "tags": ["algorithms", "graphs", "connectivity"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q32",
+    "chapterId": "math-prob",
+    "type": "nat",
+    "prompt": "The number of arrangements of six IDENTICAL balls in three IDENTICAL bins is ______.",
+    "numericAnswer": 7,
+    "numericTolerance": 0,
+    "explanation": "This is the number of partitions of 6 into at most 3 parts: 6, 51, 42, 411, 33, 321, 222 = 7.",
+    "year": 2022,
+    "marks": 1,
+    "tags": ["combinatorics", "partitions"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q34",
+    "chapterId": "math-calc",
+    "type": "nat",
+    "prompt": "The value of  lim (x -> 0) [ x / (1 - e^(2x)) ]  is ______ (1 decimal place).",
+    "numericAnswer": -0.5,
+    "numericTolerance": 0,
+    "explanation": "Near 0, e^(2x) ~ 1 + 2x, so 1 - e^(2x) ~ -2x, and x/(-2x) = -1/2.",
+    "year": 2022,
+    "marks": 1,
+    "tags": ["calculus", "limits"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q35",
+    "chapterId": "cn-routing",
+    "type": "nat",
+    "prompt": "Resolving www.gate.org.in with an iterative DNS query and no caching anywhere: the number of DNS query-response pairs is ______.",
+    "numericAnswer": 4,
+    "numericTolerance": 0,
+    "explanation": "The local resolver queries the root, then .in, then org.in, then gate.org.in servers: 4 query-response pairs.",
+    "year": 2022,
+    "marks": 1,
+    "tags": ["networks", "dns"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q37",
+    "chapterId": "algo-graphs",
+    "type": "mcq",
+    "prompt": "For a simple undirected unweighted graph with adjacency matrix A (at least 3 vertices), the number of 3-cycles (triangles) equals the trace of:",
+    "options": ["A^3", "A^3 divided by 2", "A^3 divided by 3", "A^3 divided by 6"],
+    "correctIndex": 3,
+    "explanation": "trace(A^3) counts each triangle 6 times (3 starting vertices x 2 directions), so the number of triangles is trace(A^3)/6.",
+    "year": 2022,
+    "marks": 2,
+    "tags": ["algorithms", "graphs", "adjacency-matrix"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q46",
+    "chapterId": "toc-tm",
+    "type": "msq",
+    "prompt": "Which of the following are UNDECIDABLE? (Select all that apply.)",
+    "options": [
+      "Given two TMs M1, M2, decide if L(M1) is a subset of L(M2)",
+      "Given a TM M, decide if L(M) is regular",
+      "Given a TM M, decide if M accepts all strings",
+      "Given a TM M, decide if M takes more than 1073 steps on every string"
+    ],
+    "correctIndexes": [0, 1, 2],
+    "explanation": "Subset, 'is L(M) regular', and 'accepts all strings' are all undecidable (Rice / reductions). 'Takes more than 1073 steps on every string' is decidable by simulating 1073 steps on each of the finitely many short inputs.",
+    "year": 2022,
+    "marks": 2,
+    "tags": ["toc", "decidability", "rice"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q48",
+    "chapterId": "toc-cfg",
+    "type": "msq",
+    "prompt": "L1 = {ww | w in {a,b}*}, L2 = {a^n b^n c^m | m,n>=0}, L3 = {a^m b^n c^n | m,n>=0}. Which statements are FALSE? (Select all that apply.)",
+    "options": [
+      "L1 is not context-free but L2 and L3 are deterministic context-free",
+      "Neither L1 nor L2 is context-free",
+      "L2, L3 and L2 intersect L3 are all context-free",
+      "Neither L1 nor its complement is context-free"
+    ],
+    "correctIndexes": [1, 2, 3],
+    "explanation": "A is true. B is false (L2 IS context-free). C is false (L2 intersect L3 = {a^n b^n c^n} is not context-free). D is false (the complement of L1 is context-free).",
+    "year": 2022,
+    "marks": 2,
+    "tags": ["toc", "context-free", "closure"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q49",
+    "chapterId": "algo-graphs",
+    "type": "msq",
+    "prompt": "G is a simple undirected weighted graph with all DISTINCT edge weights. Which statements about its minimum spanning trees are TRUE? (Select all that apply.)",
+    "options": [
+      "The edge with the second smallest weight is always in the MST",
+      "One or both of the third- and fourth-smallest edges are in the MST",
+      "The minimum-weight edge crossing any cut (S, V\\S) is always in the MST",
+      "G can have multiple minimum spanning trees"
+    ],
+    "correctIndexes": [0, 1, 2],
+    "explanation": "The two smallest edges are always in the MST (A true), and among the next edges at least one of the 3rd/4th must be included (B true). The cut property guarantees the minimum crossing edge is in the MST (C true). Distinct weights give a UNIQUE MST, so D is false.",
+    "year": 2022,
+    "marks": 2,
+    "tags": ["algorithms", "graphs", "mst"],
+    "source": "GATE CSE 2022"
+  },
+  {
+    "id": "cs22-q52",
+    "chapterId": "algo-graphs",
+    "type": "msq",
+    "prompt": "For the adjacency matrix A of a simple undirected unweighted graph with n vertices, which property holds? (Select all that apply.)",
+    "options": [
+      "The diagonal entries of A^2 are the degrees of the vertices",
+      "If the graph is connected, none of the entries of A^(n-1) + I_n can be zero",
+      "If the sum of all elements of A is at most 2(n-1), the graph must be acyclic",
+      "If there is at least a 1 in each row and column, the graph must be connected"
+    ],
+    "correctIndexes": [0],
+    "explanation": "(A^2)[i][i] counts walks of length 2 from i back to i = degree(i), so A is true. The other claims are false in general.",
+    "year": 2022,
+    "marks": 2,
+    "tags": ["algorithms", "graphs", "adjacency-matrix"],
+    "source": "GATE CSE 2022"
   }
 ]
