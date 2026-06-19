@@ -2437,5 +2437,387 @@
     "marks": 2,
     "tags": ["data-structures", "hashing", "double-hashing"],
     "source": "GATE CSE 2025 (Set 1)"
+  },
+  {
+    "id": "g25s2-cs-q1",
+    "chapterId": "apt-verbal",
+    "type": "mcq",
+    "prompt": "Despite his initial hesitation, Rehman's _________ to contribute to the success of the project never wavered. Select the most appropriate option.",
+    "options": ["ambivalence", "satisfaction", "resolve", "revolve"],
+    "correctIndex": 2,
+    "explanation": "'Resolve' (firm determination) fits an attitude that 'never wavered' despite hesitation.",
+    "year": 2025,
+    "marks": 1,
+    "tags": ["aptitude", "verbal"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q2",
+    "chapterId": "apt-reason",
+    "type": "mcq",
+    "prompt": "Bird : Nest :: Bee : _______ . Select the correct option to complete the analogy.",
+    "options": ["Kennel", "Hammock", "Hive", "Lair"],
+    "correctIndex": 2,
+    "explanation": "A bird lives in a nest; a bee lives in a hive.",
+    "year": 2025,
+    "marks": 1,
+    "tags": ["aptitude", "analogy"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q5",
+    "chapterId": "apt-reason",
+    "type": "mcq",
+    "prompt": "Let p1 and p2 be two arbitrary prime numbers. Which statement is correct for ALL values of p1 and p2?",
+    "options": [
+      "p1 + p2 is not a prime number",
+      "p1 * p2 is not a prime number",
+      "p1 + p2 + 1 is a prime number",
+      "p1 * p2 + 1 is a prime number"
+    ],
+    "correctIndex": 1,
+    "explanation": "A product of two primes always has those primes as factors, so it is composite (never prime). The others fail for some primes (e.g. 2+3=5 is prime).",
+    "year": 2025,
+    "marks": 1,
+    "tags": ["aptitude", "numbers", "primes"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q6",
+    "chapterId": "apt-reason",
+    "type": "mcq",
+    "prompt": "Based only on the statement, identify the logically correct inference: \"Even if I had known that you were in the hospital, I would not have gone there to see you\", Ramya told Josephine.",
+    "options": [
+      "Ramya knew that Josephine was in the hospital",
+      "Ramya did not know that Josephine was in the hospital",
+      "Ramya and Josephine were once close friends, but not now",
+      "Josephine was in the hospital due to a leg injury"
+    ],
+    "correctIndex": 1,
+    "explanation": "The counterfactual 'Even if I had known' implies Ramya did NOT actually know Josephine was in the hospital.",
+    "year": 2025,
+    "marks": 2,
+    "tags": ["aptitude", "logical-reasoning", "inference"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q13",
+    "chapterId": "ds-trees",
+    "type": "mcq",
+    "prompt": "In a binary tree where every node has either zero or two children, let n (> 0) be the total number of nodes. How many nodes have exactly two children?",
+    "options": ["(n - 2) / 2", "(n - 1) / 2", "n / 2", "(n + 1) / 2"],
+    "correctIndex": 1,
+    "explanation": "In a full binary tree the number of internal (two-child) nodes is (n - 1)/2; the leaves number (n + 1)/2.",
+    "year": 2025,
+    "marks": 1,
+    "tags": ["data-structures", "binary-tree"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q16",
+    "chapterId": "cn-transport",
+    "type": "mcq",
+    "prompt": "Consider: (i) ARP provides a mapping from an IP address to the corresponding link-layer (hardware) address. (ii) A single TCP segment from S to R cannot carry both data (S to R) and an acknowledgement for a segment from R to S. Which is CORRECT?",
+    "options": [
+      "Both (i) and (ii) are TRUE",
+      "(i) is TRUE and (ii) is FALSE",
+      "(i) is FALSE and (ii) is TRUE",
+      "Both (i) and (ii) are FALSE"
+    ],
+    "correctIndex": 1,
+    "explanation": "(i) is true (ARP maps IP to MAC). (ii) is false: TCP can piggyback an ACK on a data segment. So (i) true, (ii) false.",
+    "year": 2025,
+    "marks": 1,
+    "tags": ["networks", "arp", "tcp"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q17",
+    "chapterId": "cn-routing",
+    "type": "mcq",
+    "prompt": "Match List I (routing protocols) with List II (names): (i) Distance vector routing, (ii) Link state routing; (a) Bellman-Ford, (b) Dijkstra.",
+    "options": [
+      "(i)-(a) and (ii)-(b)",
+      "(i)-(a) and (ii)-(a)",
+      "(i)-(b) and (ii)-(a)",
+      "(i)-(b) and (ii)-(b)"
+    ],
+    "correctIndex": 0,
+    "explanation": "Distance-vector routing is based on the Bellman-Ford algorithm; link-state routing uses Dijkstra's algorithm.",
+    "year": 2025,
+    "marks": 1,
+    "tags": ["networks", "routing"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q18",
+    "chapterId": "cn-routing",
+    "type": "mcq",
+    "prompt": "An IPv4 datagram's protocol field holds the protocol number of a protocol X. Which of the following is NOT a possible candidate for X?",
+    "options": [
+      "Internet Control Message Protocol (ICMP)",
+      "Internet Group Management Protocol (IGMP)",
+      "Open Shortest Path First (OSPF)",
+      "Routing Information Protocol (RIP)"
+    ],
+    "correctIndex": 3,
+    "explanation": "ICMP, IGMP, and OSPF run directly over IP (they have IP protocol numbers). RIP runs over UDP, so it is not named by the IP protocol field.",
+    "year": 2025,
+    "marks": 1,
+    "tags": ["networks", "ip", "protocols"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q20",
+    "chapterId": "algo-sorting",
+    "type": "mcq",
+    "prompt": "Given an unordered list of n distinct integers, what is the minimum number of element comparisons required to find an integer that is NOT the largest in the list?",
+    "options": ["1", "n - 1", "n", "2n - 1"],
+    "correctIndex": 0,
+    "explanation": "Compare any two elements; the smaller of the two cannot be the largest. One comparison suffices.",
+    "year": 2025,
+    "marks": 1,
+    "tags": ["algorithms", "comparisons"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q23",
+    "chapterId": "cn-routing",
+    "type": "mcq",
+    "prompt": "Ethernet + IPv4 (no IP options); each Ethernet frame carries at most 1500 bytes of data. A UDP segment with 7488 bytes of payload is sent. Give the total number of IP fragments and the size of the last fragment (including the IPv4 header).",
+    "options": [
+      "5 fragments, 1488 bytes",
+      "6 fragments, 88 bytes",
+      "6 fragments, 108 bytes",
+      "6 fragments, 116 bytes"
+    ],
+    "correctIndex": 3,
+    "explanation": "IP payload = 7488 + 8 (UDP header) = 7496. Max data per fragment = 1500 - 20 = 1480 (multiple of 8). ceil(7496/1480) = 6 fragments. Last data = 7496 - 5*1480 = 96, plus 20-byte header = 116 bytes.",
+    "year": 2025,
+    "marks": 1,
+    "tags": ["networks", "ip", "fragmentation"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q24",
+    "chapterId": "toc-cfg",
+    "type": "mcq",
+    "prompt": "Which one of the following languages is accepted by a DETERMINISTIC pushdown automaton (DPDA)?",
+    "options": [
+      "Any regular language",
+      "Any context-free language",
+      "Any language accepted by a non-deterministic PDA",
+      "Any decidable language"
+    ],
+    "correctIndex": 0,
+    "explanation": "Every regular language is a deterministic context-free language, so a DPDA accepts it. DPDAs are strictly weaker than NPDAs (they accept only DCFLs).",
+    "year": 2025,
+    "marks": 1,
+    "tags": ["toc", "pda", "dcfl"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q25",
+    "chapterId": "toc-cfg",
+    "type": "mcq",
+    "prompt": "Let G1, G2 be context-free grammars and r a regular expression. Which ONE of the following questions is DECIDABLE?",
+    "options": [
+      "Is L(G1) = L(G2)?",
+      "Is L(G1) intersect L(G2) = empty?",
+      "Is L(G1) = L(r)?",
+      "Is L(G1) = empty?"
+    ],
+    "correctIndex": 3,
+    "explanation": "Emptiness of a context-free language is decidable. Equivalence and intersection-emptiness of CFLs are undecidable.",
+    "year": 2025,
+    "marks": 1,
+    "tags": ["toc", "cfg", "decidability"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q26",
+    "chapterId": "os-process",
+    "type": "mcq",
+    "prompt": "Processes P1, P2, P3, P4 arrive at times 0, 1, 2, 8 ms with execution times 10, 13, 6, 9 ms. Using Shortest Remaining Time First (preemptive) and ignoring context-switch time, the average turnaround time (ms) is:",
+    "options": ["22", "15", "37", "19"],
+    "correctIndex": 3,
+    "explanation": "SRTF schedule: P1(0-2), P3(2-8), P1(8-16), P4(16-25), P2(25-38). Turnarounds: P1=16, P2=37, P3=6, P4=17; average = (16+37+6+17)/4 = 19.",
+    "year": 2025,
+    "marks": 1,
+    "tags": ["os", "scheduling", "srtf"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q27",
+    "chapterId": "dbms-txn",
+    "type": "msq",
+    "prompt": "Two joint holders simultaneously transfer Rs.10000 each from account A to B. Both read the same initial balance Rs.11000 and both commit. B is credited twice but A is debited only once (ending at Rs.1000). Which properties are certain to have been violated? (Select all that apply.)",
+    "options": ["Atomicity", "Consistency", "Isolation", "Durability"],
+    "correctIndexes": [1, 2],
+    "explanation": "This is a lost-update anomaly: concurrent transactions interfered (Isolation violated) and money was created, breaking the balance invariant (Consistency violated).",
+    "year": 2025,
+    "marks": 1,
+    "tags": ["dbms", "transactions", "acid"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q29",
+    "chapterId": "algo-graphs",
+    "type": "msq",
+    "prompt": "Which statements about BFS and DFS on an undirected simple graph G are TRUE? (Select all that apply.)",
+    "options": [
+      "A DFS tree of G is a shortest-path tree of G",
+      "Every non-tree edge of G w.r.t. a DFS tree is a forward/back edge",
+      "If (u,v) is a non-tree edge w.r.t. a BFS tree, the BFS distances to u and v differ by at most 1",
+      "Both BFS and DFS can find the connected components of G"
+    ],
+    "correctIndexes": [1, 2, 3],
+    "explanation": "DFS does not give shortest paths (A false). In an undirected DFS all non-tree edges are back edges (B true). BFS cross/non-tree edges connect vertices whose levels differ by at most 1 (C true). Both traversals discover connected components (D true).",
+    "year": 2025,
+    "marks": 1,
+    "tags": ["algorithms", "graphs", "bfs", "dfs"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q35",
+    "chapterId": "ds-trees",
+    "type": "nat",
+    "prompt": "The values 10, -4, 15, 30, 20, 5, 60, 19 are inserted in that order into an initially empty binary search tree. The number of edges on the path from the node containing 19 to the root is ______.",
+    "numericAnswer": 4,
+    "numericTolerance": 0,
+    "explanation": "Path to 19: 10 -> 15 -> 30 -> 20 -> 19, which is 4 edges.",
+    "year": 2025,
+    "marks": 1,
+    "tags": ["data-structures", "bst"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q36",
+    "chapterId": "cn-transport",
+    "type": "mcq",
+    "prompt": "Stop-and-Wait protocol: frame size 3000 bits, channel rate 2000 bps, one-way propagation delay 100 ms, negligible processing and ACK sizes. The channel utilization (percentage) is closest to:",
+    "options": ["88.23", "93.75", "85.44", "66.67"],
+    "correctIndex": 0,
+    "explanation": "Transmission time Tt = 3000/2000 = 1.5 s. Utilization = Tt / (Tt + 2*Tp) = 1.5 / (1.5 + 0.2) = 1.5/1.7 = 88.23%.",
+    "year": 2025,
+    "marks": 2,
+    "tags": ["networks", "stop-and-wait", "utilization"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q37",
+    "chapterId": "algo-graphs",
+    "type": "mcq",
+    "prompt": "A positive constant c is added to the weight of EVERY edge of a connected, positively-weighted undirected graph. Which statement about its minimum spanning trees (MSTs) and shortest paths (SPs) is TRUE?",
+    "options": [
+      "Every MST remains an MST, and every SP remains an SP",
+      "MSTs need not remain MSTs, and every SP remains an SP",
+      "Every MST remains an MST, and SPs need not remain SPs",
+      "MSTs need not remain MSTs, and SPs need not remain SPs"
+    ],
+    "correctIndex": 2,
+    "explanation": "Adding a constant to all edges shifts every spanning tree's weight by the same (n-1)c, so MSTs are unchanged. Shortest paths can change because paths with more edges are penalized more.",
+    "year": 2025,
+    "marks": 2,
+    "tags": ["algorithms", "graphs", "mst", "shortest-path"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q38",
+    "chapterId": "ds-trees",
+    "type": "mcq",
+    "prompt": "Meld combines two instances of a data structure into one. For size-n instances of P: unsorted doubly linked list (with head and tail pointers), Q: array-based min-heap, R: binary search tree - which gives the correct worst-case meld time complexities?",
+    "options": [
+      "P: O(1), Q: O(n), R: O(n)",
+      "P: O(1), Q: O(n log n), R: O(n)",
+      "P: O(n), Q: O(n log n), R: O(n^2)",
+      "P: O(1), Q: O(n), R: O(n log n)"
+    ],
+    "correctIndex": 0,
+    "explanation": "A DLL with head/tail pointers melds by splicing in O(1). Two array min-heaps meld by concatenating and re-heapifying in O(n). Two BSTs meld in O(n) (e.g. via sorted-order merge).",
+    "year": 2025,
+    "marks": 2,
+    "tags": ["data-structures", "complexity", "meld"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q41",
+    "chapterId": "algo-sorting",
+    "type": "mcq",
+    "prompt": "An array of n distinct elements is bitonic if it increases up to some index and then decreases. The best possible worst-case number of comparisons to search for an element in a bitonic array is:",
+    "options": ["O(n)", "O(1)", "O((log n)^2)", "O(log n)"],
+    "correctIndex": 3,
+    "explanation": "Find the peak with binary search (O(log n)), then binary-search each monotonic part (O(log n)) - overall O(log n).",
+    "year": 2025,
+    "marks": 2,
+    "tags": ["algorithms", "searching", "bitonic"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q44",
+    "chapterId": "math-la",
+    "type": "msq",
+    "prompt": "A system Ax=b has an LU decomposition A = LU, with L unit lower-triangular and U upper-triangular (A is 3x3). Which statements are TRUE? (Select all that apply.)",
+    "options": [
+      "Ax=b can be solved by first solving Ly=b, then Ux=y",
+      "If A is invertible, then both L and U are invertible",
+      "If A is singular, then at least one diagonal element of U is zero",
+      "If A is symmetric, then both L and U are symmetric"
+    ],
+    "correctIndexes": [0, 1, 2],
+    "explanation": "Forward then back substitution solves the system (A). det(A)=det(L)det(U)=det(U); invertible A means U has nonzero diagonal, so both factors are invertible (B), and singular A forces a zero pivot in U (C). L and U need not be symmetric even when A is (D false).",
+    "year": 2025,
+    "marks": 2,
+    "tags": ["linear-algebra", "lu-decomposition"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q45",
+    "chapterId": "ds-linear",
+    "type": "msq",
+    "prompt": "Augment a stack (distinct positive integer keys) with an O(1) MIN operation that returns the record with the smallest key, without removing it and without increasing the cost of standard stack operations. Which approach(es) achieve this? (Select all that apply.)",
+    "options": [
+      "With each record, store a pointer to the record with the smallest key below it",
+      "Keep a single pointer to the record with the smallest key in the stack",
+      "Keep an auxiliary array of the keys maintained in sorted order",
+      "Keep a Min-Heap of the key values in the stack"
+    ],
+    "correctIndexes": [0],
+    "explanation": "Storing a per-record 'min below' pointer gives O(1) push/pop/min. A single min pointer breaks on pop; a sorted array or heap makes push worse than O(1).",
+    "year": 2025,
+    "marks": 2,
+    "tags": ["data-structures", "stack", "min-stack"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q54",
+    "chapterId": "dbms-sql",
+    "type": "msq",
+    "prompt": "Schemas: Students(rollno, name, age, cgpa), Courses(courseno, cname, credits), Enrolled(rollno, courseno, grade). Which SQL query/queries correctly retrieve the names of students enrolled in courseno 1470? (Select all that apply.)",
+    "options": [
+      "SELECT S.name FROM Students S WHERE EXISTS (SELECT * FROM Enrolled E WHERE E.courseno = 1470 AND E.rollno = S.rollno)",
+      "SELECT S.name FROM Students S WHERE SIZEOF (SELECT * FROM Enrolled E WHERE E.courseno = 1470 AND E.rollno = S.rollno) > 0",
+      "SELECT S.name FROM Students S WHERE 0 < (SELECT COUNT(*) FROM Enrolled E WHERE E.courseno = 1470 AND E.rollno = S.rollno)",
+      "SELECT S.name FROM Students S NATURAL JOIN Enrolled E WHERE E.courseno = 1470"
+    ],
+    "correctIndexes": [0, 2, 3],
+    "explanation": "EXISTS (A), COUNT(*) > 0 (C), and NATURAL JOIN on rollno (D) all work. SIZEOF (B) is not a valid SQL operator.",
+    "year": 2025,
+    "marks": 2,
+    "tags": ["dbms", "sql"],
+    "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "g25s2-cs-q58",
+    "chapterId": "os-memory",
+    "type": "nat",
+    "prompt": "A system has a 2^32-byte logical address space and uses two-level hierarchical paging with 4096-byte pages. Each inner page-table entry is 8 bytes. The address splits into an x-bit outer-page-table index, an inner-page-table offset, and a page offset. The value of x is ______.",
+    "numericAnswer": 11,
+    "numericTolerance": 0,
+    "explanation": "Page offset = 12 bits (4096). An inner page table fits in one page: 4096/8 = 512 = 2^9 entries -> 9 bits. Outer index = 32 - 12 - 9 = 11 bits.",
+    "year": 2025,
+    "marks": 2,
+    "tags": ["os", "paging", "multilevel"],
+    "source": "GATE CSE 2025 (Set 2)"
   }
 ]
