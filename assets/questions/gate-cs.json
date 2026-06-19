@@ -5286,5 +5286,129 @@
     "marks": 2,
     "tags": ["networks", "tcp", "congestion-control"],
     "source": "GATE CSE 2020"
+  },
+  {
+    "id": "cs21s1-q3cs",
+    "chapterId": "algo-sorting",
+    "type": "mcq",
+    "prompt": "Order f1 = 10^n, f2 = n^(log n), f3 = n^(sqrt n) in INCREASING order of asymptotic growth rate.",
+    "options": [
+      "f3, f2, f1",
+      "f2, f1, f3",
+      "f1, f2, f3",
+      "f2, f3, f1"
+    ],
+    "correctIndex": 3,
+    "explanation": "Comparing exponents of n: log n < sqrt(n), and 10^n is a true exponential dominating both quasi-polynomials. So f2 < f3 < f1.",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["algorithms", "asymptotics"],
+    "source": "GATE CSE 2021 (Set 1)"
+  },
+  {
+    "id": "cs21s1-q5cs",
+    "chapterId": "toc-cfg",
+    "type": "mcq",
+    "prompt": "S1: Every SLR(1) grammar is unambiguous, but some unambiguous grammars are not SLR(1). S2: For any context-free grammar there is a parser that takes at most O(n^3) time to parse a string of length n. Which is correct?",
+    "options": [
+      "S1 is true and S2 is false",
+      "S1 is false and S2 is true",
+      "S1 is true and S2 is true",
+      "S1 is false and S2 is false"
+    ],
+    "correctIndex": 2,
+    "explanation": "SLR(1) grammars are a proper subset of unambiguous grammars (S1 true), and the CYK algorithm parses any CFG in O(n^3) (S2 true).",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["toc", "cfg", "parsing"],
+    "source": "GATE CSE 2021 (Set 1)"
+  },
+  {
+    "id": "cs21s1-q6cs",
+    "chapterId": "apt-quant",
+    "type": "mcq",
+    "prompt": "A number is written as 210 in base 3. What is its hexadecimal representation?",
+    "options": ["15", "21", "D2", "528"],
+    "correctIndex": 0,
+    "explanation": "210 (base 3) = 2*9 + 1*3 + 0 = 21 (decimal) = 0x15.",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["aptitude", "number-systems", "radix"],
+    "source": "GATE CSE 2021 (Set 1)"
+  },
+  {
+    "id": "cs21s1-q12cs",
+    "chapterId": "toc-tm",
+    "type": "msq",
+    "prompt": "Let <M> encode an automaton M, with Sigma = {0,1}. Which of the following languages is/are NOT recursive? (Select all that apply.)",
+    "options": [
+      "{ <M> : M is a DFA with L(M) = empty }",
+      "{ <M> : M is a DFA with L(M) = Sigma* }",
+      "{ <M> : M is a PDA with L(M) = empty }",
+      "{ <M> : M is a PDA with L(M) = Sigma* }"
+    ],
+    "correctIndexes": [3],
+    "explanation": "DFA emptiness and universality are decidable, and PDA emptiness is decidable. But PDA universality (L(M) = Sigma*) is undecidable, so only (D) is not recursive.",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["toc", "decidability", "pda"],
+    "source": "GATE CSE 2021 (Set 1)"
+  },
+  {
+    "id": "cs21s1-q15cs",
+    "chapterId": "os-process",
+    "type": "msq",
+    "prompt": "A directory is a linear list of nodes, each holding a file name and metadata. Which operations on a directory necessarily require a FULL scan of it? (Select all that apply.)",
+    "options": [
+      "Creation of a new file",
+      "Deletion of an existing file",
+      "Renaming of an existing file",
+      "Opening of an existing file"
+    ],
+    "correctIndexes": [0, 2],
+    "explanation": "Creating a file must scan the whole list to ensure the name is unique; renaming must scan to ensure the new name is unique. Deletion and opening stop as soon as the target is found.",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["os", "file-systems"],
+    "source": "GATE CSE 2021 (Set 1)"
+  },
+  {
+    "id": "cs21s1-q16cs",
+    "chapterId": "algo-graphs",
+    "type": "nat",
+    "prompt": "An undirected connected planar graph G has 8 vertices and 5 faces. The number of edges in G is ______.",
+    "numericAnswer": 11,
+    "numericTolerance": 0,
+    "explanation": "By Euler's formula V - E + F = 2: 8 - E + 5 = 2, so E = 11.",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["graphs", "planar", "euler"],
+    "source": "GATE CSE 2021 (Set 1)"
+  },
+  {
+    "id": "cs21s1-q18cs",
+    "chapterId": "math-prob",
+    "type": "nat",
+    "prompt": "The lifetime of a component is exponentially distributed. For a randomly picked component, the probability that its lifetime EXCEEDS the expected lifetime is ______ (2 decimal places).",
+    "numericAnswer": 0.37,
+    "numericTolerance": 0.02,
+    "explanation": "For an exponential variable, P(X > E[X]) = P(X > 1/lambda) = e^(-1) = 0.368.",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["probability", "exponential"],
+    "source": "GATE CSE 2021 (Set 1)"
+  },
+  {
+    "id": "cs21s1-q19cs",
+    "chapterId": "math-prob",
+    "type": "nat",
+    "prompt": "Six jobs of distinct difficulty are assigned to three computers of distinct speed so that the fastest computer gets the toughest job, the slowest gets the easiest job, and every computer gets at least one job. The number of ways to do this is ______.",
+    "numericAnswer": 65,
+    "numericTolerance": 0,
+    "explanation": "The toughest and easiest jobs are fixed. The remaining 4 jobs go to any of the 3 computers (3^4 = 81), minus the 2^4 = 16 assignments that leave the middle computer empty: 81 - 16 = 65.",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["combinatorics", "counting"],
+    "source": "GATE CSE 2021 (Set 1)"
   }
 ]
