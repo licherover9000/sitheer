@@ -4851,5 +4851,98 @@
     "marks": 2,
     "tags": ["number-theory", "rsa"],
     "source": "GATE CSE 2019"
+  },
+  {
+    "id": "cs21s1-q1",
+    "chapterId": "apt-quant",
+    "type": "mcq",
+    "prompt": "The ratio of boys to girls in a class is 7 to 3. Which of the following is an acceptable value for the total number of students?",
+    "options": ["21", "37", "50", "73"],
+    "correctIndex": 2,
+    "explanation": "The total must be a multiple of 7 + 3 = 10. Among the options only 50 is divisible by 10.",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["aptitude", "ratio"],
+    "source": "GATE CSE 2021 (Set 1)"
+  },
+  {
+    "id": "cs21s1-q3",
+    "chapterId": "apt-verbal",
+    "type": "mcq",
+    "prompt": "(i) 'Everybody in the class is prepared for the exam.' (ii) 'Babu invited Danish to his home because he enjoys playing chess.' Which observation is CORRECT?",
+    "options": [
+      "(i) is grammatically correct and (ii) is unambiguous",
+      "(i) is grammatically incorrect and (ii) is unambiguous",
+      "(i) is grammatically correct and (ii) is ambiguous",
+      "(i) is grammatically incorrect and (ii) is ambiguous"
+    ],
+    "correctIndex": 2,
+    "explanation": "(i) is grammatically correct. (ii) is ambiguous because 'he' could refer to either Babu or Danish.",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["aptitude", "grammar", "ambiguity"],
+    "source": "GATE CSE 2021 (Set 1)"
+  },
+  {
+    "id": "cs21s1-q5",
+    "chapterId": "apt-reason",
+    "type": "mcq",
+    "prompt": "_____ is to surgery as writer is to ________. Which option maintains a similar logical relation?",
+    "options": [
+      "Plan, outline",
+      "Hospital, library",
+      "Doctor, book",
+      "Medicine, grammar"
+    ],
+    "correctIndex": 2,
+    "explanation": "A doctor performs surgery; a writer produces a book (agent to product/activity).",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["aptitude", "analogy"],
+    "source": "GATE CSE 2021 (Set 1)"
+  },
+  {
+    "id": "cs21s1-q8",
+    "chapterId": "apt-quant",
+    "type": "mcq",
+    "prompt": "Five bags each contain identical sets of ten distinct chocolates. One chocolate is picked from each bag. The probability that at least two of the picked chocolates are identical is:",
+    "options": ["0.3024", "0.4235", "0.6976", "0.8125"],
+    "correctIndex": 2,
+    "explanation": "P(all distinct) = (10*9*8*7*6)/10^5 = 0.3024, so P(at least two identical) = 1 - 0.3024 = 0.6976.",
+    "year": 2021,
+    "marks": 2,
+    "tags": ["aptitude", "probability"],
+    "source": "GATE CSE 2021 (Set 1)"
+  },
+  {
+    "id": "cs21s1-q10",
+    "chapterId": "apt-reason",
+    "type": "mcq",
+    "prompt": "Anti-obesity measures like showing calorie counts on menus sidestep the core causes of obesity - poverty and income inequality. Which statement summarizes the passage?",
+    "options": [
+      "The proposed measures address the core problems that cause obesity",
+      "If obesity reduces, poverty will naturally reduce, since obesity causes poverty",
+      "The measures address the core problems and are likely to succeed",
+      "The measures address the problem superficially"
+    ],
+    "correctIndex": 3,
+    "explanation": "The passage says the measures sidestep the core causes, i.e. they address obesity only superficially.",
+    "year": 2021,
+    "marks": 2,
+    "tags": ["aptitude", "inference"],
+    "source": "GATE CSE 2021 (Set 1)"
+  },
+  {
+    "id": "cs21s2-q1",
+    "chapterId": "apt-verbal",
+    "type": "mcq",
+    "prompt": "Gauri said that she can play the keyboard __________ her sister.",
+    "options": ["as well as", "as better as", "as nicest as", "as worse as"],
+    "correctIndex": 0,
+    "explanation": "The correct comparative-equality construction is 'as well as'.",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["aptitude", "grammar"],
+    "source": "GATE CSE 2021 (Set 2)"
   }
 ]
