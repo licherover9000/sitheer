@@ -5410,5 +5410,119 @@
     "marks": 1,
     "tags": ["combinatorics", "counting"],
     "source": "GATE CSE 2021 (Set 1)"
+  },
+  {
+    "id": "cs21s2-q6cs",
+    "chapterId": "dbms-normal",
+    "type": "mcq",
+    "prompt": "S1: A relation scheme can have at most one foreign key. S2: A foreign key in a relation scheme R cannot be used to refer to tuples of R. Which is correct?",
+    "options": [
+      "Both S1 and S2 are true",
+      "S1 is true and S2 is false",
+      "S1 is false and S2 is true",
+      "Both S1 and S2 are false"
+    ],
+    "correctIndex": 3,
+    "explanation": "A relation can have several foreign keys (S1 false), and a self-referencing foreign key can refer to tuples of the same relation R (S2 false).",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["dbms", "foreign-key"],
+    "source": "GATE CSE 2021 (Set 2)"
+  },
+  {
+    "id": "cs21s2-q16cs",
+    "chapterId": "ds-trees",
+    "type": "nat",
+    "prompt": "For a complete binary tree with 7 nodes, let A be the first 3 nodes visited by BFS from the root and B the first 3 nodes visited by DFS from the root. The value of |A - B| (set difference) is ______.",
+    "numericAnswer": 1,
+    "numericTolerance": 0,
+    "explanation": "BFS visits 1,2,3; DFS visits 1,2,4. A - B = {3}, so |A - B| = 1.",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["data-structures", "binary-tree", "traversal"],
+    "source": "GATE CSE 2021 (Set 2)"
+  },
+  {
+    "id": "cs21s2-q18cs",
+    "chapterId": "apt-quant",
+    "type": "nat",
+    "prompt": "If x and y are decimal digits with (0.1101) in binary equal to (0.8xy5) in decimal, then x + y = ______.",
+    "numericAnswer": 3,
+    "numericTolerance": 0,
+    "explanation": "(0.1101)2 = 0.5 + 0.25 + 0.0625 = 0.8125, so x = 1, y = 2 and x + y = 3.",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["number-systems", "binary"],
+    "source": "GATE CSE 2021 (Set 2)"
+  },
+  {
+    "id": "cs21s2-q21cs",
+    "chapterId": "dbms-sql",
+    "type": "nat",
+    "prompt": "A file of 150000 records is on a disk with 4096-byte blocks. A dense index is built whose entries are (12-byte Aadhaar value, 7-byte record pointer); records do not span blocks. The number of blocks in the index file is ______.",
+    "numericAnswer": 698,
+    "numericTolerance": 0,
+    "explanation": "Index entry = 12 + 7 = 19 bytes; entries per block = floor(4096/19) = 215; blocks = ceil(150000/215) = 698.",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["dbms", "indexing"],
+    "source": "GATE CSE 2021 (Set 2)"
+  },
+  {
+    "id": "cs21s2-q22cs",
+    "chapterId": "math-prob",
+    "type": "nat",
+    "prompt": "A biased coin shows heads with probability 0.4. It is tossed 1000 times; X is the number of heads. The standard deviation of X is ______ (2 decimal places).",
+    "numericAnswer": 15.49,
+    "numericTolerance": 0.5,
+    "explanation": "X is Binomial(1000, 0.4); standard deviation = sqrt(n p (1-p)) = sqrt(1000 * 0.4 * 0.6) = sqrt(240) = 15.49.",
+    "year": 2021,
+    "marks": 1,
+    "tags": ["probability", "binomial"],
+    "source": "GATE CSE 2021 (Set 2)"
+  },
+  {
+    "id": "cs21s2-q33cs",
+    "chapterId": "math-prob",
+    "type": "mcq",
+    "prompt": "A bag has r red and b black balls. Each trial draws a ball at random, notes its colour, and returns it along with one more ball of the same colour. After 4 such trials, the probability that the 4th draw is red is:",
+    "options": [
+      "r / (r + b)",
+      "r / (r + b + 3)",
+      "(r + 3) / (r + b + 3)",
+      "(r + 3) / (r + b)"
+    ],
+    "correctIndex": 0,
+    "explanation": "This is a Polya urn; by exchangeability the marginal probability of drawing red on any trial stays r/(r+b).",
+    "year": 2021,
+    "marks": 2,
+    "tags": ["probability", "polya-urn"],
+    "source": "GATE CSE 2021 (Set 2)"
+  },
+  {
+    "id": "cs21s2-q50cs",
+    "chapterId": "math-prob",
+    "type": "nat",
+    "prompt": "Let S be a set of 10 elements. The number of ordered pairs (A, B) where A and B are subsets of S with A a subset of B is ______.",
+    "numericAnswer": 59049,
+    "numericTolerance": 0,
+    "explanation": "Each element is in neither, in B only, or in both A and B (3 choices; it cannot be in A but not B). So 3^10 = 59049.",
+    "year": 2021,
+    "marks": 2,
+    "tags": ["combinatorics", "sets"],
+    "source": "GATE CSE 2021 (Set 2)"
+  },
+  {
+    "id": "cs21s2-q54cs",
+    "chapterId": "cn-physical",
+    "type": "nat",
+    "prompt": "A pure-ALOHA network has 1000-bit frames on a 1 Mbps channel. The total transmission attempts (new + retransmitted) form a Poisson process at 1000 frames/sec. The throughput (frames successfully transmitted per second, nearest integer) is ______.",
+    "numericAnswer": 135,
+    "numericTolerance": 5,
+    "explanation": "Frame time = 1000/10^6 = 1 ms, so the offered load G = 1000 * 1ms = 1. Pure-ALOHA throughput S = G e^(-2G) = e^(-2) = 0.135 per frame-time = 135 frames/sec.",
+    "year": 2021,
+    "marks": 2,
+    "tags": ["networks", "aloha", "throughput"],
+    "source": "GATE CSE 2021 (Set 2)"
   }
 ]
