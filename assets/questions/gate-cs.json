@@ -2819,5 +2819,403 @@
     "marks": 2,
     "tags": ["os", "paging", "multilevel"],
     "source": "GATE CSE 2025 (Set 2)"
+  },
+  {
+    "id": "cs24-q1",
+    "chapterId": "apt-reason",
+    "type": "mcq",
+    "prompt": "If '<' denotes increasing order of intensity, then [dry < arid < parched] is analogous to [diet < fast < ______]. Fill the blank.",
+    "options": ["starve", "reject", "feast", "deny"],
+    "correctIndex": 0,
+    "explanation": "The series escalates in intensity; the most extreme form of fasting is to starve.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["aptitude", "analogy"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q3",
+    "chapterId": "apt-quant",
+    "type": "mcq",
+    "prompt": "The median of the sample 9, 18, 11, 14, 15, 17, 10, 69, 11, 13 is:",
+    "options": ["13.5", "14", "11", "18.7"],
+    "correctIndex": 0,
+    "explanation": "Sorted: 9,10,11,11,13,14,15,17,18,69. With 10 values, the median is the average of the 5th and 6th: (13 + 14)/2 = 13.5.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["aptitude", "statistics", "median"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q4",
+    "chapterId": "apt-quant",
+    "type": "mcq",
+    "prompt": "The number of coins of denominations 1, 5, and 10 are in the ratio 5:3:13. The percentage of the total money that is in 5-denomination coins is:",
+    "options": ["21%", "14.27%", "10%", "30%"],
+    "correctIndex": 2,
+    "explanation": "Money: 5x1=5, 3x5=15, 13x10=130; total 150. Share of 5-coins = 15/150 = 10%.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["aptitude", "ratio"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q12",
+    "chapterId": "math-la",
+    "type": "mcq",
+    "prompt": "The product of all eigenvalues of the matrix [[1,2,3],[4,5,6],[7,8,9]] is:",
+    "options": ["-1", "0", "1", "2"],
+    "correctIndex": 1,
+    "explanation": "The product of eigenvalues equals the determinant. This matrix has linearly dependent rows (row3 = 2*row2 - row1), so det = 0.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["linear-algebra", "eigenvalues", "determinant"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q14",
+    "chapterId": "math-prob",
+    "type": "mcq",
+    "prompt": "A permutation of {1,...,n} (n >= 4) is sampled uniformly. Let E = '1 occurs before 2' and F = '3 occurs before 4'. Which is TRUE?",
+    "options": [
+      "E and F are mutually exclusive",
+      "E and F are independent",
+      "Either E or F must occur",
+      "E is more likely than F"
+    ],
+    "correctIndex": 1,
+    "explanation": "P(E) = P(F) = 1/2, and the relative order of {1,2} is independent of the relative order of {3,4}, so E and F are independent.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["probability", "permutations", "independence"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q16",
+    "chapterId": "cn-routing",
+    "type": "mcq",
+    "prompt": "With all caches empty, a browser opens one TCP connection to fetch an index page with embedded images. Order these packets leaving the computer (earliest to latest): (i) HTTP GET index, (ii) DNS request, (iii) HTTP GET image, (iv) TCP SYN.",
+    "options": [
+      "(iv), (ii), (iii), (i)",
+      "(ii), (iv), (iii), (i)",
+      "(ii), (iv), (i), (iii)",
+      "(iv), (ii), (i), (iii)"
+    ],
+    "correctIndex": 2,
+    "explanation": "DNS resolves the name first, then the TCP SYN opens the connection, then the GET for the index page, and finally the GET for an image (discovered after parsing the index).",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["networks", "dns", "tcp", "http"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q17",
+    "chapterId": "algo-sorting",
+    "type": "mcq",
+    "prompt": "To check whether an array of size N is sorted (ascending or descending) with a single pass comparing only adjacent elements, the worst-case time complexity is:",
+    "options": [
+      "Both O(n) and Omega(n)",
+      "O(n) but not Omega(n)",
+      "Omega(n) but not O(n)",
+      "Neither O(n) nor Omega(n)"
+    ],
+    "correctIndex": 0,
+    "explanation": "A single adjacent-comparison pass is Theta(n) in the worst case, i.e. both O(n) and Omega(n).",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["algorithms", "complexity"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q21",
+    "chapterId": "ds-trees",
+    "type": "mcq",
+    "prompt": "In a B+ tree, the at-least-half-full (50%) node-occupancy requirement is relaxed for:",
+    "options": [
+      "Only the root node",
+      "All leaf nodes",
+      "All internal nodes",
+      "Only the leftmost leaf node"
+    ],
+    "correctIndex": 0,
+    "explanation": "Only the root is exempt from the minimum-occupancy rule (it may have as few as one key / two children).",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["data-structures", "b+ tree", "indexing"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q22",
+    "chapterId": "dbms-normal",
+    "type": "msq",
+    "prompt": "Which statements about a relation R in first normal form (1NF) are TRUE? (Select all that apply.)",
+    "options": [
+      "R can have a multi-attribute key",
+      "R cannot have a foreign key",
+      "R cannot have a composite attribute",
+      "R cannot have more than one candidate key"
+    ],
+    "correctIndexes": [0, 2],
+    "explanation": "1NF allows composite (multi-attribute) keys (A true) but requires atomic attributes, so no composite attribute (C true). It says nothing against foreign keys or multiple candidate keys (B, D false).",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["dbms", "normalization", "1nf"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q23",
+    "chapterId": "toc-fa",
+    "type": "msq",
+    "prompt": "Let L1, L2 be regular languages and L3 a non-regular language. Which statements are ALWAYS TRUE? (Select all that apply.)",
+    "options": [
+      "L1 = L2 if and only if L1 intersect L2 = empty",
+      "L1 union L3 is not regular",
+      "Complement of L3 is not regular",
+      "L1 union L2 is regular"
+    ],
+    "correctIndexes": [2, 3],
+    "explanation": "Regular languages are closed under union, so L1 union L2 is regular (D true). If the complement of L3 were regular, L3 would be too, so the complement is non-regular (C true). A and B do not always hold.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["toc", "regular-languages", "closure"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q24",
+    "chapterId": "os-process",
+    "type": "msq",
+    "prompt": "Which statements about threads are TRUE? (Select all that apply.)",
+    "options": [
+      "Threads can only be implemented in kernel space",
+      "Each thread has its own file descriptor table for open files",
+      "All threads belonging to a process share a common stack",
+      "Threads belonging to a process are by default not protected from each other"
+    ],
+    "correctIndexes": [3],
+    "explanation": "Threads share the process's address space and file-descriptor table but each has its OWN stack, and they are not protected from one another (D true). A, B, C are false.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["os", "threads"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q25",
+    "chapterId": "os-process",
+    "type": "msq",
+    "prompt": "Which process state transitions are NOT possible? (Select all that apply.)",
+    "options": [
+      "Running to Ready",
+      "Waiting to Running",
+      "Ready to Waiting",
+      "Running to Terminated"
+    ],
+    "correctIndexes": [1, 2],
+    "explanation": "A process leaves Waiting only to Ready (not directly to Running), and enters Waiting only from Running (not from Ready). So Waiting->Running and Ready->Waiting are impossible.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["os", "process-states"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q27",
+    "chapterId": "math-prob",
+    "type": "msq",
+    "prompt": "Events A, B have P(A)=0.3, P(B)=0.5, P(A intersect B)=0.1. Which statements are TRUE? (Select all that apply.)",
+    "options": [
+      "A and B are independent",
+      "P(A union B) = 0.7",
+      "P(A intersect B^c) = 0.2",
+      "P(A^c intersect B^c) = 0.4"
+    ],
+    "correctIndexes": [1, 2],
+    "explanation": "P(A)P(B)=0.15 != 0.1 so not independent (A false). P(A union B)=0.3+0.5-0.1=0.7 (B true). P(A and not B)=0.3-0.1=0.2 (C true). P(neither)=1-0.7=0.3, not 0.4 (D false).",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["probability"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q29",
+    "chapterId": "cn-transport",
+    "type": "msq",
+    "prompt": "TCP client P establishes a connection to server Q. Let x be the sequence number in the SYN from P, and y the acknowledgement number in the SYN-ACK from Q. Which statements are CORRECT? (Select all that apply.)",
+    "options": [
+      "The sequence number x is chosen randomly by P",
+      "The sequence number x is always 0 for a new connection",
+      "The acknowledgement number y equals x",
+      "The acknowledgement number y equals x + 1"
+    ],
+    "correctIndexes": [0, 3],
+    "explanation": "The initial sequence number is chosen (pseudo-)randomly (A true), and the SYN-ACK acknowledges it with y = x + 1 (D true).",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["networks", "tcp", "handshake"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q31",
+    "chapterId": "cn-routing",
+    "type": "msq",
+    "prompt": "Which IP-header fields are modified for a packet leaving an internal network through a NAT device to an external network? (Select all that apply.)",
+    "options": ["Source IP", "Destination IP", "Header Checksum", "Total Length"],
+    "correctIndexes": [0, 2],
+    "explanation": "NAT rewrites the Source IP (and port), which forces the Header Checksum to be recomputed. The Destination IP and Total Length are unchanged.",
+    "year": 2024,
+    "marks": 1,
+    "tags": ["networks", "nat", "ip"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q36",
+    "chapterId": "cn-transport",
+    "type": "mcq",
+    "prompt": "P--Q--R: P sends a 10^6-byte file in 10^3-byte chunks back-to-back. Each link has 10^6 bits/s bandwidth, negligible propagation/processing delay; Q store-and-forwards each packet (can receive and transmit simultaneously). Starting at t=0, when does R receive all chunks (seconds)?",
+    "options": ["8.000", "8.008", "15.992", "16.000"],
+    "correctIndex": 1,
+    "explanation": "Each chunk = 8000 bits -> 0.008 s per link. 1000 chunks pipeline through Q: P finishes sending at 1000*0.008 = 8.0 s, and the last chunk needs one more 0.008 s on Q--R, so 8.008 s.",
+    "year": 2024,
+    "marks": 2,
+    "tags": ["networks", "store-and-forward", "pipelining"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q40",
+    "chapterId": "os-sync",
+    "type": "mcq",
+    "prompt": "Threads T1: {a=a+1; b=2*b;} and T2: {b=b+1; a=2*a;} start with a=b=1; each statement is atomic but interleaving is arbitrary. Which option lists ALL possible (a,b) after both finish?",
+    "options": [
+      "(a=4,b=4); (a=3,b=3); (a=4,b=3)",
+      "(a=3,b=4); (a=4,b=3); (a=3,b=3)",
+      "(a=4,b=4); (a=4,b=3); (a=3,b=4)",
+      "(a=2,b=2); (a=2,b=3); (a=3,b=4)"
+    ],
+    "correctIndex": 0,
+    "explanation": "Enumerating the interleavings of the four atomic statements yields exactly the outcomes (4,4), (3,3), and (4,3).",
+    "year": 2024,
+    "marks": 2,
+    "tags": ["os", "concurrency", "interleaving"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q41",
+    "chapterId": "ds-trees",
+    "type": "mcq",
+    "prompt": "The array [82, 101, 90, 11, 111, 75, 33, 131, 44, 93] is heapified (max-heap). The first three elements of the heapified array are:",
+    "options": ["82, 90, 101", "82, 11, 93", "131, 11, 93", "131, 111, 90"],
+    "correctIndex": 3,
+    "explanation": "Building a max-heap brings the maximum (131) to the root; the standard build-heap procedure yields 131, 111, 90 as the first three array entries.",
+    "year": 2024,
+    "marks": 2,
+    "tags": ["data-structures", "heap", "heapify"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q43",
+    "chapterId": "ds-trees",
+    "type": "mcq",
+    "prompt": "A binary MIN-heap stores 105 distinct elements. Let i be the array index of the MAXIMUM element. The number of possible values of i is:",
+    "options": ["53", "52", "27", "1"],
+    "correctIndex": 0,
+    "explanation": "The maximum of a min-heap must be a leaf. Leaves occupy indices floor(105/2)+1 = 53 through 105, i.e. 53 possible positions.",
+    "year": 2024,
+    "marks": 2,
+    "tags": ["data-structures", "heap"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q51",
+    "chapterId": "algo-graphs",
+    "type": "msq",
+    "prompt": "A graph G has n vertices and chromatic number k. Which statements are ALWAYS TRUE? (Select all that apply.)",
+    "options": [
+      "G contains a complete subgraph with k vertices",
+      "G contains an independent set of size at least n/k",
+      "G contains at least k(k-1)/2 edges",
+      "G contains a vertex of degree at least k"
+    ],
+    "correctIndexes": [1, 2],
+    "explanation": "A proper k-colouring partitions n vertices into k colour classes; the largest is an independent set of size >= n/k (B true), and each pair of colour classes must share an edge, giving >= k(k-1)/2 edges (C true). A k-clique need not exist (A false), and degree >= k is not guaranteed (D false).",
+    "year": 2024,
+    "marks": 2,
+    "tags": ["algorithms", "graphs", "chromatic-number"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q57",
+    "chapterId": "os-process",
+    "type": "nat",
+    "prompt": "For  int x=3; while(x>0){ fork(); printf(\"hello\"); wait(NULL); x--; }  the total number of times printf executes is ______.",
+    "numericAnswer": 14,
+    "numericTolerance": 0,
+    "explanation": "Each iteration doubles the number of processes: iteration 1 prints 2 times, iteration 2 prints 4, iteration 3 prints 8. Total = 2 + 4 + 8 = 14.",
+    "year": 2024,
+    "marks": 2,
+    "tags": ["os", "fork"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q58",
+    "chapterId": "cn-routing",
+    "type": "nat",
+    "prompt": "Router forwarding table: 10.1.1.0/24->R1, 10.1.1.128/25->R2, 10.1.1.64/26->R3, 10.1.1.192/26->R4. It forwards 20 packets each to hosts 10.1.1.16, .72, .132, .191, .205. Using longest-prefix matching, the number of packets forwarded via R2 is ______.",
+    "numericAnswer": 40,
+    "numericTolerance": 0,
+    "explanation": ".16->R1, .72->R3, .132->R2 (/25), .191->R2 (/25), .205->R4 (/26). Two hosts (.132, .191) use R2, so 2*20 = 40 packets.",
+    "year": 2024,
+    "marks": 2,
+    "tags": ["networks", "longest-prefix-match", "forwarding"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q60",
+    "chapterId": "algo-graphs",
+    "type": "nat",
+    "prompt": "A DFS of an undirected graph G with 100 vertices produces a forest with 40 edges. The number of connected components in G is ______.",
+    "numericAnswer": 60,
+    "numericTolerance": 0,
+    "explanation": "A DFS forest with c components on V vertices has V - c tree edges. So 100 - c = 40 gives c = 60.",
+    "year": 2024,
+    "marks": 2,
+    "tags": ["algorithms", "graphs", "dfs", "connected-components"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q62",
+    "chapterId": "os-memory",
+    "type": "nat",
+    "prompt": "Page size 2 KB. Pages 0,1,2,3 are in frames 1,3,2,0 respectively. The physical address for virtual address 2500 (decimal) is ______.",
+    "numericAnswer": 6596,
+    "numericTolerance": 0,
+    "explanation": "2500 = page 1 (2500/2048), offset 452. Page 1 -> frame 3. PA = 3*2048 + 452 = 6596.",
+    "year": 2024,
+    "marks": 2,
+    "tags": ["os", "paging", "address-translation"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q63",
+    "chapterId": "math-prob",
+    "type": "nat",
+    "prompt": "A bag has 10 red and 15 blue balls. Two are drawn without replacement. Given the first is red, the probability that BOTH are red is ______ (3 decimal places).",
+    "numericAnswer": 0.375,
+    "numericTolerance": 0.005,
+    "explanation": "Given the first is red, 9 red remain out of 24 balls: P = 9/24 = 0.375.",
+    "year": 2024,
+    "marks": 2,
+    "tags": ["probability", "conditional"],
+    "source": "GATE CSE 2024 (Set 1)"
+  },
+  {
+    "id": "cs24-q65",
+    "chapterId": "cn-routing",
+    "type": "nat",
+    "prompt": "A 1420-byte IP datagram (incl. 20-byte header) is sent over two links via a router. Link 1 (sender->router) MTU = 542 bytes; link 2 (router->receiver) MTU = 360 bytes. The number of fragments delivered at the receiver is ______.",
+    "numericAnswer": 6,
+    "numericTolerance": 0,
+    "explanation": "Link-1 data per fragment = 542 - 20 = 522 -> 520 (multiple of 8); 1400 data -> 3 fragments. The router re-fragments these for link-2 (MTU 360, data 336 -> 336), yielding 6 fragments delivered.",
+    "year": 2024,
+    "marks": 2,
+    "tags": ["networks", "ip", "fragmentation"],
+    "source": "GATE CSE 2024 (Set 1)"
   }
 ]
