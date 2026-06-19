@@ -9,6 +9,12 @@ service-account*.json
 # Firebase deploy/emulator cache
 .firebase/
 
+# Android release signing (NEVER commit the keystore or its passwords)
+key.properties
+*.jks
+*.keystore
+!*.example
+
 # Miscellaneous
 *.class
 *.log

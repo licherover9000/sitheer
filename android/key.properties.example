@@ -1,0 +1,16 @@
+# Copy this file to android/key.properties and fill in your real values.
+# android/key.properties is gitignored - NEVER commit it or the .jks keystore.
+#
+# Generate the keystore first (one time), keeping a SAFE BACKUP of the file and
+# passwords - if you lose them you can never update the app on Google Play:
+#
+#   keytool -genkey -v -keystore upload-keystore.jks \
+#     -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+#
+# Then place upload-keystore.jks somewhere outside the repo (or in android/ -
+# it is gitignored) and point storeFile at it below.
+
+storePassword=your-keystore-password
+keyPassword=your-key-password
+keyAlias=upload
+storeFile=/absolute/path/to/upload-keystore.jks
